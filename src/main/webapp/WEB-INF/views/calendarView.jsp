@@ -150,7 +150,7 @@ A:hover {
 <body>
 
 	<form name="calendarFrm" id="calendarFrm" action="" method="post">
-		<div id="content" style="width: 712px;">
+		<div id="content" style="width: 100%;">
 			<table width="100%" border="0" cellspacing="1" cellpadding="1">
 				<tr>
 					<td align="right">
@@ -205,27 +205,27 @@ A:hover {
 				<table border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF">
 				<thead>
 					<tr bgcolor="#CECECE">
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">
 								<font color="red">일</font>
 							</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">월</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">화</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">수</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">목</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">금</div>
 						</td>
-						<td width='100px'>
+						<td width='12.5%'>
 							<div align="center">
 								<font color="#529dbc">토</font>
 							</div>
