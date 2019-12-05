@@ -4,20 +4,11 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	//String step = (String)request.getAttribute("step") ;
+	String step = (String)request.getAttribute("step") ;
 
-	String step = "1";
+	if(step==null)
+		step=(String)session.getAttribute("step");
 
-	String params = (String) request.getAttribute("params");
-	String time = (String) request.getAttribute("time");
-
-	//selectedTicketDTO stdto = (selectedTicketDTO)request.getAttribute("stdto");
-
-	//System.out.println(hmap);
-
-	SelectedTicketDTO stdto = (SelectedTicketDTO) request.getAttribute("stdto");
-
-	System.out.println(stdto + "454545454");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

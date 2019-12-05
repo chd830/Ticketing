@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,6 +67,10 @@ public class HomeController {
 	public ModelAndView use_discount(@RequestParam String discountPrice, HttpServletRequest request) {
 		System.out.println("use_discountµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("step", "3");
 
 		System.out.println("discountPrice: " + discountPrice);
 
@@ -86,13 +91,13 @@ public class HomeController {
 	public ModelAndView use_coupon(@RequestParam String couponPrice, HttpServletRequest request) {
 		System.out.println("use_couponµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
-
-		System.out.println("1.couponPrice: " + couponPrice);
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("step", "3");
 
 		dao.input_couponPrice(userId, Integer.parseInt(couponPrice));
 		stdto = dao.selectTicket(userId);
-
-		System.out.println("2.couponPrice: " + couponPrice);
 
 		mv.setViewName("detail");
 		mv.addObject("stdto", stdto);
