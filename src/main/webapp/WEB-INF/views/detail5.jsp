@@ -43,30 +43,31 @@
 			
 			<div>
 			<table width="200" bgcolor="#363636">
-					<tr>
-						<td><font size="2px" color="#ffffff">선택내역</font></td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">날짜</font> </td>
-						<td><font size="1px" color="#ffffff"> 2019.11.22 (금)</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">시간</font> </td>
-						<td><font size="1px" color="#ffffff">[2회] 16시 30분</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">매수</font> </td>
-						<td><font size="1px" color="#ffffff">1매</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">좌석</font> </td>
-						<td><font size="1px" color="#ffffff">비지정석</font> </td>
-					</tr>
-					
-					<tr height="30"></tr>
-					
-			</table>	
-			</div>
+				<tr>
+					<td><font size="2px" color="#ffffff">선택내역</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">날짜</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.getSelectedDate() }</font>
+					</td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">시간</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.getTime() }</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">매수</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.inwon }매</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">좌석</font></td>
+					<td><font size="1px" color="#ffffff">비지정석</font></td>
+				</tr>
+
+				<tr height="30"></tr>
+
+			</table>
+		</div>
 			
 			<table width="200" bgcolor="#363636">
 				<tr>
@@ -82,11 +83,11 @@
 					</tr>
 					<tr>
 						<td><font size="1px" color="#BFBFBF">티켓금액</font> </td>
-						<td><font size="1px" color="#ffffff">40,000</font> </td>
+						<td><font size="1px" color="#ffffff">${stdto.ticketPrice*stdto.inwon }</font> </td>
 					</tr>
 					<tr>
 						<td><font size="1px" color="#BFBFBF">예매수수료</font> </td>
-						<td><font size="1px" color="#ffffff">500</font> </td>
+						<td><font size="1px" color="#ffffff">${500*stdto.inwon }                     </font> </td>
 					</tr>
 					<tr>
 						<td><font size="1px" color="#BFBFBF">배송료</font> </td>
@@ -94,7 +95,7 @@
 					</tr>
 					<tr>
 						<td><font size="1px" color="#C3E3FA">총 금액(+)</font> </td>
-						<td><font size="1px" color="#ffffff">40,500</font> </td>
+						<td><font size="1px" color="#ffffff">${stdto.discountPrice*stdto.inwon+500*stdto.inwon }</font> </td>
 					</tr>
 			</table>	
 			</div>
@@ -140,7 +141,7 @@
 					</tr>
 					<tr>
 						<td><font size="1px" color="#C3E3FA">총 할인금액(-)</font> </td>
-						<td><font size="1px" color="#ffffff">${stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon-stdto.pointPrice }</font> </td>
+						<td><font size="1px" color="#ffffff">${stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }</font> </td>
 					</tr>
 			</table>	
 			</div>
@@ -157,11 +158,10 @@
 					<tr height="9"><td></td></tr>
 					<tr>
 						<td><font size="1.5px" color="#ffffff">최종 결제 금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
-						<td><font size="4px" color="#ffffff"><b>40,500</b></font><font size="2px;" color="#ffffff">원</font></td>
+						<td><font size="4px" color="#ffffff"><b>${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }</b></font><font size="2px;" color="#ffffff">원</font></td>
 					</tr>
-			</table>	
-			
-			</div>
+			</table>		
+		</div>
 
 
 </body>

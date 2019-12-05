@@ -1,5 +1,6 @@
 package com.ticket.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,7 @@ public class HomeController {
 
 	String userId = "suzi";
 	SelectedTicketDTO stdto;
+	String cancelDate;
 
 
 	@RequestMapping(value = "/step3", method = { RequestMethod.GET, RequestMethod.POST })
@@ -227,30 +229,43 @@ public class HomeController {
 
 		UserInfoDTO uidto = dao.selectUserInfo(userId);
 
-		// autoImage-start
-
 		Random rd = new Random();
 
 		int imageNum = rd.nextInt(6) + 1;
 
 		AutoImageDTO aidto = dao.selectAutoImage(imageNum);
+		stdto = dao.selectTicket(userId);
+		
+		//취소마감일자
+		cancelDate = stdto.getSelectedDate();
+		int year = Integer.parseInt(cancelDate.substring(0,4));
+		int month = Integer.parseInt(cancelDate.substring(5,7));
+		int day = Integer.parseInt(cancelDate.substring(8,10));
+		
+		day-=1;
+		
+		if(day==0) {
+			
+			if(month==1||month==5||month==7||month==8||month==10||month==12) 
+				day=30;
+			else if(month==3) 
+				day=29;
+			else 
+				day=31;
+			
+			month-=1;
 
-		// String imagePath =
-		// "D:\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Ticketing\\resources\\images\\autoOrder\\";
-
-		// String imagePath = dto.getImagePath();
-
-		// autoImage-end
+		}
+		
+		cancelDate = year+"년 "+month+"월 "+day+"일 11:00까지";
+		
+		System.out.println("canceldate:" +cancelDate);
 
 		int point = uidto.getUserPoint();
-
-		// ModelAndView mv = new ModelAndView();
-		// mv.setViewName("step5");
-		// mv.addObject("point", point);
-//		mv.addObject("aidto", aidto);
 		String flag = "";
 		req.setAttribute("flag", flag);
 		req.setAttribute("point", point);
+		req.setAttribute("cancelDate", cancelDate);
 		req.setAttribute("aidto", aidto);
 		String check = "1";
 		req.setAttribute("check", check);
@@ -314,9 +329,18 @@ public class HomeController {
 		AccountDTO adto = dao.selectAccount(bank);
 
 		stdto = dao.selectTicket(userId);
+		
+		Calendar today = Calendar.getInstance();
+		
+		//입금마감일자
+		String deadline = today.get(Calendar.YEAR)+"년 "+(today.get(Calendar.MONTH)+1)+"월 "+(today.get(Calendar.DAY_OF_MONTH)+3)+"일 "+"23:59:59";
+		
+		System.out.println("canceldate: "+cancelDate+"/deadline: "+deadline);
 
 		request.setAttribute("adto", adto);
 		request.setAttribute("stdto", stdto);
+		request.setAttribute("cancelDate", cancelDate);
+		request.setAttribute("deadline", deadline);
 
 		return "laststep";
 	}
