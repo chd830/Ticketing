@@ -62,7 +62,7 @@
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.7:1521:TestDB"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.1:1521:TestDB"/>
 		<beans:property name="username" value="suzi"/>
 		<beans:property name="password" value="a123"/>
 	</beans:bean>
