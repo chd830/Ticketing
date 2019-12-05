@@ -2,6 +2,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -93,7 +94,7 @@ color: #B3B3B3;
 					<table style="margin-left: 30px; margin-top: 7px;">
 						<tr height="15">
 							<td><b>수령방법선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
-							<td bgcolor="#FDEEEA" width="550" height="30"><input type="checkbox"><font size="1.5px;">현장수령[배송불가 할인 포함]</font></td>
+							<td bgcolor="#FDEEEA" width="550" height="30"><input type="checkbox" checked="checked"><font size="1.5px;">현장수령[배송불가 할인 포함]</font></td>
 						</tr>
 					</table>
 				</div>

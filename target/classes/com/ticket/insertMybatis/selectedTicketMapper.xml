@@ -77,31 +77,28 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.UserInfoDTO"
-		parameterType="String" id="selectUserInfo"> select * from UserInfo where
-		userId=#{userId}
+	<select resultType="com.ticket.dto.UserInfoDTO" parameterType="String" id="selectUserInfo"> 
+		select * from UserInfo where userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.CouponDataDTO"
-		parameterType="String" id="couponSearch"> select couponCode,couponPrice,couponDesc
-		from couponData where couponCode=#{couponCode}
+	<select resultType="com.ticket.dto.CouponDataDTO" parameterType="String" id="couponSearch"> 
+		select couponCode,couponPrice,couponDesc from couponData where couponCode=#{couponCode}
 	</select>
 
-	<select resultType="com.ticket.dto.MyCouponDTO"
-		parameterType="String" id="myCouponList"> select
-		userId,couponCode,couponPrice,couponDesc from MyCoupon where
-		userId=#{userId}
+	<select resultType="com.ticket.dto.MyCouponDTO" parameterType="String" id="myCouponList"> 
+		select userId,couponCode,couponPrice,couponDesc from MyCoupon where userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.DiscountDTO"
-		id="myDiscountList"> select * from discount where userId=#{userId} </select>
+	<select resultType="com.ticket.dto.DiscountDTO" id="myDiscountList"> 
+		select * from discount where userId=#{userId} 
+	</select>
 
-	<update parameterType="map" id="input_discountPrice"> update selectedTicket set
-		discountPrice=#{discountPrice} where userId=#{userId}
+	<update parameterType="map" id="input_discountPrice"> 
+		update selectedTicket set discountPrice=#{discountPrice} where userId=#{userId}
 	</update>
 
-	<update parameterType="map" id="input_couponPrice"> update selectedTicket set
-		couponPrice=#{couponPrice} where userId=#{userId}
+	<update parameterType="map" id="input_couponPrice"> 
+		update selectedTicket set couponPrice=#{couponPrice} where userId=#{userId}
 	</update>
 
 	<update parameterType="map" id="input_point"> update selectedTicket set

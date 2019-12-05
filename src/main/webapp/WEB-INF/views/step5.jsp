@@ -623,6 +623,7 @@ margin-left: 0px;
 			
 			if(deposit==0) {
 				alert("사용 가능한 예치금이 없습니다.");
+				return;
 			}else{
 				$('#inputDeposit').val(point);
 			}	

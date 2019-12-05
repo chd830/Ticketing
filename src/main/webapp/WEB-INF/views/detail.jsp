@@ -4,10 +4,10 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	String step = (String)request.getAttribute("step") ;
-
-	if(step==null)
-		step=(String)session.getAttribute("step");
+	//String step = (String)request.getAttribute("step") ;
+	String step="3";
+	//if(step==null||step.equals(""))
+	//	step=(String)session.getAttribute("step");
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -114,35 +114,35 @@
 			<table width="200" bgcolor="#363636">
 				<tr>
 					<td><font size="1px" color="#BFBFBF">할인금액</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.discountPrice }</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">할인쿠폰</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.couponPrice }</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">Yes머니</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.pointPrice }</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">예치금</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff"></font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">YES상품권</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff"></font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">공연예매권</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff"></font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">기타결제</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff"></font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#C3E3FA">총 찰인금액(-)</font></td>
-					<td><font size="1px" color="#ffffff">0</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.discountPrice+stdto.couponPrice+stdto.pointPrice }</font></td>
 				</tr>
 			</table>
 		</div>
@@ -162,7 +162,7 @@
 				<tr>
 					<td><font size="1.5px" color="#ffffff">최종 결제
 							금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
-					<td><font size="4px" st color="#ffffff"><b>40,500</b></font><font
+					<td><font size="4px" color="#ffffff"><b>40,500</b></font><font
 						size="2px;" color="#ffffff">원</font></td>
 				</tr>
 			</table>
@@ -212,7 +212,7 @@
 			</tr>
 		</table>
 	</div>
-	</div>
+	
 
 	<%
 		} else if (step.equals("4")) {
@@ -237,7 +237,7 @@
 			</tr>
 		</table>
 	</div>
-	</div>
+	
 
 
 	<%
@@ -262,7 +262,7 @@
 			</tr>
 		</table>
 	</div>
-	</div>
+	
 
 	<%
 		}

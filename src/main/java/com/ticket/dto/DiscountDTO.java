@@ -4,7 +4,7 @@ public class DiscountDTO {
 
 	private String userId;
 	
-	private String discountName;
+	private String discountCode;
 	private int discountPrice;
 	private String discountDesc;
 	
@@ -14,11 +14,11 @@ public class DiscountDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}	
-	public String getDiscountName() {
-		return discountName;
+	public String getdiscountCode() {
+		return discountCode;
 	}
-	public void setDiscountName(String discountName) {
-		this.discountName = discountName;
+	public void setdiscountCode(String discountCode) {
+		this.discountCode = discountCode;
 	}
 	public int getDiscountPrice() {
 		return discountPrice;

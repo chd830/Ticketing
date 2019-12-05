@@ -64,7 +64,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/use_discount", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView use_discount(@RequestParam String discountPrice, HttpServletRequest request) {
+	public ModelAndView use_discount(@RequestParam int discountPrice,@RequestParam int inwon, HttpServletRequest request) {
 		System.out.println("use_discountµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
 		
@@ -73,12 +73,16 @@ public class HomeController {
 		session.setAttribute("step", "3");
 
 		System.out.println("discountPrice: " + discountPrice);
+		
+		System.out.println(discountPrice*inwon);
 
-		dao.input_discountPrice(userId, Integer.parseInt(discountPrice));
+		dao.input_discountPrice(userId, discountPrice*inwon);
 		stdto = dao.selectTicket(userId);
 
 		mv.setViewName("detail");
 		mv.addObject("stdto", stdto);
+		
+		System.out.println("stdto: "+stdto.getDiscountPrice());
 
 		request.setAttribute("stdto", stdto);
 
@@ -88,7 +92,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/use_coupon", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView use_coupon(@RequestParam String couponPrice, HttpServletRequest request) {
+	public ModelAndView use_coupon(@RequestParam int couponPrice,@RequestParam int inwon, HttpServletRequest request) {
 		System.out.println("use_couponµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
 		
@@ -96,7 +100,7 @@ public class HomeController {
 		
 		session.setAttribute("step", "3");
 
-		dao.input_couponPrice(userId, Integer.parseInt(couponPrice));
+		dao.input_couponPrice(userId, couponPrice*inwon);
 		stdto = dao.selectTicket(userId);
 
 		mv.setViewName("detail");
@@ -212,6 +216,7 @@ public class HomeController {
 		stdto = dao.selectTicket(userId);
 		
 		req.setAttribute("stdto", stdto);
+		req.setAttribute("step", "4");
 		
 		return "step4";
 
