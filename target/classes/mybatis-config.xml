@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3,0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties>
+		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.16.7:1521:TestDB"/>
+		<property name="username" value="suzi"/>
+		<property name="password" value="a123"/>
+	</properties>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+				<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+				</dataSource>
+			
+		</environment>
+	</environments>
+
+<mappers>
+	<mapper resource="com/ticket/insertMybatis/insertMapper.xml"/>
+	<mapper resource="com/ticket/insertMybatis/performMapper.xml"/>
+	<mapper resource="com/ticket/insertMybatis/mainMapper.xml"/>
+	<mapper resource="com/ticket/insertMybatis/selectedTicketMapper.xml"/>
+	<mapper resource="com/ticket/insertMybatis/remainMapper.xml"/>
+</mappers>
+
+</configuration>

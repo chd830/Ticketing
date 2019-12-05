@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketMapper">
+	<!-- 진교 -->
+	<select id="posterReadData"
+		resultType="com.ticket.dto.PosterDTO">
+		SELECT distinct a.performCode, a.performName,a.performMainImage, a.performStartDate,
+		a.performEnddate, b.placeName,
+		c.genreName, d.ratingname, a.performrunningTime
+		from performData a, placeData b, genreData c, ratingData d
+		where a.performPlaceCode = b.placeCode and a.performGenreCode = c.genreCode 
+			and a.performRatingCode = d.ratingCode and a.performCode = #{performCode}
+	</select>
+
+	<select id="payReadData" parameterType="String"
+		resultType="com.ticket.dto.PayDTO">
+		select rclass, sclass, vclass, notSelectClass
+		from seatingData
+		where
+		performcode = #{performcode}
+	</select>
+
+	<select id="detailImageRead" parameterType="String" resultType="com.ticket.dto.PerformDetailDTO">
+		select performDetailimage 
+		from performdetail where performcode = #{performcode}
+	</select>
+</mapper>
