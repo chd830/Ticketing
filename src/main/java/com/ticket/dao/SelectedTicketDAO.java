@@ -11,6 +11,10 @@ import com.ticket.dto.AutoImageDTO;
 import com.ticket.dto.CouponDataDTO;
 import com.ticket.dto.DiscountDTO;
 import com.ticket.dto.MyCouponDTO;
+import com.ticket.dto.PerformDTO;
+import com.ticket.dto.PerformInfoDTO;
+import com.ticket.dto.PlaceDTO;
+import com.ticket.dto.SeatingDTO;
 import com.ticket.dto.SelectedTicketDTO;
 import com.ticket.dto.UserInfoDTO;
 
@@ -26,70 +30,136 @@ public class SelectedTicketDAO {
 
 	//*******************************정화 시작********************************
 	
-
-	public void home_updateData(SelectedTicketDTO dto){
-	
-		sessionTemplate.selectOne("ticketMapper.home_updateData",dto);
-	}
-	
-	public void date_updateData(SelectedTicketDTO dto){
-		sessionTemplate.selectOne("ticketMapper.date_updateData",dto);
-	}
-	
-	public void time_updateData(SelectedTicketDTO dto){
-		sessionTemplate.selectOne("ticketMapper.time_updateData",dto);
-	}
-	
-	public void inwon_updateData(SelectedTicketDTO dto){
-		sessionTemplate.selectOne("ticketMapper.inwon_updateData",dto);
-	}
-	
-	public SelectedTicketDTO detail_readData(){
+	public void home_insertData(SelectedTicketDTO stdto){
 		
-		SelectedTicketDTO stdto = sessionTemplate.selectOne("ticketMapper.detail_ReadData");
+		sessionTemplate.insert("ticketMapper.home_insertData", stdto);
 		
-		/*
-		 * HashMap<String, Object> map = new HashMap<String, Object>();
-		 * 
-		 * map.put("selectedDate", stdto.getSelectedDate()); map.put("time",
-		 * stdto.getTime()); map.put("inwon",stdto.getInwon());
-		 */
+	}
+	
+	public void date_updateData(String selectedDate,String userId, String performCode){
+	
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-			
+		map.put("selectedDate", selectedDate);
+		map.put("userId", userId);
+		map.put("performCode", performCode);
+		
+		sessionTemplate.update("ticketMapper.date_updateData",map);
+	
+	}
+	
+	public void time_updateData(String performCode, String userId, String rtime){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("rtime", rtime);
+		map.put("userId", userId);
+		map.put("performCode", performCode);
+		
+		sessionTemplate.update("ticketMapper.time_updateData",map);
+		
+	}
+	
+	public void inwon_updateData(String performCode,String userId, String inwon){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("inwon", inwon);
+		map.put("userId", userId);
+		map.put("performCode", performCode);
+		
+		sessionTemplate.update("ticketMapper.inwon_updateData",map);
+	}
+	
+	public SelectedTicketDTO detail_readData(String performCode, String userId){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userId", userId);
+		map.put("performCode", performCode);
+		
+		SelectedTicketDTO stdto = sessionTemplate.selectOne("ticketMapper.detail_ReadData",map);
+		
 		return stdto;
 	}
 	
+	public PerformDTO cal_select(String performCode){
+		
+		PerformDTO pdto = new PerformDTO();
+		
+		pdto = sessionTemplate.selectOne("ticketMapper.cal_select",performCode);
+		
+		return pdto;
+	}
 	
+	public int get_performCode(String performCode){
+		
+		int performGenreCode = sessionTemplate.selectOne("ticketMapper.get_performCode",performCode);
+		
+		return performGenreCode;
+	}
 	
+	public List<PerformInfoDTO> timeList(String performCode){
+		
+		List<PerformInfoDTO> list = sessionTemplate.selectList("ticketMapper.timeList",performCode);
+		
+		return list;
+		
+	}
 	
+	public List<SeatingDTO> seatPrice(String performCode){
+		
+		List<SeatingDTO> list = sessionTemplate.selectList("ticketMapper.seatPrice",performCode);
+		
+		return list;
+		
+	}
+	
+	public PerformDTO read_performData(String performCode){
+		
+		PerformDTO performReaddto = new PerformDTO();
+		
+		performReaddto = sessionTemplate.selectOne("ticketMapper.read_performData",performCode);
+		
+		return performReaddto;
+	}
+	
+	public PlaceDTO read_placeData(String placeCode){
+		
+		PlaceDTO Read_placedto = new PlaceDTO();
+		
+		Read_placedto = sessionTemplate.selectOne("ticketMapper.read_placeData",placeCode);
+		
+		return Read_placedto;
+	}
 	
 	//*********************************정화 끝********************************
 	
 	//*********************************연주 시작********************************
 	
-public CouponDataDTO CouponSearch(String couponCode){
-		
-		CouponDataDTO dto = new CouponDataDTO();
-		
-		try {
-			dto = sessionTemplate.selectOne("ticketMapper.couponSearch",couponCode);
+	public CouponDataDTO CouponSearch(String couponCode){
 			
-			if(dto==null||dto.getcouponCode()==null||dto.getcouponCode().equals("")) {
+			CouponDataDTO dto = new CouponDataDTO();
+			
+			try {
+				dto = sessionTemplate.selectOne("ticketMapper.couponSearch",couponCode);
+				
+				if(dto==null||dto.getcouponCode()==null||dto.getcouponCode().equals("")) {
+					dto.setcouponCode("error");
+					dto.setCouponPrice(0);
+				}
+				
+				
+				
+			} catch (Exception e) {
 				dto.setcouponCode("error");
 				dto.setCouponPrice(0);
+				System.out.println(e.toString()+"//CouponSearch");
 			}
 			
+			System.out.println("couponCode: "+dto.getcouponCode());
 			
-			
-		} catch (Exception e) {
-			dto.setcouponCode("error");
-			dto.setCouponPrice(0);
-			System.out.println(e.toString()+"//CouponSearch");
-		}
-		
-		System.out.println("couponCode: "+dto.getcouponCode());
-		
-		return dto;
+			return dto;
 		
 	}
 	

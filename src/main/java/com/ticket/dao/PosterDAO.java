@@ -8,6 +8,7 @@ import com.ticket.dto.PayDTO;
 import com.ticket.dto.PerformDetailDTO;
 import com.ticket.dto.PosterDTO;
 import com.ticket.dto.ReviewBoardDTO;
+import com.ticket.dto.SelectedTicketDTO;
 
 public class PosterDAO {
 
@@ -52,15 +53,8 @@ public class PosterDAO {
 		}
 
 	}
+	
 
-	/*
-	 * public ReviewBoardDTO getMaxNum(int num) {
-	 * 
-	 * ReviewBoardDTO review_dto =
-	 * sessionTemplate.selectOne("ticketMapper.reviewMaxNum", num); return
-	 * review_dto;
-	 * 
-	 * }
-	 */
 
+	
 }

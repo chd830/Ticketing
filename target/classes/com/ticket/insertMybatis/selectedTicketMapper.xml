@@ -6,49 +6,57 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="ticketMapper">
 
 	<!-- 정화시작 -->
-	<insert id="insertData"
-		parameterType="com.ticket.dto.SelectedTicketDTO">
-		insert into selectedTicket
-		(userId,performCode,selectedDate,time,inwon,ticketPrice,discountPrice,couponPrice,pointPrice,seatRow,seatNum)
-		values(#{userId}, #{performCode}, #{selectedDate},
-		#{time},#{inwon},#{ticketPrice},#{discountPrice},#{couponPrice},#{pointPrice},#{seatRow},#{seatNum})
+	<insert id="home_insertData" parameterType="com.ticket.dto.SelectedTicketDTO" >
+	 insert into selectedTicket (userId,performCode,selectedDate,time,performGenreCode) 
+	 values(#{userId}, #{performCode}, #{selectedDate},#{time},#{performGenreCode}) 
 	</insert>
 
-	<update id="home_updateData"
-		parameterType="com.ticket.dto.SelectedTicketDTO">
-		update selectedTicket set selectedDate=#{selectedDate},
-		time=#{time} where
-		userId=#{userId} and performCode=#{performCode}
-	</update>
-
-	<update id="date_updateData"
-		parameterType="com.ticket.dto.SelectedTicketDTO">
+	<update id="date_updateData" parameterType="map">
 		update selectedTicket set selectedDate=#{selectedDate}
-		where
-		userId=#{userId} and performCode=#{performCode}
+		where userId=#{userId} and performCode=#{performCode}
 	</update>
 
-	<update id="time_updateData"
-		parameterType="com.ticket.dto.SelectedTicketDTO">
-		update selectedTicket set time=#{time} where
-		userId=#{userId} and
-		performCode=#{performCode}
+	<update id="time_updateData" parameterType="map">
+		update selectedTicket set time=#{rtime} 
+		where userId=#{userId} and performCode=#{performCode}
 	</update>
 
-	<update id="inwon_updateData"
-		parameterType="com.ticket.dto.SelectedTicketDTO">
+	<update id="inwon_updateData" parameterType="map">
 		update selectedTicket set inwon=#{inwon} where
 		userId=#{userId} and
 		performCode=#{performCode}
 	</update>
 
-	<select id="detail_ReadData"
-		resultType="com.ticket.dto.SelectedTicketDTO">
-		select * from selectedTicket
+	<select id="detail_ReadData" parameterType="map" resultType="com.ticket.dto.SelectedTicketDTO">
+		select * from selectedTicket where userId=#{userId} and performCode=#{performCode}
 	</select>
-
-	<!-- <select id="maxNum" resultType="int"> select nvl(max(num),0) from board 
-		</select> <insert id="insertData" parameterType="com.jdbc.dto.BoardDTO"> 
+	
+	<select id="cal_select" parameterType="String" resultType="com.ticket.dto.PerformDTO">
+		select performStartDate, performEndDate from performData where performCode=#{performCode}
+	</select>
+	
+	<select id="get_performCode" parameterType="String" resultType="int">
+		select performGenreCode from performData where performCode=#{performCode}
+	</select>
+	
+	<select  id="timeList" parameterType="String" resultType="com.ticket.dto.PerformInfoDTO" >
+	 	select distinct performTime from performinfo where performCode=#{performCode}
+	</select>
+	
+	<select  id="seatPrice" parameterType="String" resultType="com.ticket.dto.SeatingDTO" >
+	 	select rclass,sclass,vclass from seatingData where performCode=#{performCode}
+	</select>
+	
+	<select  id="read_performData" parameterType="String" resultType="com.ticket.dto.PerformDTO" >
+	 	select performName,performStartDate,performEndDate,performPlaceCode,performMainImage from performData where performCode=#{performCode}
+	</select> 
+	
+	<select  id="read_placeData" parameterType="String" resultType="com.ticket.dto.PlaceDTO" >
+	 	select placeName from placeData where placeCode=#{placeCode}
+	</select>
+	
+<!-- <select id="maxNum" resultType="int"> select nvl(max(num),0) from board 
+		</select> <insert id="insertData" parameterType="com.jdbc.dto.BoardDTO"ㅣㅏ;> 
 		insert into board(num, name, pwd, email, content, subject, ipAddr, hitCount, 
 		created) values(#{num}, #{name}, #{pwd}, #{email}, #{content}, #{subject}, 
 		#{ipAddr}, 0, sysdate) </insert> <select id="getDataCount" parameterType="map" 

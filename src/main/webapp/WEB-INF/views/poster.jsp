@@ -35,7 +35,7 @@ height: 100%;
 	<!-- Main 종료  -->
 
 	<!--상단 포스터 시작  -->
-	<div>
+ 	<div>
 	<div style="border-bottom: 1px solid black; width: 400px; margin-left: 500px;">
 		<h3>
 			<span id="spanPerfName">${p_dto.performName}</span>      
@@ -95,10 +95,9 @@ height: 100%;
 				</tr>	
 				
 			</table>		
-	</div>
-		<div class="post" style="vertical-align: top; border: 0pt groove #3f51b5; height: 550px; padding-left: 40px; 
-		border-left: 1px solid #e6e6e6;">
-			<jsp:include page="home.jsp" flush="false" />
+	</div> 
+		<div class="post" style="vertical-align: top; border: 0pt groove #3f51b5; height: 550px; padding-left: 40px; border-left: 1px solid #e6e6e6;" id="home">
+			<%-- <jsp:include page="home.jsp" flush="false" /> --%>
 		</div>
 	</div>
 	<hr/>
@@ -108,7 +107,7 @@ height: 100%;
 
 
 	<!-- 하단 TAB BAR 시작  -->
-	<br/><br/><br/>
+ 	<br/><br/><br/>
 	<div id="tabs">
 		<ul style="text-align: center;">
 			<li><a href="#tabs-1" style="text-align: center;">상세정보</a></li>
@@ -131,13 +130,13 @@ height: 100%;
 	</div>
 		<div class="post">
 			
-		</div>
+		</div> 
 	<!-- 하단 TAB BAR 종료  -->
 
 	<!-- footer 시작  -->
-	<%-- <div>
-		<jsp:include page="footer.jsp" flush="false" />
-	</div> --%>
+	<%-- 	 <div>
+			<jsp:include page="footer.jsp" flush="false" />
+		</div>  --%>
 	<!-- footer 종료  -->
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -146,6 +145,17 @@ height: 100%;
 	$(function() {
 		$("#tabs").tabs();
 	});
+	
+	$(document).ready(function() {
+		
+		$.get('calData', function(args) {
+			$('#home').html(args);
+		});
+		
+		
+	});
+	
 </script>
+
 </body>
 </html>
