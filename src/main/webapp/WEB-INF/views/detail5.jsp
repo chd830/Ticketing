@@ -24,15 +24,12 @@
 		
 			<div>
 			<table width="200" bgcolor="#363636">
-					<tr style="border-bottom-color: #ffffff;">
-						<td>
-							<img src="/ticketing/resources/images/pic.PNG"/>
-						</td>
-						<td><font size="1px" color="#ffffff">한뼘사이<br/>2018. 06. 01 ~ 2019. 12. 31<br/>대학로 서연아트홀<br/></font>
-						</td>
-					</tr>
+				<tr style="border-bottom-color: #ffffff;">
+					<td><img src="/ticketing/resources/images/${performReaddto.performMainImage }" /></td>
+					<td><font size="1px" color="#ffffff">${performReaddto.performName }<br />${performReaddto.performStartDate } ~ <br/> ${performReaddto.performEndDate }<br />${Read_placedto.placeName}<br /></font></td>
+				</tr>
 			</table>
-			</div>
+		</div>
 			
 			<table width="200" bgcolor="#363636">
 				<tr>
