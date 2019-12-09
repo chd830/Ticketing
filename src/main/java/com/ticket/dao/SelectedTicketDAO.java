@@ -9,7 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.ticket.dto.AccountDTO;
 import com.ticket.dto.AutoImageDTO;
 import com.ticket.dto.CouponDataDTO;
-import com.ticket.dto.DiscountDTO;
+import com.ticket.dto.DiscountDataDTO;
+import com.ticket.dto.MyDiscountDTO;
 import com.ticket.dto.MyCouponDTO;
 import com.ticket.dto.SelectedTicketDTO;
 import com.ticket.dto.UserInfoDTO;
@@ -101,9 +102,9 @@ public CouponDataDTO CouponSearch(String couponCode){
 		
 	}
 	
-	public List<DiscountDTO> MyDiscountList(String userId) {
+	public List<MyDiscountDTO> MyDiscountList(String userId) {
 		
-		List<DiscountDTO> list = sessionTemplate.selectList("ticketMapper.myDiscountList",userId);
+		List<MyDiscountDTO> list = sessionTemplate.selectList("ticketMapper.myDiscountList",userId);
 		
 		return list;
 		
@@ -192,6 +193,44 @@ public CouponDataDTO CouponSearch(String couponCode){
 	public AccountDTO selectAccount(String accountBank) {
 		AccountDTO adto = sessionTemplate.selectOne("ticketMapper.selectAccount",accountBank);
 		return adto;
+	}
+
+	public List<DiscountDataDTO> discountDataList() {
+		
+		List<DiscountDataDTO> dddto = sessionTemplate.selectList("ticketMapper.discountDataList");
+		return dddto;
+	}
+
+	public DiscountDataDTO selectDiscountDataDTO(String discountCode) {
+		
+		DiscountDataDTO dddto = sessionTemplate.selectOne("ticketMapper.selectDiscountDataDTO",discountCode);
+		return dddto;
+	}
+
+	public void insertMyDiscount(DiscountDataDTO dddto,String userId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userId", userId);
+		map.put("dddto", dddto);
+		
+		sessionTemplate.insert("ticketMapper.insertMyDiscount",map);
+		
+	}
+
+	public void updateDiscountData(String discountCode) {
+		sessionTemplate.update("ticketMapper.updateDiscountData",discountCode);
+		
+	}
+
+	public void deleteDiscountData(String discountCode) {
+		sessionTemplate.delete("ticketMapper.deleteDiscountData",discountCode);
+		
+	}
+
+	public MyDiscountDTO selectMyDiscount(String discountCode) {
+		MyDiscountDTO mddto = sessionTemplate.selectOne("ticketMapper.selectMyDiscount",discountCode);
+		return mddto;
 	}
 
 

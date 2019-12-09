@@ -138,9 +138,7 @@ color: #B3B3B3;
 		</div>
 		
 		<div class="post" style="float: left;" >
-			<jsp:include page="detail.jsp">
-				<jsp:param value="4" name="step"/>
-			</jsp:include>
+			<jsp:include page="detail4.jsp"/>
 		</div>	
 
 </body>

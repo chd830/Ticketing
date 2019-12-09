@@ -98,7 +98,7 @@
 				<tr  height="30">
 					<td width="80"><font size="2pt"><b>등급선택</b></font></td>
 					<td style="background-color: #FDEEEA;" width="600"><font size="2pt" color="#888888">
-						<input type="radio" name="v" checked="checked">자기가 선택한 등급
+						<input type="radio" name="v" checked="checked">${stdto.seatClass }
 						</font>
 					</td>
 				</tr>
@@ -123,8 +123,9 @@
 				<c:if test="${discountList.size()!=0 }">
 			
 					<c:forEach var="dto" items="${discountList}">
+					
 						<tr height="20">
-							<td align="center" width="200">${dto.discountCode }</td>
+							<td align="center" width="200">${dto.discountName }</td>
 							<td align="center" width="166" id="discountPrice" >${dto.discountPrice }</td>
 							<td align="center" width="100">
 								<select id="discountInwon">
@@ -136,6 +137,7 @@
 							<td align="center" width="162">${dto.discountDesc }</td>
 							<td align="center" width="100"><input type="button" value="사용하기" class="use_discount"></td>
 						</tr>
+						
 					</c:forEach>
 				
 				</c:if>
@@ -263,31 +265,11 @@
 	</div>
 	
 	<div id="resultDiv" class="post" style="vertical-align: top; float: left; margin-left: 0px;" align="right">
-		<jsp:include page="detail.jsp" >
-			<jsp:param value="3" name="step"/>
-		</jsp:include>	
+		<jsp:include page="detail3.jsp" />	
 	</div>
 		
 		
 </form>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-		
-		
 		
 		
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -322,7 +304,7 @@
 		
 		if(inwon=="0"){
 			alert("매수를 선택해주세요");
-			f.discountInwon.focus();
+			f.couponInwon.focus();
 			return;
 		}
 		
@@ -338,7 +320,7 @@
 				alert(e.responseText);
 			}
 		})	
-		});
+	});
 	
 	$(".use_discount").click(function(){ 
 		
@@ -347,7 +329,8 @@
 		var tr = $(this).parent().parent();
 		var td = tr.children();
 		var discountPrice = td.eq(1).text();
-		var inwon = f.discountInwon.value;
+		var inwon = $("#discountInwon option:selected").val();
+		
 		
 		if(inwon=="0"){
 			alert("매수를 선택해주세요");

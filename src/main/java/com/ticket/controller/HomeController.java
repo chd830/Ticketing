@@ -4,9 +4,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +25,8 @@ import com.ticket.dto.UserInfoDTO;
 import com.ticket.dto.AccountDTO;
 import com.ticket.dto.AutoImageDTO;
 import com.ticket.dto.CouponDataDTO;
-import com.ticket.dto.DiscountDTO;
+import com.ticket.dto.DiscountDataDTO;
+import com.ticket.dto.MyDiscountDTO;
 
 @Controller
 public class HomeController {
@@ -37,20 +38,110 @@ public class HomeController {
 	@Autowired
 	MyUtil myUtil;
 
-	String userId = "suzi";
+	String userId = "";
+	String performCode = "";
 	SelectedTicketDTO stdto;
 	String cancelDate;
+	
+	public void cookie(HttpServletRequest req) {
+		
+		 Cookie[] cookie = req.getCookies();
+		  
+		 
+	      if (cookie != null) {
+	    	for (int i = 0; i < cookie.length; i++) {
+				if (cookie[i].getName().equals("performcode")) {
+					performCode = cookie[i].getValue();
+					}
+				}
+			} 
+	  	
+	      if (cookie != null) {
+	      	for (int i = 0; i < cookie.length; i++) {
+	  			if (cookie[i].getName().equals("userId")) {
+	  				userId = cookie[i].getValue();
+	  				}
+	  			}
+	  		}
+		
+		
+		
+	}
 
+	@RequestMapping(value = "/dis", method = { RequestMethod.GET, RequestMethod.POST })
+	public String dis(HttpServletRequest req, HttpServletResponse resp) {
+
+		cookie(req);
+		
+		List<DiscountDataDTO> discountDataList = dao.discountDataList();
+		
+		req.setAttribute("discountDataList", discountDataList);
+		
+		return "discount";
+
+	}
+	
+	@RequestMapping(value = "/download_check", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String download_check(HttpServletRequest req, HttpServletResponse resp) {
+		
+		cookie(req);
+		
+		String discountCode = req.getParameter("discountCode");
+
+		MyDiscountDTO mddto = new MyDiscountDTO();
+		try {
+			mddto = dao.selectMyDiscount(discountCode);
+			
+			
+			
+		} catch (Exception e) {
+			mddto.setDiscountCode("0");
+		}
+
+		//ÇÒÀÎÄíÆùÀÌ ¾È °®°íÀÖÀ¸´Ï±î °¡Á®°¡µµµÊ
+		if(mddto.getDiscountCode()=="0"||mddto.getDiscountCode().equals("0")) {
+			return "thankyou";
+		}else {
+			return "error";
+		}
+	
+	}
+	
+	@RequestMapping(value = "/download_discount", method = { RequestMethod.GET, RequestMethod.POST })
+	public String download_discount(HttpServletRequest req, HttpServletResponse resp) {
+		
+		cookie(req);
+
+		String discountCode = req.getParameter("discountCode");
+		
+		DiscountDataDTO dddto = dao.selectDiscountDataDTO(discountCode);
+		
+		if(dddto.getAmount()!=0) {
+			dao.updateDiscountData(dddto.getDiscountCode());
+			dao.insertMyDiscount(dddto,userId);
+		}else
+			dao.deleteDiscountData(dddto.getDiscountCode());
+		
+		List<DiscountDataDTO> discountDataList = dao.discountDataList();
+		
+		req.setAttribute("discountDataList", discountDataList);
+		
+		return "discount";
+
+	}
 
 	@RequestMapping(value = "/step3", method = { RequestMethod.GET, RequestMethod.POST })
 	public String step3(HttpServletRequest req, HttpServletResponse resp) {
 
+		cookie(req);
+		
 		stdto = dao.selectTicket(userId);
 
 		int step = 3;
 
 		// ÇÒÀÎ,ÄíÆù ¸®½ºÆ®
-		List<DiscountDTO> discountList = dao.MyDiscountList(userId);
+		List<MyDiscountDTO> discountList = dao.MyDiscountList(userId);
 		List<MyCouponDTO> couponList = dao.MyCouponList(userId);
 
 		req.setAttribute("userId", userId);
@@ -66,27 +157,20 @@ public class HomeController {
 
 	@RequestMapping(value = "/use_discount", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView use_discount(@RequestParam int discountPrice,@RequestParam int inwon, HttpServletRequest request) {
+	public ModelAndView use_discount(@RequestParam int discountPrice,@RequestParam int inwon, HttpServletRequest req) {
+		
+		cookie(req);
+		
 		System.out.println("use_discountµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
-		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("step", "3");
-
-		System.out.println("discountPrice: " + discountPrice);
-		
-		System.out.println(discountPrice*inwon);
 
 		dao.input_discountPrice(userId, discountPrice*inwon);
 		stdto = dao.selectTicket(userId);
 
 		mv.setViewName("detail");
 		mv.addObject("stdto", stdto);
-		
-		System.out.println("stdto: "+stdto.getDiscountPrice());
 
-		request.setAttribute("stdto", stdto);
+		req.setAttribute("stdto", stdto);
 
 		return mv;
 
@@ -94,21 +178,20 @@ public class HomeController {
 
 	@RequestMapping(value = "/use_coupon", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView use_coupon(@RequestParam int couponPrice,@RequestParam int inwon, HttpServletRequest request) {
+	public ModelAndView use_coupon(@RequestParam int couponPrice,@RequestParam int inwon, HttpServletRequest req) {
+		
+		cookie(req);
+		
 		System.out.println("use_couponµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
 		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("step", "3");
-
 		dao.input_couponPrice(userId, couponPrice*inwon);
 		stdto = dao.selectTicket(userId);
 
 		mv.setViewName("detail");
 		mv.addObject("stdto", stdto);
 
-		request.setAttribute("stdto", stdto);
+		req.setAttribute("stdto", stdto);
 
 		return mv;
 
@@ -116,7 +199,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/use_point", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView use_point(@RequestParam String pointPrice, HttpServletRequest request) {
+	public ModelAndView use_point(@RequestParam String pointPrice, HttpServletRequest req) {
+		
+		cookie(req);
 
 		System.out.println("use_pointµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
@@ -131,7 +216,7 @@ public class HomeController {
 		mv.setViewName("detail5");
 		mv.addObject("stdto", stdto);
 
-		request.setAttribute("stdto", stdto);
+		req.setAttribute("stdto", stdto);
 
 		return mv;
 
@@ -139,7 +224,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/allPointUse", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public ModelAndView allPointUse(@RequestParam String point, HttpServletRequest request) {
+	public ModelAndView allPointUse(@RequestParam String point, HttpServletRequest req) {
+		
+		cookie(req);
+		
 		System.out.println("allPointUseµé¾î¿È");
 		ModelAndView mv = new ModelAndView();
 
@@ -153,7 +241,7 @@ public class HomeController {
 		mv.setViewName("step5");
 		mv.addObject("stdto", stdto);
 
-		request.setAttribute("stdto", stdto);
+		req.setAttribute("stdto", stdto);
 
 		return mv;
 
@@ -162,6 +250,9 @@ public class HomeController {
 	// ÄíÆù µî·Ï
 	@RequestMapping(value = "/coupon", method = { RequestMethod.GET, RequestMethod.POST })
 	public String coupon(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		cookie(req);
+		
 
 		String couponCode = req.getParameter("couponCode");
 
@@ -207,6 +298,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/step4", method = RequestMethod.GET)
 	public String step4(HttpServletRequest req, HttpServletResponse resp) {
+		
+		cookie(req);
 
 		UserInfoDTO uidto = dao.selectUserInfo(userId);
 
@@ -226,6 +319,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/step5", method = RequestMethod.GET)
 	public String header(HttpServletRequest req, HttpServletResponse resp) {
+		
+		cookie(req);
 
 		UserInfoDTO uidto = dao.selectUserInfo(userId);
 
@@ -279,10 +374,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/reloadImage", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public String reloadImage(HttpServletRequest request) {
+	public String reloadImage(HttpServletRequest req) {
 		// System.out.println("reloadImageµé¾î¿È");
 		// autoImage-start
 
+		cookie(req);
+		
 		Random rd = new Random();
 
 		int imageNum = rd.nextInt(6) + 1;
@@ -292,7 +389,7 @@ public class HomeController {
 
 		// autoImage-end
 
-		request.setAttribute("aidto", aidto);
+		req.setAttribute("aidto", aidto);
 		return aidto.getImagePath();
 
 	}
@@ -300,7 +397,9 @@ public class HomeController {
 	@RequestMapping(value = "autoPayPre", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public String autoPayPre(@RequestParam String imageCode, @RequestParam String imagePath,
-			HttpServletRequest request) {
+			HttpServletRequest req) {
+		
+		cookie(req);
 
 		System.out.println("autoPayPre µé¾î¿È");
 		System.out.println("imagePath: " + imagePath);
@@ -318,11 +417,12 @@ public class HomeController {
 		return flag;
 	}
 
+	@RequestMapping(value = "/laststep", method = { RequestMethod.GET,RequestMethod.POST })
+	public String why(HttpServletRequest req, HttpServletResponse response) {
+		
+		cookie(req);
 
-	@RequestMapping(value = "/laststep", method = { RequestMethod.GET, RequestMethod.POST })
-	public String why(HttpServletRequest request, HttpServletResponse response) {
-
-		String bank = (request.getParameter("bank"));
+		String bank = (req.getParameter("bank"));
 
 		System.out.println("bank: " + bank);
 
@@ -337,18 +437,18 @@ public class HomeController {
 		
 		System.out.println("canceldate: "+cancelDate+"/deadline: "+deadline);
 
-		request.setAttribute("adto", adto);
-		request.setAttribute("stdto", stdto);
-		request.setAttribute("cancelDate", cancelDate);
-		request.setAttribute("deadline", deadline);
+		req.setAttribute("adto", adto);
+		req.setAttribute("stdto", stdto);
+		req.setAttribute("cancelDate", cancelDate);
+		req.setAttribute("deadline", deadline);
 
 		return "laststep";
 	}
 
 	
 	/*
-	 * @RequestMapping(value = "/laststep", method = RequestMethod.GET) public
-	 * String final_step(@RequestParam String bank, HttpServletRequest req,
+	 * @reqMapping(value = "/laststep", method = reqMethod.GET) public
+	 * String final_step(@reqParam String bank, HttpServletRequest req,
 	 * HttpServletResponse resp) {
 	 * 
 	 * System.out.println("final µé¾î¿È"); System.out.println("bank: "+bank);
@@ -367,9 +467,9 @@ public class HomeController {
 	 * }
 	 */
 	/*
-	 * @RequestMapping(value = "/final_pay", method = RequestMethod.GET)
+	 * @reqMapping(value = "/final_pay", method = reqMethod.GET)
 	 * 
-	 * @ResponseBody public ModelAndView final_step(@RequestParam String bank,
+	 * @ResponseBody public ModelAndView final_step(@reqParam String bank,
 	 * HttpServletRequest req, HttpServletResponse resp) {
 	 * 
 	 * ModelAndView mv = new ModelAndView();
