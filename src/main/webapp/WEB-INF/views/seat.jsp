@@ -88,6 +88,9 @@ td {
 	    			<table id="table" style="border-collapse: separate; border-spacing: 3px; width: 700px;">
 	    				<tr>
 	    				<c:forEach items="${checkSeat }" var="l">
+	    					<c:if test="${l.seatNum == 1 }">
+	    						<td class="rowName">${l.seatRow }</td>
+	    					</c:if>
 	    					<c:if test="${l.isEmpty == 1 }">
 	    						<td class='seat'>${l.seatNum }</td>
 	    					</c:if>
