@@ -166,7 +166,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 은총이시작 -->
 	<insert parameterType="com.ticket.dto.SelectedTicket"
 		id="insertSelectedTicket">
-		insert into selectedTicket values('test', 'test code', '2019-11-26',
+		insert into selectedTicket(userid, performcode, selecteddate, time, inwon, ticketprice, discountprice, couponprice, pointprice, seatrow, seatnum) values('test', 'test code', '2019-11-26',
 		'16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum})
 		<!-- insert into selctedTicket values(#{userId}, #{performCode}, #{selectedDate}, 
 			#{time}, #{inwon}, #{ticketPrice}, #{discountPrice}, #{couponPrice}, #{pointPrice}, 
