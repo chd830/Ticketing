@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ticket.dao.PosterDAO;
@@ -29,7 +31,7 @@ public class PosterController {
 
 	@RequestMapping(value = "/poster.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView poster(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+		
 		// ÄíÅ° °¡Á®¿À±â
 		// id ÄíÅ°
 		Cookie[] userId = request.getCookies();
@@ -58,19 +60,17 @@ public class PosterController {
 		ModelAndView mav = new ModelAndView();
 
 		String performCode = request.getParameter("performCode");
-
+		
 		PosterDTO p_dto = PosterDAO.getReadData(performCode);
 		PayDTO pay_dto = PosterDAO.getPayData(performCode);
 		List<PerformDetailDTO> lists = PosterDAO.getDetailImageData(performCode);
 				
-
 		// performcode ÄíÅ° »ý¼º
 		Cookie p_performCode = new Cookie("performcode", performCode);
 		//p_performCode.setMaxAge(600*24*10);
 		p_performCode.setPath("/ticketing");
 		response.addCookie(p_performCode);
 				
-		
 		mav.setViewName("poster");
 		mav.addObject("p_dto", p_dto);
 		mav.addObject("pay_dto", pay_dto);
@@ -79,5 +79,6 @@ public class PosterController {
 		return mav;
 
 	}
+	 
 
 }
