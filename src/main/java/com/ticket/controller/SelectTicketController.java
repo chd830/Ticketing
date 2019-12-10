@@ -55,6 +55,8 @@ public class SelectTicketController {
 		
 	}
 	
+<<<<<<< HEAD
+=======
 	 @RequestMapping(value = "getDate", method = RequestMethod.GET)
 	 @ResponseBody 
 	 public String getDate(@RequestParam String year,@RequestParam String month,@RequestParam String day, HttpServletRequest request) {
@@ -69,6 +71,7 @@ public class SelectTicketController {
 	  
 	 }
 	
+>>>>>>> 9462a0a8380d738d806da7d3faaf88e5aee07cce
 	@RequestMapping(value = "/step1.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String step1(HttpServletRequest request,HttpServletResponse response) {
 		

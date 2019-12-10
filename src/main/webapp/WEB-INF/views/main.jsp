@@ -261,8 +261,8 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-				<c:forEach var="mainListDTO" items="${lists }">
-					<c:if test="${i%j==0 }">
+				<c:forEach var="mainListDTO" items="${lists }" begin="0" end="5">
+					<c:if test="${i%j==0 and mainListDTO.performGenreCode==1 }">
 						<tr align="center">
 					</c:if>
 					<!-- <td> -->
