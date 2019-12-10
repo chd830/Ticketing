@@ -240,10 +240,10 @@ public class SelectTicketController {
 	  			}
 	  		}
 	      
-	     //int realtime = time.indexOf(":");
-		 //String rtime = time.substring(realtime-2, realtime+3);
+	     int realtime = time.indexOf("]");
+		 String rtime = time.substring(realtime+3, realtime+11);
 		 
-		 dao.time_updateData(performCode, userId, time);
+		 dao.time_updateData(performCode, userId, rtime);
 		 
 		 return time;
 	 
