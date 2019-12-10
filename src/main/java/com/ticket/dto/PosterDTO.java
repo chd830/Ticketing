@@ -24,6 +24,8 @@ public class PosterDTO {
 	// 장소정보
 	private int placeCode;
 	private String placeName;
+	private String placeAddr;
+	
 
 	// 등급정보
 	private int ratingCode;
@@ -131,5 +133,11 @@ public class PosterDTO {
 	public void setRatingName(String ratingName) {
 		this.ratingName = ratingName;
 	}
-
+	public String getPlaceAddr() {
+		return placeAddr;
+	}
+	public void setPlaceAddr(String placeAddr) {
+		this.placeAddr = placeAddr;
+	}
+	
 }

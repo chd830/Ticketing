@@ -8,7 +8,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="posterReadData"
 		resultType="com.ticket.dto.PosterDTO">
 		SELECT distinct a.performCode, a.performName,a.performMainImage, a.performStartDate,
-		a.performEnddate, b.placeName,
+		a.performEnddate, b.placeName,b.PLACEADDR,
 		c.genreName, d.ratingname, a.performrunningTime
 		from performData a, placeData b, genreData c, ratingData d
 		where a.performPlaceCode = b.placeCode and a.performGenreCode = c.genreCode 
@@ -26,5 +26,12 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailImageRead" parameterType="String" resultType="com.ticket.dto.PerformDetailDTO">
 		select performDetailimage 
 		from performdetail where performcode = #{performcode}
+	</select>
+	
+	<select id="infoMap" parameterType="String" resultType="map">
+		SELECT distinct a.performCode, b.PLACEMAPX, b.PLACEMAPY,b.PLACEADDR
+		from performData a, placeData b
+		where a.performPlaceCode = b.placeCode and a.performCode = #{performcode}
+	
 	</select>
 </mapper>

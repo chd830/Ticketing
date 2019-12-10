@@ -8,6 +8,7 @@
 <html>
 
 <head>
+
 <title>Ecoland - Free Bootstrap 4 Template by Colorlib</title>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -32,9 +33,11 @@
 <link rel="stylesheet" href="/ticketing/resources/css/flaticon.css">
 <link rel="stylesheet" href="/ticketing/resources/css/icomoon.css">
 <link rel="stylesheet" href="/ticketing/resources/css/style.css">
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
 		id="ftco-navbar">
@@ -65,6 +68,16 @@
 							class="nav-link"><span>My Page</span></a></li>
 					</c:otherwise>
 				</c:choose>
+				
+				<%-- <c:if test="${!empty c_success}">
+						<li class="nav-item"><a href="<%=cp%>/userLogin.action"
+							class="nav-link"><span>Login</span></a></li>
+						<li class="nav-item"><a href="<%=cp%>/userSignUp.action"
+							class="nav-link"><span>Sign Up</span></a></li>
+						<li class="nav-item"><a href="<%=cp%>/performInsert.action"
+							class="nav-link"><span>Sign Up</span></a></li>
+					</c:if> --%>
+				
 
 				<li class="nav-item"><a href="#about-section" class="nav-link"><span>Musical</span></a></li>
 				<li class="nav-item"><a href="#destination-section"
@@ -74,33 +87,87 @@
 				<li class="nav-item"><a href="#blog-section" class="nav-link"><span>Exhibition</span></a></li>
 				<li class="nav-item"><a href="#contact-section"
 					class="nav-link"><span>Theater</span></a></li>
-				<li class="nav-item"><img src="">
+				<c:if test="${!empty c_success}">
+				<li class="nav-item"><a href="<%=cp%>/performInsert.action" class="nav-link"><span>Insert</span></a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>
+	<div>
 	</nav>
+	<br/><br/><br/><br/>
+	<section class="ftco-section ftco-no-pb ftco-no-pt">
+	<div class="container" style="text-align: right;">
+		<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
+			<div class="col-md-12 heading-section ftco-animate">
+				<span class="subheading" style="font-size: 22pt;">Party &amp; Ticket</span>
+				<!-- <h2 class="mb-4">Where do you participate in?</h2> -->
+				<div class="row" align="left">
+			<div class="col-md-12" align="right">
+				<!-- <div class="search-wrap-1 ftco-animate p-4"> -->
+					<form action="#" class="search-property-1">
+						<div class="row" style="width: 600px; height: 10px;" align="right">
+							<div class="form-group" align="right" style="width: 120px; text-align: center;">
+								<!-- <label for="name" style="font-weight: normal;">Category</label> -->
+								<select name="genreName" class="form-control">
+									<option value="musical" style="font-size: 12pt;">뮤지컬</option>
+									<option value="concert" style="font-size: 12pt;">콘서트</option>
+								</select>
+							</div>
+							<div class="col-lg align-items-end" style="height: 30px;">
+								<div class="form-group">
+									<!-- <label for="#">Participate</label> -->
+									<div class="form-field" align="right">
+										<div class="icon">
+											<span class="ion-ios-search"></span>
+										</div>
+										<b><input type="text" class="form-control"
+											placeholder="검색어를 입력해주세요" style="width: 300px;"></b>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg align-self-end" style="width: 150px;">
+								<div class="form-group">
+									<div class="form-field">
+										<b><input type="submit" value="검색하기"
+											class="form-control btn btn-primary"></b>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				<!-- </div> -->
+			</div>
+		</div>
+			</div>
+		</div>
+		
+	</div>
+	<!-- </section> -->
+
+	<br/><br/>
 
 	<section id="home-section" class="hero"> <img
 		src="/images/blob-shape-3.svg" class="svg-blob"
 		alt="Colorlib Free Template">
-	<div class="home-slider owl-carousel">
+	<div class="home-slider owl-carousel" style="height: 670px;">
 		<div class="slider-item">
 			<div class="overlay"></div>
+			<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
 			<div class="container-fluid p-0">
 				<div
 					class="row d-md-flex no-gutters slider-text align-items-center justify-content-end"
-					data-scrollax-parent="true">
-					<div class="one-third order-md-last">
+					data-scrollax-parent="true" style="height: 700px;">
+					<div class="one-third order-md-last" style="height: 700px;">
 						<div class="img"
-							style="background-image: url(/ticketing/resources/images/movie.jpg); width: 700px; height: 800px;">
+							style="background-image: url(/ticketing/resources/images/레미제라블.jpeg); width: 600px; height: 550px;">
 							<div class="overlay"></div>
 						</div>
-						<div class="bg-primary">
-							<!-- <div class="vr"><span class="pl-3 py-4" style="background-image: url(images/bg_1-1.jpg);">Greece</span></div> -->
-						</div>
+						<!-- <div class="bg-primary">
+						</div> -->
 					</div>
 					<div class="one-forth d-flex align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
+						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;">
 						<div class="text">
 							<span class="subheading pl-5">Participate Loro</span>
 							<h1 class="mb-4 mt-3">Explore Your Travel Destinations like
@@ -125,16 +192,16 @@
 			<div class="container-fluid p-0">
 				<div
 					class="row d-flex no-gutters slider-text align-items-center justify-content-end"
-					data-scrollax-parent="true">
-					<div class="one-third order-md-last">
+					data-scrollax-parent="true" style="height: 700px;">
+					<div class="one-third order-md-last" style="height: 700px;">
 						<div class="img"
-							style="background-image: url(/ticketing/resources/images/jpark.jpg); width: 700px; height: 800px;">
+							style="background-image: url(/ticketing/resources/images/jpark.jpg); width: 600px; height: 550px;">
 							<div class="overlay"></div>
 						</div>
 						<!-- <div class="vr"><span class="pl-3 py-4" style="background-image: url(images/jpark.jpg);">J-Park</span></div> -->
 					</div>
 					<div class="one-forth d-flex align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
+						data-scrollax=" properties: { translateY: '100%' }" style="height: 700px;">
 						<div class="text">
 							<span class="subheading pl-5">Participate J'park</span>
 							<h1 class="mb-4 mt-3">
@@ -155,10 +222,12 @@
 			</div>
 		</div>
 	</div>
-	</section>
+	</div>
+	
+	
 
 	<br/><br/>
-	<section class="ftco-section ftco-no-pb ftco-no-pt">
+	<!-- <section class="ftco-section ftco-no-pb ftco-no-pt">
 	<div class="container" style="text-align: center;">
 		<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
 			<div class="col-md-12 heading-section ftco-animate">
@@ -172,7 +241,7 @@
 					<form action="#" class="search-property-1">
 						<div class="row">
 							<div class="form-group" align="center" style="width: 120px; text-align: left;">
-								<!-- <label for="name" style="font-weight: normal;">Category</label> -->
+								<label for="name" style="font-weight: normal;">Category</label>
 								<select name="genreName" class="form-control">
 									<option value="musical" style="font-size: 12pt;">뮤지컬</option>
 									<option value="concert" style="font-size: 12pt;">콘서트</option>
@@ -180,7 +249,7 @@
 							</div>
 							<div class="col-lg align-items-end">
 								<div class="form-group">
-									<!-- <label for="#">Participate</label> -->
+									<label for="#">Participate</label>
 									<div class="form-field">
 										<div class="icon">
 											<span class="ion-ios-search"></span>
@@ -204,7 +273,7 @@
 			</div>
 		</div>
 	</div>
-	</section>
+	</section> -->
 
 	<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb"
 		id="about-section">
@@ -245,13 +314,28 @@
 	</div>
 	</section>
 
+	
+	
+
+	<!-- 뮤지컬이든 뭐든 장르 출력시키기 (첫번째) -->
 	<!-- 첫번째 리스트 부분 -->
 	<section class="ftco-section">
 	<div class="container">
-		<div class="row justify-content-center pb-5">
+		<!-- <div class="row justify-content-center pb-5">
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<span class="subheading">Partycket Performance</span>
-				<h2 class="mb-4">Musical</h2>
+				<h2 class="mb-4">Musical & Theater</h2>
+				<p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia</p>
+			</div>
+		</div> -->
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- musical and theater --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+		
+	<div class="row justify-content-center pb-5">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<span class="subheading">Partycket Performance</span>
+				<h2 class="mb-4">Musical &amp; Theater</h2>
 				<!-- <p>Far far away, behind the word mountains, far from the
 					countries Vokalia and Consonantia</p> -->
 			</div>
@@ -261,30 +345,28 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-				<c:forEach var="mainListDTO" items="${lists }">
-					<c:if test="${i%j==0 }">
-						<tr align="center">
-					</c:if>
-					<!-- <td> -->
-					<div class="col-md-6 col-lg-4 ftco-animate"
+				<c:forEach var="dto" items="${mtlists }" begin="0" end="5">
+					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
+					
+						<div class="col-md-6 col-lg-4 ftco-animate"
 						style="display: inline-block;">
 						<div class="project">
 
-							<div class="img">
+							<div class="img" style="width: 300px;">
 								<div class="vr">
-									<span>H O T</span>
+									
 								</div>
-								<a href="/ticketing/poster.action?performCode=${mainListDTO.performCode}"><img src="<c:url value='/image/${mainListDTO.performMainImage }'/>"
-									style="width: 550px; height: 350px;" class="img-fluid"
+								<a href="/ticketing/poster.action?performCode=${dto.performCode}"><img src="<c:url value='/image/${dto.performMainImage }'/>"
+									style="width: 300px; height: 380px;" class="img-fluid"
 									alt="Colorlib Template"></a>
 							</div>
 							<div class="text">
 
-								<h4 class="price">● ${mainListDTO.placeName }</h4>
-								<span><b>${mainListDTO.performStartDate } ~
-										${mainListDTO.performEndDate }<b /></span>
+								<h4 class="price">● ${dto.placeName }</h4>
+								<span><b>${dto.performStartDate } ~
+										${dto.performEndDate }<b /></span>
 								<h3>
-									<a href="/ticketing/poster.action?performCode=${mainListDTO.performCode}">${mainListDTO.performName }</a>
+									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
 								</h3>
 								<div class="star d-flex clearfix">
 									<div class="mr-auto float-left">
@@ -296,56 +378,191 @@
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 										댓글(120)</b></a></span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- </td> -->
+					<!-- </td>
+					</tr> -->
+					
+					<%-- </c:if> --%>
+					
 					<c:if test="${i%j == j-1 }">
 						</tr align="left">
 					</c:if>
 					<c:set var="i" value="${i+1 }" />
 				</c:forEach>
+				
 			</table>
 		</div>
-	</div>
-	</section>
-	<!-- 첫번째 리스트 부분 끝 -->
-	
-	<!-- 긴 이미지 전시회 부분 -->
-	<!-- <section class="ftco-intro img" id="hotel-section"
-		style= "background-image: url(/ticketing/resources/images/down.png);">
-	<div class="overlay" style="height: 300px;"></div>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-9 text-center">
-				<p><h2>나랑 전시회 보러갈래..??</h2></p>
-				<p style="font-weight: normal;">Do you want go to exhibition with me???</p>
-				<p class="mb-0">
-					<a href="#" class="btn btn-white px-4 py-3"><b>전시회 보러가기</b></a>
-				</p>
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- musical and theater --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+		
+		<br/><br/><br/>
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- concert and classic --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+	<div class="row justify-content-center pb-5">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<span class="subheading">Partycket Performance</span>
+				<h2 class="mb-4">Musical &amp; Theater</h2>
+				<!-- <p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia</p> -->
 			</div>
 		</div>
-	</div>
-	</section> -->
-	<!-- 긴 이미지 전시회 부분 끝 -->
+		<div class="row" style="display: inline-block;">
+			<c:set var="i" value="0" />
+			<c:set var="j" value="3" />
+			<table align="center" border="0" width="500" cellpadding="3"
+				cellspacing="3">
+				<c:forEach var="dto" items="${cclists }" begin="0" end="5">
+					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
+					
+						<div class="col-md-6 col-lg-4 ftco-animate"
+						style="display: inline-block;">
+						<div class="project">
 
-	<!-- 뮤지컬이든 뭐든 장르 출력시키기 (첫번째) -->
+							<div class="img" style="width: 300px;">
+								<div class="vr">
+									
+								</div>
+								<a href="/ticketing/poster.action?performCode=${dto.performCode}"><img src="<c:url value='/image/${dto.performMainImage }'/>"
+									style="width: 300px; height: 380px;" class="img-fluid"
+									alt="Colorlib Template"></a>
+							</div>
+							<div class="text">
+
+								<h4 class="price">● ${dto.placeName }</h4>
+								<span><b>${dto.performStartDate } ~
+										${dto.performEndDate }<b /></span>
+								<h3>
+									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
+								</h3>
+								<div class="star d-flex clearfix">
+									<div class="mr-auto float-left">
+										<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
+										<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
+										<span class="ion-ios-star"></span>
+										<span class="rate"><a href="#"><b>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+										댓글(120)</b></a></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- </td>
+					</tr> -->
+					
+					<%-- </c:if> --%>
+					
+					<c:if test="${i%j == j-1 }">
+						</tr align="left">
+					</c:if>
+					<c:set var="i" value="${i+1 }" />
+				</c:forEach>
+				
+			</table>
+		</div>
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- concert and classic --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+		
+		<br/><br/><br/>
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- Exhibition & Child --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+		<div class="row justify-content-center pb-5">
+			<div class="col-md-12 heading-section text-center ftco-animate">
+				<span class="subheading">Partycket Performance</span>
+				<h2 class="mb-4">Musical &amp; Theater</h2>
+				<!-- <p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia</p> -->
+			</div>
+		</div>
+		<div class="row" style="display: inline-block;">
+			<c:set var="i" value="0" />
+			<c:set var="j" value="3" />
+			<table align="center" border="0" width="500" cellpadding="3"
+				cellspacing="3">
+				<c:forEach var="dto" items="${eclists }" begin="0" end="5">
+					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
+					
+						<div class="col-md-6 col-lg-4 ftco-animate"
+						style="display: inline-block;">
+						<div class="project">
+
+							<div class="img" style="width: 300px;">
+								<div class="vr">
+									
+								</div>
+								<a href="/ticketing/poster.action?performCode=${dto.performCode}"><img src="<c:url value='/image/${dto.performMainImage }'/>"
+									style="width: 300px; height: 380px;" class="img-fluid"
+									alt="Colorlib Template"></a>
+							</div>
+							<div class="text">
+
+								<h4 class="price">● ${dto.placeName }</h4>
+								<span><b>${dto.performStartDate } ~
+										${dto.performEndDate }<b /></span>
+								<h3>
+									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
+								</h3>
+								<div class="star d-flex clearfix">
+									<div class="mr-auto float-left">
+										<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
+										<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
+										<span class="ion-ios-star"></span>
+										<span class="rate"><a href="#"><b>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+										댓글(120)</b></a></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- </td>
+					</tr> -->
+					
+					<%-- </c:if> --%>
+					
+					<c:if test="${i%j == j-1 }">
+						</tr align="left">
+					</c:if>
+					<c:set var="i" value="${i+1 }" />
+				</c:forEach>
+				
+			</table>
+		</div>
+		
+		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- Exhibition & Child --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+		
+	</div>
+	
+	<!-- </section> -->
+	<!-- 첫번째 리스트 부분 끝 -->
 	<section class="ftco-section">
 	<div class="container">
-		<div class="row justify-content-center pb-5">
+		<!-- <div class="row justify-content-center pb-5">
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<span class="subheading" style="font-weight: normal;">Suggested Hotel</span>
 				<h2 class="mb-4">Find Nearest Hotel</h2>
 				<p>Far far away, behind the word mountains, far from the
 					countries Vokalia and Consonantia</p>
 			</div>
-		</div>
-		<div class="row">
+		</div> -->
+	<!-- 	<div class="row">
 			<div class="col-md-6 col-lg-4 ftco-animate">
 				<div class="project">
 					<div class="img">
@@ -441,7 +658,7 @@
 					</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row justify-content-center pb-5 pt-5">
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<span class="subheading" style="font-weight: normal; font-size: 15pt;">전문가 칼럼</span>
@@ -452,7 +669,7 @@
 		<div class="row">
 			<div class="col-md-12 room-wrap">
 				<div class="row">
-					<div class="col-md-7 d-flex ftco-animate">
+					<div class="col-md-7 d-flex ftco-animate" style="width: 600px;">
 						<div class="img align-self-stretch"
 							style="background-image: url(/ticketing/resources/images/opera100.jpg); width: 600px; height: 780px;"></div>
 					</div>
@@ -524,6 +741,7 @@
 			</div>
 		</div>
 	</div>
+	</section>
 	</section>
 	<!-- 뮤지컬이든 뭐든 장르 출력시키기 (첫번째) 끝 -->
 
@@ -1013,6 +1231,7 @@
 		</div>
 	</div>
 	</section>
+	
 	<footer class="ftco-footer ftco-section">
 	<div class="container">
 		<div class="row mb-5">
@@ -1104,13 +1323,13 @@
 
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
+	<%-- <div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
 		<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
 			stroke-width="4" stroke="#eeeeee" />
 		<circle class="path" cx="24" cy="24" r="22" fill="none"
 			stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
+	</div> --%>
 
 
 	<script src="/ticketing/resources/js/jquery.min.js"></script>

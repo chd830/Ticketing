@@ -1,6 +1,8 @@
 package com.ticket.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -52,15 +54,11 @@ public class PosterDAO {
 		}
 
 	}
-
-	/*
-	 * public ReviewBoardDTO getMaxNum(int num) {
-	 * 
-	 * ReviewBoardDTO review_dto =
-	 * sessionTemplate.selectOne("ticketMapper.reviewMaxNum", num); return
-	 * review_dto;
-	 * 
-	 * }
-	 */
-
-}
+	
+	
+	  public List<Map<String,Object>> infoMap (String performCode) {
+	  List<Map<String,Object>> lists =  sessionTemplate.selectList("ticketMapper.infoMap",performCode); 
+	  return lists; 
+	  }
+	 
+	}

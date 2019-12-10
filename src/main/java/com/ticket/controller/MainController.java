@@ -36,7 +36,8 @@ public class MainController {
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main(Locale locale, Model model) {
 		
-		return "main";
+		//return "mainFooter";
+		return "redirect:/main.action";
 		
 	}
 	
@@ -54,8 +55,7 @@ public class MainController {
 				}
 			}
 		}
-
-		 
+		
 		//여기서 부터 
 		
 		String cp = request.getContextPath();
@@ -81,7 +81,7 @@ public class MainController {
 		}
 		
 		int dataCount = dao.getDataCount(searchKey,searchValue);
-		int numPerPage = 3;
+		int numPerPage = 6;
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		
 		if(currentPage>totalPage)
@@ -91,8 +91,11 @@ public class MainController {
 		int end = currentPage*numPerPage;
 		
 		List<MainListDTO> lists = dao.getList(); 
+		List<MainListDTO> mtlists = dao.mtgetList(); 
+		List<MainListDTO> cclists = dao.ccgetList(); 
+		List<MainListDTO> eclists = dao.ecgetList(); 
 		
-		System.out.println(lists.size() + "★★★★★★★★★★★★★★★★★★★");
+		//System.out.println(lists.size() + "★★★★★★★★★★★★★★★★★★★");
 		
 		session = request.getSession(); 
 		String root = session.getServletContext().getRealPath("/");
@@ -118,12 +121,33 @@ public class MainController {
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
+		UserMainDTO dto = dao.myPageReadData(HttpUtils.getUserId(request));
+		CompanyMainDTO c_dto = dao.myPageCompanyReadData(HttpUtils.getUserId(request));
+		request.setAttribute("userMainDTO", dto);
+		request.setAttribute("companyMainDTO", c_dto);
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(dto != null) {
+			
+			request.setAttribute("success", HttpUtils.getUserId(request));
+			System.out.println(dto.getNum());
+			
+		}if(c_dto != null) {
+			
+			request.setAttribute("c_success", HttpUtils.getUserId(request));
+			
+		}
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
 		request.setAttribute("savePath", savePath);
 		request.setAttribute("lists", lists);
+		request.setAttribute("mtlists", mtlists);
+		request.setAttribute("cclists", cclists);
+		request.setAttribute("eclists", eclists);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
 		request.setAttribute("success", id);
-		request.setAttribute("c_success", id);
 		
 		return "main";
 		
@@ -182,8 +206,8 @@ public class MainController {
 		String companyId = request.getParameter("companyId");
 		String companyPwd = request.getParameter("companyPwd");
 			
-		CompanyMainDTO CompanyMainDTO = dao.myPageCompanyReadData(companyId);
-		
+		companyMainDTO = dao.myPageCompanyReadData(companyId);
+		System.out.println();
 		if(companyMainDTO==null || !companyMainDTO.getCompanyId().equals(companyId) || !companyMainDTO.getCompanyPwd().equals(companyPwd)) {
 				
 			request.setAttribute("message", "아이디 또는 패스워드를 정확히 입력하세요");
@@ -225,6 +249,7 @@ public class MainController {
 	@RequestMapping(value = "/userSignUp.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userSignUp(HttpServletRequest request,HttpServletResponse response, UserMainDTO userMainDTO) {
 		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("userSignUp");
 		return mav;
@@ -256,9 +281,9 @@ public class MainController {
 		@RequestMapping(value = "/companySignUp_ok.action", method = {RequestMethod.GET, RequestMethod.POST})
 		public String companySignUp_ok(HttpServletRequest request,HttpServletResponse response, CompanyMainDTO companyMainDTO) {
 			
+			dao.insertCompanySignUpData(companyMainDTO);
 			int maxNum = 0;
 			companyMainDTO.setNum(maxNum + 1); 
-			dao.insertCompanySignUpData(companyMainDTO);
 			return "companyLogin";
 			
 		}
@@ -270,14 +295,13 @@ public class MainController {
 		UserMainDTO dto = dao.myPageReadData(HttpUtils.getUserId(request));
 		CompanyMainDTO c_dto = dao.myPageCompanyReadData(HttpUtils.getUserId(request));
 		request.setAttribute("userMainDTO", dto);
-		//System.out.println(dto.getUserFinalAddr() + "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
 		request.setAttribute("companyMainDTO", c_dto);
 		
 		if(dto != null) {
 			request.setAttribute("success", HttpUtils.getUserId(request));
+			System.out.println(dto.getNum());
 		}
-		//System.out.println(dto.getUserFinalAddr());
-		//System.out.println(dto.getUserEmail());
+		
 		if(c_dto != null) {
 			request.setAttribute("c_success", HttpUtils.getUserId(request));
 		}
@@ -289,13 +313,11 @@ public class MainController {
 	
 	//마이페이지_OK 화면 (수정)
 	@RequestMapping(value = "/myPage_ok.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String myPage_pk(HttpServletRequest request,HttpServletResponse response, UserMainDTO 
-			userMainDTO, CompanyMainDTO companyMainDTO) throws Exception {
+	public String myPage_pk(HttpServletRequest request,HttpServletResponse response,Model model, UserMainDTO userMainDTO) throws Exception {
 		
-		//String cp = request.getContextPath();
 		System.out.println("미친새끼야 이거 실행 안하냐??");
-		userMainDTO = dao.updateUserData(userMainDTO);
-		System.out.println("미친새끼야 이거 실행 안하냐??");
+		int num = Integer.parseInt(request.getParameter("num"));
+		dao.updateUserData(userMainDTO);
 		
 		return "redirect:/main.action";
 		

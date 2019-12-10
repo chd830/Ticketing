@@ -14,12 +14,12 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertUserSignUpData" parameterType="com.ticket.dto.UserMainDTO">	<!-- 일반사용자 회원가입 -->
 		insert into userInfo(num,userId,userPwd,userName,userAddr,userRoadAddr,userJibunAddr,userFinalAddr,
 		userBirth,userGender,userUpdateDate,userEmail,userPhoneNum,userPoint,userCoupon,userDisCount)
-		values(0,#{userId},#{userPwd},#{userName},#{userAddr},#{userRoadAddr},#{userJibunAddr},
+		values(#{num},#{userId},#{userPwd},#{userName},#{userAddr},#{userRoadAddr},#{userJibunAddr},
 		#{userFinalAddr},#{userBirth},#{userGender},sysdate,#{userEmail},#{userPhoneNum},0,0,0)
 	</insert>
 	
 	<select id="myPageReadData" resultType="com.ticket.dto.UserMainDTO" parameterType="String">   <!-- 일반사용자 마이페이지 -->
-		select userId,userPwd,userName,userAddr,userFinalAddr,
+		select num,userId,userPwd,userName,userAddr,userFinalAddr,
 		userEmail,userPhoneNum from userInfo where userId=#{userId}
 	</select>	
 	
@@ -30,8 +30,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateUserData" parameterType="com.ticket.dto.UserMainDTO">
 		update userInfo set userPwd=#{userPwd},userName=#{userName},userAddr=#{userAddr},userFinalAddr=#{userFinalAddr}
-		,userEmail=#{userEmail},userPhoneNum=#{userPhoneNum}
-		where userId=#{userId}
+		,userEmail=#{userEmail},userPhoneNum=#{userPhoneNum} 
+		where num=#{num}
 	</update>
 	
 					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 일반회원 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
@@ -49,12 +49,12 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertCompanySignUpData" parameterType="com.ticket.dto.CompanyMainDTO">	  <!-- 기업회원 회원가입 -->
 		insert into companyInfo(num,companyId,companyPwd,companyName,companyAddr,companyRoadAddr,companyJibunAddr,companyFinalAddr,
 		companyUpdateDate,companyEmail,companyPhoneNum)
-		values(0,#{companyId},#{companyPwd},#{companyName},#{companyAddr},#{companyRoadAddr},#{companyJibunAddr},
+		values(#{num},#{companyId},#{companyPwd},#{companyName},#{companyAddr},#{companyRoadAddr},#{companyJibunAddr},
 		#{companyFinalAddr},sysdate,#{companyEmail},#{companyPhoneNum})
 	</insert>
 	
 	<select id="myPageCompanyReadData" resultType="com.ticket.dto.CompanyMainDTO" parameterType="String">   <!-- 기업회원 마이페이지 -->
-		select companyId,companyPwd,companyName,companyAddr,companyEmail,companyPhoneNum from companyInfo where companyId=#{companyId}
+		select num,companyId,companyPwd,companyName,companyAddr,companyEmail,companyPhoneNum from companyInfo where companyId=#{companyId}
 	</select>
 	
 	<select id="companyIdCheck" resultType="String" parameterType="String"> <!-- 기업회원 아이디 체크 -->
@@ -70,12 +70,40 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 					
 					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 공통공통 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
 					
+	<!-- 전체데이터 -->
 	<select id="getLists" resultType="com.ticket.dto.MainListDTO">
-		<![CDATA[
+		
 		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
-		 a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
-		 and a.performPlaceCode = b.placeCode
-		 ]]>
+		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		and a.performPlaceCode = b.placeCode
+		 
+	</select>
+	
+	<!-- 뮤지컬 & 연극 -->
+	<select id="mtgetLists" resultType="com.ticket.dto.MainListDTO">
+		
+		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
+		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		and a.performPlaceCode = b.placeCode and (c.genreCode = 2 or c.genreCode = 3)
+		 
+	</select>
+	
+	<!-- 콘서트 & 클래식 -->
+	<select id="ccgetLists" resultType="com.ticket.dto.MainListDTO">
+		
+		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
+		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		and a.performPlaceCode = b.placeCode and (c.genreCode = 1 or c.genreCode = 4)
+		 
+	</select>
+	
+	<!-- 전시 & 아동 -->
+	<select id="ecgetLists" resultType="com.ticket.dto.MainListDTO">
+		
+		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
+		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		and a.performPlaceCode = b.placeCode and (c.genreCode = 5 or c.genreCode = 6)
+		 
 	</select>
 					
 	<select id="getDataCount" parameterType="map" resultType="int">

@@ -2,7 +2,9 @@ package com.ticket.controller;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -62,19 +64,35 @@ public class PosterController {
 		PosterDTO p_dto = PosterDAO.getReadData(performCode);
 		PayDTO pay_dto = PosterDAO.getPayData(performCode);
 		List<PerformDetailDTO> lists = PosterDAO.getDetailImageData(performCode);
-				
-
+		List<Map<String,Object>> infoMap = PosterDAO.infoMap(performCode);	
+		
+		System.out.println("mapx : " + infoMap.get(0).get("PLACEMAPX"));
+		
 		// performcode ÄíÅ° »ý¼º
 		Cookie p_performCode = new Cookie("performcode", performCode);
 		//p_performCode.setMaxAge(600*24*10);
 		p_performCode.setPath("/ticketing");
 		response.addCookie(p_performCode);
+		
+		
+		
+		/*
+		 * HashMap<String, Object> hMap = new HashMap<String, Object>();
+		 * 
+		 * hMap.put("mapX", hMap.get); hMap.put("mapY", month);
+		 */
 				
 		
 		mav.setViewName("poster");
 		mav.addObject("p_dto", p_dto);
 		mav.addObject("pay_dto", pay_dto);
 		mav.addObject("lists", lists);
+		//mav.addObject("hMap", infoMap.get(0));
+		
+		
+		  mav.addObject("MapX",infoMap.get(0).get("PLACEMAPX"));
+		  mav.addObject("MapY",infoMap.get(0).get("PLACEMAPY"));
+	
 				
 		return mav;
 

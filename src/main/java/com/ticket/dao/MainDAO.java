@@ -88,17 +88,40 @@ public class MainDAO {
 	}
 
 	
-	  public List<MainListDTO> getList() {
+	  public List<MainListDTO> mtgetList() {
 	  
 		  Map<String, Object> params = new HashMap<String, Object>();
+		
+		  List<MainListDTO> mtlists = sessionTemplate.selectList("mainMapper.mtgetLists");
 	  
+		  return mtlists;
 	  
-		/*
-		 * params.put("start", start); params.put("end", end); params.put("searchKey",
-		 * searchKey); params.put("searchValue", searchValue);
-		 */
+	  }
 	  
+	  public List<MainListDTO> ccgetList() {
+		  
+		  Map<String, Object> params = new HashMap<String, Object>();
+		
+		  List<MainListDTO> cclists = sessionTemplate.selectList("mainMapper.ccgetLists");
 	  
+		  return cclists;
+	  
+	  }
+	  
+	  public List<MainListDTO> ecgetList() {
+		  
+		  Map<String, Object> params = new HashMap<String, Object>();
+		
+		  List<MainListDTO> eclists = sessionTemplate.selectList("mainMapper.ecgetLists");
+	  
+		  return eclists;
+	  
+	  }
+	  
+	  public List<MainListDTO> getList() {
+		  
+		  Map<String, Object> params = new HashMap<String, Object>();
+		
 		  List<MainListDTO> lists = sessionTemplate.selectList("mainMapper.getLists");
 	  
 		  return lists;
