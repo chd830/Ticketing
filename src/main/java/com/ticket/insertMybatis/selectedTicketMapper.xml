@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ticketMapper">
+
+	<!-- 정화시작 -->
+	<insert id="home_insertData" parameterType="com.ticket.dto.SelectedTicketDTO" >
+	 insert into selectedTicket (userId,performCode,selectedDate,time,performGenreCode) 
+	 values(#{userId}, #{performCode}, #{selectedDate},#{time},#{performGenreCode}) 
+	</insert>
+
+	<update id="date_updateData" parameterType="map">
+		update selectedTicket set selectedDate=#{selectedDate}
+		where userId=#{userId} and performCode=#{performCode}
+	</update>
+
+	<update id="time_updateData" parameterType="map">
+		update selectedTicket set time=#{rtime} 
+		where userId=#{userId} and performCode=#{performCode}
+	</update>
+
+	<update id="inwon_updateData" parameterType="map">
+		update selectedTicket set inwon=#{inwon},ticketprice=#{price} where
+		userId=#{userId} and performCode=#{performCode}
+	</update>
+
+	<select id="detail_ReadData" parameterType="map" resultType="com.ticket.dto.SelectedTicketDTO">
+		select * from selectedTicket where userId=#{userId} and performCode=#{performCode}
+	</select>
+	
+	<select id="cal_select" parameterType="String" resultType="com.ticket.dto.PerformDTO">
+		select performStartDate, performEndDate from performData where performCode=#{performCode}
+	</select>
+	
+	<select id="get_performCode" parameterType="String" resultType="int">
+		select performGenreCode from performData where performCode=#{performCode}
+	</select>
+	
+	<select  id="timeList" parameterType="String" resultType="com.ticket.dto.PerformInfoDTO" >
+	 	select distinct performTime from performinfo where performCode=#{performCode}
+	</select>
+	
+	<select  id="seatPrice" parameterType="String" resultType="com.ticket.dto.SeatingDTO" >
+	 	select rclass,sclass,vclass from seatingData where performCode=#{performCode}
+	</select>
+	
+	<select  id="read_performData" parameterType="String" resultType="com.ticket.dto.PerformDTO" >
+	 	select performName,performStartDate,performEndDate,performPlaceCode,performMainImage from performData where performCode=#{performCode}
+	</select> 
+	
+	<select  id="read_placeData" parameterType="String" resultType="com.ticket.dto.PlaceDTO" >
+	 	select placeName from placeData where placeCode=#{placeCode}
+	</select>
+	
+	<select  id="p_SeatPrice" parameterType="String" resultType="int" >
+	 	select notSelectClass from seatingData where performCode=#{performCode}
+	</select>
+	
+<!-- <select id="maxNum" resultType="int"> select nvl(max(num),0) from board 
+		</select> <insert id="insertData" parameterType="com.jdbc.dto.BoardDTO"ㅣㅏ;> 
+		insert into board(num, name, pwd, email, content, subject, ipAddr, hitCount, 
+		created) values(#{num}, #{name}, #{pwd}, #{email}, #{content}, #{subject}, 
+		#{ipAddr}, 0, sysdate) </insert> <select id="getDataCount" parameterType="map" 
+		resultType="int"> select nvl(count(*),0) from board where ${searchKey} like 
+		'%' || #{searchValue} || '%' </select> <select id="getLists" parameterType="map" 
+		resultType="com.jdbc.dto.BoardDTO"> select * from ( select rownum rnum, data.* 
+		from ( select num, name, subject, hitCount, to_char(created, 'YYYY-MM-DD') 
+		craeted from board where ${searchKey} like '%' || #{searchValue} || '%' order 
+		by num desc) data) <![CDATA[ where rnum>=#{start} and rnum<=#{end} ]]> </select> 
+		<update id="updateHitCount" parameterType="int"> update board set hitCount 
+		= hitCount+1 where num=#{num} </update> <select id="getReadData" parameterType="int" 
+		resultType="com.jdbc.dto.BoardDTO"> select num, name, pwd, email, subject, 
+		content, ipAddr, hitCount, created from board where num=#{num} </select> 
+		<update id="updateData" parameterType="com.jdbc.dto.BoardDTO"> update board 
+		set name=#{name}, pwd=#{pwd}, email=#{email}, subject=#{subject}, content=#{content} 
+		where num=#{num} </update> <delete id="deleteData" parameterType="int"> delete 
+		board where num=#{num} </delete> -->
+	<!-- 정화 끝 -->
+
+
+
+	<!-- 연주 시작 -->
+
+	<select resultType="com.ticket.dto.SelectedTicketDTO"
+		parameterType="String" id="ticket"> select * from selectedTicket where
+		userId=#{userId}
+	</select>
+
+	<select resultType="com.ticket.dto.UserInfoDTO" parameterType="String" id="selectUserInfo"> 
+		select * from UserInfo where userId=#{userId}
+	</select>
+
+	<select resultType="com.ticket.dto.CouponDataDTO" parameterType="String" id="couponSearch"> 
+		select couponCode,couponPrice,couponDesc from couponData where couponCode=#{couponCode}
+	</select>
+
+	<select resultType="com.ticket.dto.MyCouponDTO" parameterType="String" id="myCouponList"> 
+		select userId,couponCode,couponPrice,couponDesc from MyCoupon where userId=#{userId}
+	</select>
+
+	<select resultType="com.ticket.dto.MyDiscountDTO" id="myDiscountList"> 
+		select * from myDiscount where userId=#{userId} 
+	</select>
+
+	<update parameterType="map" id="input_discountPrice"> 
+		update selectedTicket set discountPrice=#{discountPrice} where userId=#{userId}
+	</update>
+
+	<update parameterType="map" id="input_couponPrice"> 
+		update selectedTicket set couponPrice=#{couponPrice} where userId=#{userId}
+	</update>
+
+	<update parameterType="map" id="input_point"> update selectedTicket set
+		pointPrice=#{pointPrice} where userId=#{userId}
+	</update>
+
+	<insert parameterType="map" id="insert_MyCoupon"> insert into
+		MyCoupon(userId,couponCode,couponPrice,couponDesc)
+		values(#{userId},#{dto.couponCode},#{dto.couponPrice},#{dto.couponDesc})
+	</insert>
+
+	<delete parameterType="String" id="deleteCoupon"> delete couponData where
+		couponCode=#{couponCode}
+	</delete>
+
+	<select resultType="com.ticket.dto.AutoImageDTO"
+		parameterType="int" id="selectAutoImage"> select * from autoImage where
+		imageNum=#{imageNum}
+	</select>
+
+	<select resultType="com.ticket.dto.AutoImageDTO"
+		parameterType="String" id="checkAutoImage"> select * from autoImage where
+		imagePath=#{imagePath}
+	</select>
+
+	<select resultType="com.ticket.dto.AccountDTO"
+		parameterType="String" id="selectAccount"> select * from account where
+		accountBank=#{accountBank}
+	</select>
+	
+	<select id="discountDataList" resultType="com.ticket.dto.DiscountDataDTO">
+		select * from discountData
+	</select>
+	
+	<select id="selectDiscountDataDTO" parameterType="String" resultType="com.ticket.dto.DiscountDataDTO">
+		select * from discountData where discountCode=#{discountCode}
+	</select>
+	
+	<insert id="insertMyDiscount" parameterType="map">
+		insert into MyDiscount values (#{userId},#{dddto.discountCode},#{dddto.discountName},#{dddto.discountPrice},#{dddto.discountDesc})
+	</insert>
+	
+	<update id="updateDiscountData" parameterType="String">
+		update DiscountData set amount = amount-1 where discountCode= #{discountCode}
+	</update>
+	
+	<delete id="deleteDiscountData" parameterType="String">
+		delete DiscountData where discountCode = #{discountCode}
+	</delete>
+	
+	<select id="selectMyDiscount" parameterType="String" resultType="com.ticket.dto.MyDiscountDTO">
+		select * from where discountCode=#{discountCode}
+	</select>
+	<!-- 연주끝 -->
+
+
+	<!-- 은총이시작 -->
+	<insert parameterType="com.ticket.dto.SelectedTicket"
+		id="insertSelectedTicket">
+		insert into selectedTicket values('test', 'test code', '2019-11-26',
+		'16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum})
+		<!-- insert into selctedTicket values(#{userId}, #{performCode}, #{selectedDate}, 
+			#{time}, #{inwon}, #{ticketPrice}, #{discountPrice}, #{couponPrice}, #{pointPrice}, 
+			#{seatRow}, #{seatNum}) -->
+	</insert>
+
+	<update id="updateRemainData"> update remainData set isEmpty=0 where
+		seatRow=#{seatRow} AND seatNum=#{seatNum} </update>
+
+	<delete parameterType="com.ticket.dto.SelectedTicket"
+		id="deleteSelectedTicket"> delete selectedTicket where seatRow=#{seatRow} AND
+		seatNum=#{seatNum} </delete>
+
+	<select parameterType="String" id="selectSelectedTicket"
+		resultType="com.ticket.dto.SelectedTicket"> select userId, performCode, seatRow, seatNum from
+		selectedTicket where userId = #{userId} </select>
+
+	<select id="selectCount" resultType="int"> select count(*) from
+		remainData where seatNum = 1 </select>
+
+	<update parameterType="com.ticket.dto.Remain" id="updateIsEmpty"> update
+		remainData set isEmpty = 0 where seatRow = #{seatRow} AND seatNum =
+		#{seatNum} </update>
+		
+	<!-- 은총이끝 -->	
+</mapper>

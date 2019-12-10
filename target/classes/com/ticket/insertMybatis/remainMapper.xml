@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper">
+
+<insert id="insert" parameterType="int">
+	insert into remainData values(1, 'V', '?', #{seatNum}, 1)
+</insert>
+<select id="getRemainList" resultType="com.ticket.dto.Remain">
+	select placeCode, seatClass, seatRow, seatnum, isEmpty 
+	from remainData where seatNum = 1 order by seatRow
+</select>
+<select id="getCount" resultType="int">
+	select count(*) from remainData where seatNum = 1
+</select>
+<update id="updateSeat">
+	update remainData r set r.isEmpty = 0 where EXISTS( select * from selectedTicket s where r.seatrow = s.seatrow AND r.seatNum = s.seatNum)
+</update>
+<select id="selectIsEmpty" resultType="int" parameterType="com.ticket.dto.Remain">
+	select isEmpty from remainData where seatRow = #{seatRow} AND seatNum = #{seatNum}
+</select>
+<select id="selectListEmpty" resultType="com.ticket.dto.Remain">
+	select seatRow, seatNum, isEmpty from remainData order by seatRow, seatNum
+</select>
+</mapper>

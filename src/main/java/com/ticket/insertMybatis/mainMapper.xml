@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mainMapper">
+
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 일반회원 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+
+	<select id="maxNum" resultType="int">
+		select nvl(max(num),0) from userSignUp
+	</select>
+
+	<insert id="insertUserSignUpData" parameterType="com.ticket.dto.UserMainDTO">	<!-- 일반사용자 회원가입 -->
+		insert into userInfo(num,userId,userPwd,userName,userAddr,userRoadAddr,userJibunAddr,userFinalAddr,
+		userBirth,userGender,userUpdateDate,userEmail,userPhoneNum,userPoint,userCoupon,userDisCount)
+		values(0,#{userId},#{userPwd},#{userName},#{userAddr},#{userRoadAddr},#{userJibunAddr},
+		#{userFinalAddr},#{userBirth},#{userGender},sysdate,#{userEmail},#{userPhoneNum},0,0,0)
+	</insert>
+	
+	<select id="myPageReadData" resultType="com.ticket.dto.UserMainDTO" parameterType="String">   <!-- 일반사용자 마이페이지 -->
+		select userId,userPwd,userName,userAddr,userFinalAddr,
+		userEmail,userPhoneNum from userInfo where userId=#{userId}
+	</select>	
+	
+	<select id="idCheck" resultType="String" parameterType="String"> <!-- 일반사용자 아이디 체크 -->
+		select userId from userInfo
+		where userId=#{userId}
+	</select>
+	
+	<update id="updateUserData" parameterType="com.ticket.dto.UserMainDTO">
+		update userInfo set userPwd=#{userPwd},userName=#{userName},userAddr=#{userAddr},userFinalAddr=#{userFinalAddr}
+		,userEmail=#{userEmail},userPhoneNum=#{userPhoneNum}
+		where userId=#{userId}
+	</update>
+	
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 일반회원 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+	
+	
+	
+	
+	
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 기업회원 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+	
+	<select id="maxCompanyNum" resultType="int">
+		select nvl(max(num),0) from companyInfo
+	</select>
+	
+	<insert id="insertCompanySignUpData" parameterType="com.ticket.dto.CompanyMainDTO">	  <!-- 기업회원 회원가입 -->
+		insert into companyInfo(num,companyId,companyPwd,companyName,companyAddr,companyRoadAddr,companyJibunAddr,companyFinalAddr,
+		companyUpdateDate,companyEmail,companyPhoneNum)
+		values(0,#{companyId},#{companyPwd},#{companyName},#{companyAddr},#{companyRoadAddr},#{companyJibunAddr},
+		#{companyFinalAddr},sysdate,#{companyEmail},#{companyPhoneNum})
+	</insert>
+	
+	<select id="myPageCompanyReadData" resultType="com.ticket.dto.CompanyMainDTO" parameterType="String">   <!-- 기업회원 마이페이지 -->
+		select companyId,companyPwd,companyName,companyAddr,companyEmail,companyPhoneNum from companyInfo where companyId=#{companyId}
+	</select>
+	
+	<select id="companyIdCheck" resultType="String" parameterType="String"> <!-- 기업회원 아이디 체크 -->
+		select companyId from companyInfo
+		where companyId=#{companyId}
+	</select>
+	
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 기업회원 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+					
+					
+				
+
+					
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 공통공통 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+					
+	<select id="getLists" resultType="com.ticket.dto.MainListDTO">
+		<![CDATA[
+		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
+		 a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		 and a.performPlaceCode = b.placeCode
+		 ]]>
+	</select>
+					
+	<select id="getDataCount" parameterType="map" resultType="int">
+		select nvl(count(*),0) from (select distinct a.performCode,a.performName, a.performStartDate, 
+		a.performEndDate, a.performGenreCode,a.performMainImage, b.placeName,c.genreName 
+		from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode and a.performPlaceCode = b.placeCode)
+		where ${searchKey} like '%' || #{searchValue} || '%'
+	</select>
+	
+	<!-- <select id="getAllLists" resultType="com.ticket.mainDTO.MainListDTO" parameterType="map">
+		select * from (
+		select rownum rnum,data.* from (
+		select num,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created
+		from board
+		where ${searchKey} like '%' || #{searchValue} || '%'
+		order by num desc) data)
+	<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+	]]>
+	</select> -->
+	
+					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 공통공통 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

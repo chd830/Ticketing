@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="performMapper">
+
+	<!-- 태환 -->
+	
+	<select id="selectPerformData"
+		resultType="com.ticket.dto.PerformDTO">
+		select performCode
+		,performName
+		,performStartDate
+		,performEndDate
+		from performData
+	</select>
+
+	<insert id="insertPerformData"
+		parameterType="com.ticket.dto.PerformDTO">
+		insert into performData
+		values(#{performCode},#{performName},#{performGenreCode},#{performStartDate}
+		,#{performEndDate},#{performPlaceCode},#{performRatingCode},#{performRunningtime}
+		,#{performMainImage},#{companyId})
+	</insert>
+
+	<select id="selectPlaceData"
+		resultType="com.ticket.dto.PlaceDTO">
+		select * from placeData
+	</select>
+
+	<select id="selectGenreData"
+		resultType="com.ticket.dto.GenreDTO">
+		select * from genreData
+	</select>
+
+	<select id="selectRatingData"
+		resultType="com.ticket.dto.RatingDTO">
+		select * from ratingData
+	</select>
+
+	<select id="getMaxSeatingData" resultType="int">
+		<![CDATA[
+		select nvl(max(performCode),0) from seatingData
+		]]>
+	</select>
+
+	<insert id="insertSeatingData"
+		parameterType="com.ticket.dto.SeatingDTO">
+		<![CDATA[
+		insert into seatingData 
+		values(#{performCode},#{placeCode},#{Rclass},#{Sclass},#{Vclass},#{notSelectClass})
+		]]>
+	</insert>
+
+	<select id="getMaxDetailData" resultType="int">
+		<![CDATA[
+		select nvl(max(performDetailCode),0) from performDetail
+		]]>
+	</select>
+
+	<insert id="insertDetailData"
+		parameterType="com.ticket.dto.PerformDetailDTO">
+		<![CDATA[
+		insert into performDetail 
+		values(#{performDetailCode},#{performCode},#{performDetailImage})
+		]]>
+	</insert>
+
+	<select id="selectCalStartData" resultType="map" parameterType="hashmap">
+		<![CDATA[
+		select PERFORMCODE,PERFORMNAME,SUBSTR(PERFORMSTARTDATE,9,2) PERFORMSTARTDATE 
+		from PERFORMDATA 
+		where SUBSTR(PERFORMSTARTDATE,6,2)=#{month} and SUBSTR(PERFORMSTARTDATE,1,4)=#{year}
+		order by PERFORMSTARTDATE
+		]]>
+	</select>
+	
+	<select id="selectCalEndData" resultType="map" parameterType="hashmap">
+		<![CDATA[
+		select PERFORMCODE,PERFORMNAME,SUBSTR(PERFORMENDDATE,9,2) PERFORMENDDATE 
+		from PERFORMDATA 
+		where SUBSTR(PERFORMENDDATE,6,2)=#{month} and SUBSTR(PERFORMENDDATE,1,4)=#{year}
+		order by PERFORMENDDATE
+		]]>
+	</select>
+	
+	<insert id="insertPerformInfoData" parameterType="com.ticket.dto.PerformInfoDTO">
+		insert into performInfo values(#{performCode},#{performDate},#{performTime})
+	</insert>
+
+</mapper>
