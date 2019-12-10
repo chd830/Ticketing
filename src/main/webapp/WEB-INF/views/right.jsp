@@ -1,4 +1,4 @@
-<%@page import="com.ticket.dto.SelectedTicketDTO"%>
+<%@page import="com.ticket.dto.SelectedTicket"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -136,9 +136,11 @@ td {
 			<table class="selectedTab" align="left" >
 			<!-- 선택된 좌석들을 리스트로 불러와서 출력함. -->
 				<c:forEach var="l" items="${ list }">
-					<tr>
-						<td>${l.seatRow }석 ${l.seatNum }열</td>
-					</tr>				
+					<c:if test="${l.finalPay == 0 }">
+						<tr>
+							<td>${l.seatRow }석 ${l.seatNum }열</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</table>
 		

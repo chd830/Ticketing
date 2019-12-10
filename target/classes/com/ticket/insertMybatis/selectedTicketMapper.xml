@@ -164,32 +164,47 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 은총이시작 -->
-	<insert parameterType="com.ticket.dto.SelectedTicket"
-		id="insertSelectedTicket">
-		insert into selectedTicket(userid, performcode, selecteddate, time, inwon, ticketprice, discountprice, couponprice, pointprice, seatrow, seatnum) values('test', 'test code', '2019-11-26',
-		'16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum})
+	<insert parameterType="com.ticket.dto.SelectedTicket" id="insertSelectedTicket">
+		insert into selectedTicket(userid, performcode, selecteddate, time, inwon, ticketprice, discountprice, couponprice, pointprice, seatrow, seatnum, finalPay) 
+		values('test', 'test code', '2019-11-26', '16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum}, 0)
 		<!-- insert into selctedTicket values(#{userId}, #{performCode}, #{selectedDate}, 
 			#{time}, #{inwon}, #{ticketPrice}, #{discountPrice}, #{couponPrice}, #{pointPrice}, 
 			#{seatRow}, #{seatNum}) -->
 	</insert>
 
-	<update id="updateRemainData"> update remainData set isEmpty=0 where
-		seatRow=#{seatRow} AND seatNum=#{seatNum} </update>
+	<update id="updateRemainData"> 
+		update remainData set isEmpty=0 
+		where seatRow=#{seatRow} AND seatNum=#{seatNum} 
+	</update>
+	
+	<insert id="insertFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicket">
+		insert into selectedTicket(userId, performCode, selectedDate, time, inwon, ticketPrice, discountPrice, couponPrice, pointPrice, seatRow, seatNum, finalPay)
+		values('test', 'test code', '2019-12-10', '16:00', 1, #{ticketPrice}, 0, 0, 0, '','' , 1)
+	</insert>
+	
+	<update id="updateFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicket">
+		update selectedTicket
+		set ticketPrice = #{ticketPrice}
+		where userId='test' and performCode='test code' and finalpay = 1
+	</update>
 
-	<delete parameterType="com.ticket.dto.SelectedTicket"
-		id="deleteSelectedTicket"> delete selectedTicket where seatRow=#{seatRow} AND
-		seatNum=#{seatNum} </delete>
+	<delete parameterType="com.ticket.dto.SelectedTicket" id="deleteSelectedTicket"> delete selectedTicket where seatRow=#{seatRow} AND
+		seatNum=#{seatNum} 
+	</delete>
 
-	<select parameterType="String" id="selectSelectedTicket"
-		resultType="com.ticket.dto.SelectedTicket"> select userId, performCode, seatRow, seatNum from
-		selectedTicket where userId = #{userId} </select>
+	<select parameterType="String" id="selectSelectedTicket" resultType="com.ticket.dto.SelectedTicket"> 
+		select userId, ticketPrice, performCode, seatRow, seatNum, finalPay 
+		from selectedTicket where userId = #{userId} order by finalPay 
+	</select>
 
 	<select id="selectCount" resultType="int"> select count(*) from
-		remainData where seatNum = 1 </select>
+		remainData where seatNum = 1
+	</select>
 
-	<update parameterType="com.ticket.dto.Remain" id="updateIsEmpty"> update
-		remainData set isEmpty = 0 where seatRow = #{seatRow} AND seatNum =
-		#{seatNum} </update>
+	<update parameterType="com.ticket.dto.Remain" id="updateIsEmpty"> 
+		update remainData set isEmpty = 0 
+		where seatRow = #{seatRow} AND seatNum = #{seatNum} 
+	</update>
 		
 	<!-- 은총이끝 -->	
 </mapper>

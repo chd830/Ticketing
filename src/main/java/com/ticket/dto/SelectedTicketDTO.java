@@ -14,10 +14,14 @@ public class SelectedTicketDTO {
 	private String seatRow;
 	private int seatNum;
 	private int performGenreCode;
+	private int finalPay;
 	
-	
-	
-	
+	public int getFinalPay() {
+		return finalPay;
+	}
+	public void setFinalPay(int finalPay) {
+		this.finalPay = finalPay;
+	}
 	public int getPerformGenreCode() {
 		return performGenreCode;
 	}
