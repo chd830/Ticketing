@@ -192,7 +192,6 @@
 				<!--  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p> -->
 			</div>
 		</div>
-
 		
 		<div class="row block-9">
 			<c:choose>
