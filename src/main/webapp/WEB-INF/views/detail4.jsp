@@ -4,7 +4,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -28,7 +27,6 @@
 				</tr>
 			</table>
 		</div>
-
 		<table width="200" bgcolor="#363636">
 			<tr>
 				<td class="tdblack" colspan="2"></td>
@@ -165,8 +163,8 @@
 					</tr>
 			</table>		
 		</div>
-		
-	
+	</div>
+
 	<div>
 		<table width="200" bgcolor="#363636">
 			<tr height="9">
@@ -176,11 +174,10 @@
 				<td><input type="button"
 					style="color: #ffffff; width: 88px; height: 35px; margin-left: 7px; background-color: #818181; border-color: #818181;"
 					value="이전단계"
-					onclick="javascript:location.href='<%=cp%>/step2.action';">
-				</td>
+					onclick="javascript:location.href='<%=cp%>/step3.action';"></td>
 				<td><input type="button" id="detail_btn"
 					style="width: 88px; height: 35px;" value="다음단계"
-					onclick="javascript:location.href='<%=cp%>/step4.action';"></td>
+					onclick="javascript:location.href='<%=cp%>/step5.action';"></td>
 			</tr>
 			<tr height="15">
 				<td></td>

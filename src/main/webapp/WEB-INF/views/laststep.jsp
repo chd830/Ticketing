@@ -22,7 +22,7 @@
 
 
 
-<body style="background: rgba(0,0,0,0.8)">
+<body style="background: rgba(0,0,0,0.8)" onload="start();">
 
 
 
@@ -92,13 +92,12 @@
 					</tr>	
 					<tr>
 						<td style="padding-left: 10px;"><font size="2px" color="#888888">취소가능일시: </font> </td>
-						<td><font size="2px" color="#4D7CCE"><b> 2019년 12월 07일 11:00 까지</b></font> </td>
+						<td><font size="2px" color="#4D7CCE"><b> ${cancelDate }</b></font> </td>
 					</tr>
 				</table>	
 			
 			
 			<!-- 결제정보 -->
-			
 				<table width="33%" style="float: left; margin-left: 20px; border-collapse: collapse;" cellpadding="2" >
 						<tr>
 						<td colspan="2"><font size="3px"><b>∨&nbsp;결제정보</b></font></td>
@@ -108,11 +107,11 @@
 					</tr>	
 						<tr>
 							<td style="padding-left: 10px;"><font size="2px" color="#888888">티켓금액</font> </td>
-							<td align="right"><font size="2px" color="#888888">40,000</font> </td>
+							<td align="right"><font size="2px" color="#888888">${stdto.ticketPrice*stdto.inwon }</font> </td>
 						</tr>
 						<tr>
 							<td style="padding-left: 10px;"><font size="2px" color="#888888">예매수수료</font> </td>
-							<td align="right"><font size="2px" color="#888888">500</font> </td>
+							<td align="right"><font size="2px" color="#888888">${500*stdto.inwon }</font> </td>
 						</tr>
 						<tr>
 							<td style="padding-left: 10px;"><font size="2px" color="#888888">배송료</font> </td>
@@ -120,7 +119,7 @@
 						</tr>
 						<tr style="background-color: #F3F5F6;">
 							<td style="padding-left: 10px;"><font size="2px" color="#888888"><b>(+)금액</b></font> </td>
-							<td align="right"><font size="2px" color="#888888"><b>40,500</b></font> </td>
+							<td align="right"><font size="2px" color="#888888"><b>${stdto.discountPrice*stdto.inwon+500*stdto.inwon }</b></font> </td>
 						</tr>
 						<tr>
 							<td style="padding-left: 10px;"><font size="2px" color="#888888">할인금액</font></td>
@@ -157,7 +156,7 @@
 						<tr height="1"><td>&nbsp;</td></tr>
 						<tr style="background-color: #0076A3; ">
 							<td style="padding: 13px; "><font color="#ffffff" size="2px">총 결제 금액</font></td>
-							<td align="right"><font color="#ffffff" size="4px"><b>50,500</b></font> <font color="#ffffff" size="2px">원</font></td>	
+							<td align="right"><font color="#ffffff" size="4px"><b>${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }</b></font> <font color="#ffffff" size="2px">원</font></td>	
 						</tr>
 						
 						<tr>
@@ -170,7 +169,7 @@
 						</tr>
 						<tr>
 							<td style="padding-left: 10px;"><font size="2px" color="#888888">입금금액/마감</font> </td>
-							<td align="right"><font size="2px" color="#888888">50,500원 / 2019-12-03 23:59:59</font> </td>
+							<td align="right"><font size="2px" color="#888888">${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice } / ${deadline }</font> </td>
 						</tr>
 				
 				</table>	
@@ -184,11 +183,68 @@
 	    		</table>
 	    		<!-- 예매내역확인 버튼 -->	
 	    		
-	    		<input type="button" value="예매내역확인" style="padding-left: 50px; padding-right: 50px; padding-top:5px; padding-bottom:5px; font-size: 15pt; font-weight: bold; color: #ffffff; background-color: #4D7CCE; border-color: #4D7CCE; margin-top: 50px; margin-left: -40%;">
+	    		<input type="button" value="예매내역확인" onclick="javascript:location.href='<%=cp%>/myPage.action';" style="padding-left: 50px; padding-right: 50px; padding-top:5px; padding-bottom:5px; font-size: 15pt; font-weight: bold; color: #ffffff; background-color: #4D7CCE; border-color: #4D7CCE; margin-top: 50px; margin-left: -30%;">
+	    		<input type="button" value="결제하기" onclick="pay();" style="padding-left: 50px; padding-right: 50px; padding-top:5px; padding-bottom:5px; font-size: 15pt; font-weight: bold; color: #ffffff; background-color: #4D7CCE; border-color: #4D7CCE; margin-top: 50px; margin-left: -40%;">
 	    		
 	    		<br/><br/><br/>
 	    		
 	    	</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+function start(){
+	
+	var IMP = window.IMP;
+	IMP.init('imp53208811');
+	
+}
+
+
+function pay(){
+	
+	IMP.request_pay({
+	    pg : 'uplus',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'YES24',
+	    amount : '${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }',
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : '<%=cp%>/myPage.action'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+	
+	
+	
+}
+
+
+
+
+
+
+
+</script>
+
 
 </body>
 </html>

@@ -13,8 +13,17 @@ public class SelectedTicketDTO {
 	private int pointPrice;
 	private String seatRow;
 	private int seatNum;
+	private int performGenreCode;
 	
 	
+	
+	
+	public int getPerformGenreCode() {
+		return performGenreCode;
+	}
+	public void setPerformGenreCode(int performGenreCode) {
+		this.performGenreCode = performGenreCode;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -1,8 +1,16 @@
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" pageEncoding="UTF-8" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String start = (String)request.getAttribute("start");
+	
+	String end = (String)request.getParameter("end");
+	
+	//List list = (List)request.getAttribute("timeList");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,8 +20,8 @@
 <!-- 달력제외부분 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/ticketing/resources/css/book.css" type="text/css"/>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/ticketing/resources/css/book.css" type="text/css"/> -->
 <style>
     fieldset {
       border: 0;
@@ -59,11 +67,6 @@ table.calendar td {
 
 function sendIt(){
 	
-	/* $.get('/ticketing/step1.action', {
-		time: $("select[name=time]").val()
-		
-	}); */
-	
 	var f = document.myForm;
 	
 	var time = f.time.value;
@@ -75,7 +78,7 @@ function sendIt(){
 
 </script>
 </head>
-<body>
+<body id="home">
 
 <form action="" name="myForm" method="post">
 	<div>
@@ -101,16 +104,17 @@ function sendIt(){
 			    var $tdDay = null;
 			    var $tdSche = null;
 			    
-			    var startYear = 2019;
-			    var startMonth = 12;
-			    var startDay = 2;
-			    var duringDate = 10;
+			    var startYear = ${year1};
+			    var startMonth = ${mon1};
+			    var startDay = ${day1};
+			    var duringDate = ${duringDate};
 			    var t=0;
 			    var flag=false;
 			    
 			    var count=0;
 			    
 			    $(document).ready(function() {
+			    	console.log("startYear: "+startYear+", startMonth: "+startMonth);
 			        drawCalendar();
 			        initDate();
 			        drawDays();
@@ -150,9 +154,6 @@ function sendIt(){
 			        	var day = $(this).text();
 			        	console.log(day);
 			        	
-						//var params = year + "." + month + "." + day;
-						//window.location.replace("home.jsp?params=" + params);
-			      	 	
 						$.ajax({
 							type:"GET",
 							url:"getDate",
@@ -202,10 +203,7 @@ function sendIt(){
 			        			
 			        		}
 			        	
-							
-			        	
-			        	}
-			        	
+						}
 			        	
 			        });
 			    }
@@ -236,7 +234,7 @@ function sendIt(){
 			            
 			            if(flag) {
 			            	$tdDay.eq(i).css("background-color","#7C8C94");
-			            	$tdDay.eq(i).css("color","white");
+			            	$tdDay.eq(i).css("color","black");
 			            	$tdDay.eq(i).text(dayCount++);
 			            	t++;
 			            }else $tdDay.eq(i).text(dayCount++);
@@ -246,9 +244,6 @@ function sendIt(){
 			            	flag=false;
 			            	t=0;
 			            }
-			            
-			        	
-			           // $tdDay.eq(i).text(++dayCount);
 			            
 			        }
 			        
@@ -298,24 +293,62 @@ function sendIt(){
 	</div>
 
 	
-	<div style="vertical-align: top;">
+	<div style="vertical-align: top;" id="test">
 		<div>
 			<font size="2px;"><b>회차선택</b></font>&nbsp;&nbsp;&nbsp;&nbsp;
 			<select name="time" id="time">
-				<option selected="selected" value="16:00">오후 16:00</option>
-			   	<option value="18:00">오후 18:00</option>
+				<option selected="selected" value="0">회차선택</option>
+				<c:forEach var="l" items="${ timeList }">
+					<option value="${l.performTime }">${l.performTime }</option>				
+				</c:forEach>
 			</select>
 		</div>
 		
 		<div>
 			<div>
-				<font size="2px;"><b>예매 가능 좌석</b></font><br/>
+				<font size="2px;"><b>예매 가능 좌석 </b></font><br/>
 			</div>
 			<div style="margin-top: 3px;">
-				<textarea rows="5" cols="25">본 공연은 잔여좌석 서비스를 제공하지 않습니다.</textarea>
+				<table border="">
+					<tr>
+						<td>
+						<!-- 공연 -->
+							<c:if test="${performGenreCode == 3 or performGenreCode == 5 or performGenreCode == 6 }">
+								 <div>
+									 <font size="2px;">본 공연은 잔여좌석 서비스를 제공하지 않습니다.</font>
+								 </div>
+							</c:if>
+						
+						 <!-- 콘서트 좌석 등급 및 잔여석 표시 -->
+						 	<c:if test="${performGenreCode == 2 or performGenreCode == 1 or performGenreCode == 4}">
+								<div style="width: 240px; height: 130px; overflow: auto; margin-left: 10px; border-color: #ffffff" >
+								    <table width="220px" border="0" style="border-color: #FFFFFF; border-collapse: collapse;" cellpadding="0" cellspacing="0">
+								    	<c:forEach var="l" items="${ seatPriceList }">
+								    		<tr height="5" style="background-color: #ffffff"></tr>
+									        <tr style="background-color: #F3F3F3;">
+									            <td width="200" ><font size="2px;"> 지정석 R석 ${l.rclass }원</font> </td>
+									        </tr>
+									        <tr height="5" style="background-color: #ffffff"></tr>
+									         <tr style="background-color: #F3F3F3;">
+									            <td width="200" ><font size="2px;"> 지정석 S석 ${l.sclass }원</font> </td>
+									        </tr>
+									        <tr height="5" style="background-color: #ffffff"></tr>
+									         <tr style="background-color: #F3F3F3;">
+									            <td width="200" ><font size="2px;"> 지정석 V석 ${l.vclass }원</font> </td>
+									        </tr>
+									        <tr height="5" style="background-color: #ffffff"></tr>
+										</c:forEach>
+								    </table>
+								</div>
+							</c:if>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div style="margin-left: 135px;">
+			<input type="hidden" id="performGenreCode" name="performGenreCode" value="${performGenreCode }">
+			<input type="hidden" id="step" name="step" value="1">
 			<input type="button" id="book" value="예매하기" style="background-color: #EA4955; border-color: #EA4955;color: #ffffff" onclick="sendIt();">
 		</div>
 	</div>
