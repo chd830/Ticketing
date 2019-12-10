@@ -12,7 +12,14 @@ public class SelectedTicket {
 	private int pointPrice;
 	private String seatRow;
 	private int seatNum;
+	private int finalPay;
 	
+	public int getFinalPay() {
+		return finalPay;
+	}
+	public void setFinalPay(int finalPay) {
+		this.finalPay = finalPay;
+	}
 	public String getUserId() {
 		return userId;
 	}

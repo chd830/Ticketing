@@ -14,7 +14,18 @@ public class SeatDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
-
+	
+	//최종좌석을 update하는 코드
+	public void setFinalSelectedTicket(SelectedTicket ticket) {
+		sessionTemplate.selectOne("ticketMapper.insertFinalSelectedTicket", ticket);
+		
+	}
+	
+	//최종좌석을 update하는 코드
+	public void updateFinalSelectedTicket(SelectedTicket ticket) {
+		sessionTemplate.selectOne("ticketMapper.updateFinalSelectedTicket", ticket);
+	}
+	
 	//좌석을 선택했을 때 좌석이 선택되었다고 insert하는 코드
 	public void setSelectedTicket(SelectedTicket ticket) {
 		sessionTemplate.selectOne("ticketMapper.insertSelectedTicket", ticket);

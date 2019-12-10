@@ -58,6 +58,29 @@ public class SeatController {
 		ticket.setSeatNum(Integer.parseInt(seatNum));
 		seat.setSelectedTicket(ticket);
 		List<SelectedTicket> list = seat.getSelectedTicket("test");
+		SelectedTicket finalTicket = new SelectedTicket();
+		int sum = 0;
+		boolean checkFinal = false;
+		for(SelectedTicket l : list) {
+			System.out.println("가격: "+l.getTicketPrice());
+			System.out.println(l.getFinalPay());
+			if(l.getFinalPay() == 1) {
+				checkFinal = true;
+				System.out.println("break;");
+				break;
+			}
+			sum += l.getTicketPrice();
+		}
+		finalTicket.setTicketPrice(sum);
+		System.out.println("총 티켓값: "+sum);
+		if(checkFinal) {
+			System.out.println("update");
+			seat.updateFinalSelectedTicket(finalTicket);
+		}
+		else {
+			System.out.println("insert");
+			seat.setFinalSelectedTicket(finalTicket);	
+		}
 		m.setViewName("right");
 		m.addObject("seatRow", seatRow);
 		m.addObject("seatNum", seatNum);
