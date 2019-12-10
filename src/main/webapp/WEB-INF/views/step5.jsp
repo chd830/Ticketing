@@ -96,7 +96,7 @@ margin-left: 0px;
 
 </head>
 
-<body>
+<body onload="start();">
 	<form action="" name="myForm">
 		<div class="post" style="float: left;">
 			<div>
@@ -219,7 +219,7 @@ margin-left: 0px;
 					<tr>
 						
 						<td style="background-color: #F4F4F4; border-color: gray; padding-left: 10px;"><b>
-						<font color="#888888" size="2pt;">취소 가능 마감 시간 : </font><font color="#EC4955" size="2pt;">2019년 11월 21일 11:00까지</font></b>
+						<font color="#888888" size="2pt;">취소 가능 마감 시간 : </font><font color="#EC4955" size="2pt;">${cancelDate }</font></b>
 						</td>
 					</tr>
 				
@@ -536,10 +536,18 @@ margin-left: 0px;
 	
 	
 	
-	
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
+
+function start(){
+	
+	var IMP = window.IMP;
+	IMP.init('imp53208811');
+	
+}
 
 	function detailgo(){
 		
@@ -623,6 +631,7 @@ margin-left: 0px;
 			
 			if(deposit==0) {
 				alert("사용 가능한 예치금이 없습니다.");
+				return;
 			}else{
 				$('#inputDeposit').val(point);
 			}	
@@ -739,12 +748,41 @@ margin-left: 0px;
 					
 					if(flag=="1"){
 						
+						alert("azzzz");
 						
+						IMP.request_pay({
+						    pg : 'uplus',
+						    pay_method : 'card',
+						    merchant_uid : 'merchant_' + new Date().getTime(),
+						    name : 'YES24',
+						    amount : '${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }',
+						    buyer_email : 'iamport@siot.do',
+						    buyer_name : '구매자이름',
+						    buyer_tel : '010-1234-5678',
+						    buyer_addr : '서울특별시 강남구 삼성동',
+						    buyer_postcode : '123-456',
+						    m_redirect_url : '/ticketing/laststep?bank='+encodeURI(bank)
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						        var msg = '결제가 완료되었습니다.';
+						        msg += '고유ID : ' + rsp.imp_uid;
+						        msg += '상점 거래ID : ' + rsp.merchant_uid;
+						        msg += '결제 금액 : ' + rsp.paid_amount;
+						        msg += '카드 승인번호 : ' + rsp.apply_num;
+						        
+						        location.href = '/ticketing/laststep?bank='+encodeURI(bank);
+						        
+						    } else {
+						        var msg = '결제에 실패하였습니다.';
+						        msg += '에러내용 : ' + rsp.error_msg;
+						    }
+						    alert(msg);
+						});
 						
 						//document.myForm.action = 'ticketing/laststep?bank='+encodeURI(bank);
 						//document.myForm.submit();
 						
-						location.href = '/ticketing/laststep?bank='+encodeURI(bank);
+						//location.href = '/ticketing/laststep?bank='+encodeURI(bank);
 						
 						/* $.get('/ticketing/laststep',{"bank":bank},function(result){
 							location.href = '/ticketing/'+result;

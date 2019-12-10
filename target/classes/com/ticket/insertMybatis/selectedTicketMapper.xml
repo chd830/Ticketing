@@ -77,31 +77,28 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.UserInfoDTO"
-		parameterType="String" id="selectUserInfo"> select * from UserInfo where
-		userId=#{userId}
+	<select resultType="com.ticket.dto.UserInfoDTO" parameterType="String" id="selectUserInfo"> 
+		select * from UserInfo where userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.CouponDataDTO"
-		parameterType="String" id="couponSearch"> select couponCode,couponPrice,couponDesc
-		from couponData where couponCode=#{couponCode}
+	<select resultType="com.ticket.dto.CouponDataDTO" parameterType="String" id="couponSearch"> 
+		select couponCode,couponPrice,couponDesc from couponData where couponCode=#{couponCode}
 	</select>
 
-	<select resultType="com.ticket.dto.MyCouponDTO"
-		parameterType="String" id="myCouponList"> select
-		userId,couponCode,couponPrice,couponDesc from MyCoupon where
-		userId=#{userId}
+	<select resultType="com.ticket.dto.MyCouponDTO" parameterType="String" id="myCouponList"> 
+		select userId,couponCode,couponPrice,couponDesc from MyCoupon where userId=#{userId}
 	</select>
 
-	<select resultType="com.ticket.dto.DiscountDTO"
-		id="myDiscountList"> select * from discount where userId=#{userId} </select>
+	<select resultType="com.ticket.dto.MyDiscountDTO" id="myDiscountList"> 
+		select * from myDiscount where userId=#{userId} 
+	</select>
 
-	<update parameterType="map" id="input_discountPrice"> update selectedTicket set
-		discountPrice=#{discountPrice} where userId=#{userId}
+	<update parameterType="map" id="input_discountPrice"> 
+		update selectedTicket set discountPrice=#{discountPrice} where userId=#{userId}
 	</update>
 
-	<update parameterType="map" id="input_couponPrice"> update selectedTicket set
-		couponPrice=#{couponPrice} where userId=#{userId}
+	<update parameterType="map" id="input_couponPrice"> 
+		update selectedTicket set couponPrice=#{couponPrice} where userId=#{userId}
 	</update>
 
 	<update parameterType="map" id="input_point"> update selectedTicket set
@@ -131,7 +128,30 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="String" id="selectAccount"> select * from account where
 		accountBank=#{accountBank}
 	</select>
-
+	
+	<select id="discountDataList" resultType="com.ticket.dto.DiscountDataDTO">
+		select * from discountData
+	</select>
+	
+	<select id="selectDiscountDataDTO" parameterType="String" resultType="com.ticket.dto.DiscountDataDTO">
+		select * from discountData where discountCode=#{discountCode}
+	</select>
+	
+	<insert id="insertMyDiscount" parameterType="map">
+		insert into MyDiscount values (#{userId},#{dddto.discountCode},#{dddto.discountName},#{dddto.discountPrice},#{dddto.discountDesc})
+	</insert>
+	
+	<update id="updateDiscountData" parameterType="String">
+		update DiscountData set amount = amount-1 where discountCode= #{discountCode}
+	</update>
+	
+	<delete id="deleteDiscountData" parameterType="String">
+		delete DiscountData where discountCode = #{discountCode}
+	</delete>
+	
+	<select id="selectMyDiscount" parameterType="String" resultType="com.ticket.dto.MyDiscountDTO">
+		select * from where discountCode=#{discountCode}
+	</select>
 	<!-- 연주끝 -->
 
 

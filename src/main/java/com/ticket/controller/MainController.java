@@ -36,7 +36,7 @@ public class MainController {
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main(Locale locale, Model model) {
 		
-		return "main";
+		return "redirect:/main.action";
 		
 	}
 	

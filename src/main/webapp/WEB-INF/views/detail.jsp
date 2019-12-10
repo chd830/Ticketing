@@ -1,23 +1,19 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.ticket.dto.SelectedTicketDTO"%>
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	//String step = (String)request.getAttribute("step") ;
-
 	String step = "1";
 
 	String params = (String) request.getAttribute("params");
 	String time = (String) request.getAttribute("time");
 
-	//selectedTicketDTO stdto = (selectedTicketDTO)request.getAttribute("stdto");
-
-	//System.out.println(hmap);
-
 	SelectedTicketDTO stdto = (SelectedTicketDTO) request.getAttribute("stdto");
-
-	System.out.println(stdto + "454545454");
+	
+	String performGenreCode = request.getParameter("performGenreCode");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -36,9 +32,8 @@
 		<div>
 			<table width="200" bgcolor="#363636">
 				<tr style="border-bottom-color: #ffffff;">
-					<td><img src="/ticketing/resources/images/pic.PNG" /></td>
-					<td><font size="1px" color="#ffffff">한뼘사이<br />2018.
-							06. 01 ~ 2019. 12. 31<br />대학로 서연아트홀<br /></font></td>
+					<td><img src="D:/image/${performReaddto.performMainImage }" /></td>
+					<td><font size="1px" color="#ffffff">${performReaddto.performName }<br />${performReaddto.performStartDate } ~ <br/> ${performReaddto.performEndDate }<br />${Read_placedto.placeName}<br /></font></td>
 				</tr>
 			</table>
 		</div>
@@ -66,11 +61,18 @@
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">매수</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.inwon }매</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.inwon } 매</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">좌석</font></td>
-					<td><font size="1px" color="#ffffff">비지정석</font></td>
+					<td>
+						<c:if test="${stdto.performGenreCode != 1 }">
+							<font size="1px" color="#ffffff">비지정석</font>
+						</c:if>
+						<c:if test="${stdto.performGenreCode == 1 }">
+							<font size="1px" color="#ffffff">콘서트 좌석</font>
+						</c:if>
+					</td>
 				</tr>
 
 				<tr height="30"></tr>
