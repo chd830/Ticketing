@@ -7,7 +7,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 진교 -->
 	<select id="posterReadData"
 		resultType="com.ticket.dto.PosterDTO">
-		SELECT distinct a.performCode, a.performName,a.performMainImage, a.performStartDate,
+		SELECT distinct a.performCode,a.performgenrecode, a.performName,a.performMainImage, a.performStartDate,
 		a.performEnddate, b.placeName,
 		c.genreName, d.ratingname, a.performrunningTime
 		from performData a, placeData b, genreData c, ratingData d
@@ -27,4 +27,5 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select performDetailimage 
 		from performdetail where performcode = #{performcode}
 	</select>
+	
 </mapper>
