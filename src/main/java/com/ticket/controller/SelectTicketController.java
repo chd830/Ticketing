@@ -41,18 +41,6 @@ public class SelectTicketController {
 		
 	}
 	
-	/*
-	 * @RequestMapping(value = "/home_ok.action", method =
-	 * {RequestMethod.GET,RequestMethod.POST}) public String
-	 * home_ok(selectedTicketDTO dto, HttpServletRequest request,HttpServletResponse
-	 * response) {
-	 * 
-	 * return "step1";
-	 * 
-	 * }
-	 */
-	
-	
 	@RequestMapping(value = "/step1.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String step1(HttpServletRequest request,HttpServletResponse response) {
 		
