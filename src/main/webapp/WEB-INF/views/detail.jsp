@@ -1,14 +1,19 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.ticket.dto.SelectedTicketDTO"%>
 <%@ page contentType="text/html; charset=EUC-KR"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	//String step = (String)request.getAttribute("step") ;
-	String step="3";
-	//if(step==null||step.equals(""))
-	//	step=(String)session.getAttribute("step");
+	String step = "1";
 
+	String params = (String) request.getAttribute("params");
+	String time = (String) request.getAttribute("time");
+
+	SelectedTicketDTO stdto = (SelectedTicketDTO) request.getAttribute("stdto");
+	
+	String performGenreCode = request.getParameter("performGenreCode");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,9 +32,8 @@
 		<div>
 			<table width="200" bgcolor="#363636">
 				<tr style="border-bottom-color: #ffffff;">
-					<td><img src="/ticketing/resources/images/pic.PNG" /></td>
-					<td><font size="1px" color="#ffffff">한뼘사이<br />2018.
-							06. 01 ~ 2019. 12. 31<br />대학로 서연아트홀<br /></font></td>
+					<td><img src="D:/image/${performReaddto.performMainImage }" /></td>
+					<td><font size="1px" color="#ffffff">${performReaddto.performName }<br />${performReaddto.performStartDate } ~ <br/> ${performReaddto.performEndDate }<br />${Read_placedto.placeName}<br /></font></td>
 				</tr>
 			</table>
 		</div>
@@ -57,11 +61,18 @@
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">매수</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.inwon }매</font></td>
+					<td><font size="1px" color="#ffffff">${stdto.inwon } 매</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">좌석</font></td>
-					<td><font size="1px" color="#ffffff">비지정석</font></td>
+					<td>
+						<c:if test="${stdto.performGenreCode != 1 }">
+							<font size="1px" color="#ffffff">비지정석</font>
+						</c:if>
+						<c:if test="${stdto.performGenreCode == 1 }">
+							<font size="1px" color="#ffffff">콘서트 좌석</font>
+						</c:if>
+					</td>
 				</tr>
 
 				<tr height="30"></tr>
@@ -78,27 +89,27 @@
 
 		<div>
 			<table width="200" bgcolor="#363636">
-					<tr>
-						<td><font size="2px" color="#ffffff">결제내역</font></td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">티켓금액</font> </td>
-						<td><font size="1px" color="#ffffff">${stdto.ticketPrice*stdto.inwon }</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">예매수수료</font> </td>
-						<td><font size="1px" color="#ffffff">${500*stdto.inwon }</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#BFBFBF">배송료</font> </td>
-						<td><font size="1px" color="#ffffff">0</font> </td>
-					</tr>
-					<tr>
-						<td><font size="1px" color="#C3E3FA">총 금액(+)</font> </td>
-						<td><font size="1px" color="#ffffff">${stdto.ticketPrice*stdto.inwon+500*stdto.inwon }</font> </td>
-					</tr>
-			</table>	
-			</div>
+				<tr>
+					<td><font size="2px" color="#ffffff">결제내역</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">티켓금액</font></td>
+					<td><font size="1px" color="#ffffff">40,000</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">예매수수료</font></td>
+					<td><font size="1px" color="#ffffff">500</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#BFBFBF">배송료</font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
+				</tr>
+				<tr>
+					<td><font size="1px" color="#C3E3FA">총 금액(+)</font></td>
+					<td><font size="1px" color="#ffffff">40,500</font></td>
+				</tr>
+			</table>
+		</div>
 
 		<table width="200" bgcolor="#363636">
 			<tr>
@@ -114,35 +125,35 @@
 			<table width="200" bgcolor="#363636">
 				<tr>
 					<td><font size="1px" color="#BFBFBF">할인금액</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.discountPrice }</font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">할인쿠폰</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.couponPrice }</font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">Yes머니</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.pointPrice }</font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">예치금</font></td>
-					<td><font size="1px" color="#ffffff"></font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">YES상품권</font></td>
-					<td><font size="1px" color="#ffffff"></font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">공연예매권</font></td>
-					<td><font size="1px" color="#ffffff"></font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
 					<td><font size="1px" color="#BFBFBF">기타결제</font></td>
-					<td><font size="1px" color="#ffffff"></font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 				<tr>
-					<td><font size="1px" color="#C3E3FA">총 할인금액(-)</font></td>
-					<td><font size="1px" color="#ffffff">${stdto.discountPrice+stdto.couponPrice+stdto.pointPrice }</font></td>
+					<td><font size="1px" color="#C3E3FA">총 찰인금액(-)</font></td>
+					<td><font size="1px" color="#ffffff">0</font></td>
 				</tr>
 			</table>
 		</div>
@@ -156,14 +167,17 @@
 
 		<div>
 			<table width="200" bgcolor="#363636">
-					<tr height="9"><td></td></tr>
-					<tr>
-						<td><font size="1.5px" color="#ffffff">최종 결제 금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
-						<td><font size="4px" color="#ffffff"><b>${stdto.ticketPrice*stdto.inwon+500*stdto.inwon+stdto.discountPrice*stdto.inwon+stdto.couponPrice*stdto.inwon+stdto.pointPrice }</b></font><font size="2px;" color="#ffffff">원</font></td>
-					</tr>
-			</table>		
+				<tr height="9">
+					<td></td>
+				</tr>
+				<tr>
+					<td><font size="1.5px" color="#ffffff">최종 결제
+							금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
+					<td><font size="4px" st color="#ffffff"><b>40,500</b></font><font
+						size="2px;" color="#ffffff">원</font></td>
+				</tr>
+			</table>
 		</div>
-		
 		<%
 			if (step.equals("1")) {
 		%>
@@ -209,7 +223,7 @@
 			</tr>
 		</table>
 	</div>
-	
+	</div>
 
 	<%
 		} else if (step.equals("4")) {
@@ -234,7 +248,7 @@
 			</tr>
 		</table>
 	</div>
-	
+	</div>
 
 
 	<%
@@ -259,7 +273,7 @@
 			</tr>
 		</table>
 	</div>
-	
+	</div>
 
 	<%
 		}
