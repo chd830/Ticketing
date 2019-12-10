@@ -44,6 +44,10 @@ public class SelectTicketController {
 	
 	SelectedTicketDTO stdto;
 	
+	PerformDTO performReaddto;
+	PlaceDTO Read_placedto;
+	
+	
 	@RequestMapping(value = "/home.action", method = RequestMethod.GET)
 	public String home() {
 		
@@ -114,10 +118,12 @@ public class SelectTicketController {
 	  dao.home_insertData(stdto);
 	  
 	  PerformDTO pdto = new PerformDTO();
-	  PerformDTO performReaddto = new PerformDTO();
-	  PlaceDTO Read_placedto = new PlaceDTO();
+	  
+	  //PerformDTO performReaddto = new PerformDTO();
+	  //PlaceDTO Read_placedto = new PlaceDTO();
 	  
       pdto = dao.cal_select(performCode);
+      
       performReaddto = dao.read_performData(performCode);
       Read_placedto = dao.read_placeData(Integer.toString(performReaddto.getPerformPlaceCode()));
       
@@ -301,8 +307,12 @@ public class SelectTicketController {
 		mav.setViewName("detail");
 			
 		mav.addObject("stdto",stdto);
+		mav.addObject("performReaddto",performReaddto);
+		mav.addObject("Read_placedto",Read_placedto);
 		
 		request.setAttribute("stdto", stdto);
+		request.setAttribute("performReaddto", performReaddto);
+		request.setAttribute("Read_placedto", Read_placedto);
 		
 		return mav;
 	 

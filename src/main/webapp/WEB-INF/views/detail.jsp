@@ -32,7 +32,7 @@
 		<div>
 			<table width="200" bgcolor="#363636">
 				<tr style="border-bottom-color: #ffffff;">
-					<td><img src="/ticketing/resources/images/${performReaddto.performMainImage }" /></td>
+					<td><img src="D:/image/${performReaddto.performMainImage }" /></td>
 					<td><font size="1px" color="#ffffff">${performReaddto.performName }<br />${performReaddto.performStartDate } ~ <br/> ${performReaddto.performEndDate }<br />${Read_placedto.placeName}<br /></font></td>
 				</tr>
 			</table>

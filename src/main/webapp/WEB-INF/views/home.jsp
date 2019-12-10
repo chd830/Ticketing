@@ -324,6 +324,7 @@ function sendIt(){
 								<div style="width: 240px; height: 130px; overflow: auto; margin-left: 10px; border-color: #ffffff" >
 								    <table width="220px" border="0" style="border-color: #FFFFFF; border-collapse: collapse;" cellpadding="0" cellspacing="0">
 								    	<c:forEach var="l" items="${ seatPriceList }">
+								    		<tr height="5" style="background-color: #ffffff"></tr>
 									        <tr style="background-color: #F3F3F3;">
 									            <td width="200" ><font size="2px;"> 지정석 R석 ${l.rclass }원</font> </td>
 									        </tr>

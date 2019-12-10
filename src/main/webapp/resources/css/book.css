@@ -27,13 +27,20 @@ display: inline-block;
 
 <!-- 연주 start-->
 
+#header{
+	background-color: #7C9AB6;
+	border-color: #7C9AB6;
+	border: 1px;
+	color: white;
+	size: 6px;
+	
+}
+
 .td {
  border-bottom-width: 1px;
  border-bottom-style: dotted;
  border-bottom-color: #CCCCCC;
 }
-
-
 
 .tdblack {
  border-bottom-width: 1px;
@@ -87,4 +94,3 @@ display: inline-block;
 	border-radius: 10%;
 }
 <!-- 연주 end-->
-

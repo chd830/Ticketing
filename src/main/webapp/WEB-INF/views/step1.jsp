@@ -667,24 +667,6 @@
 		
 		});
 		
-		
-		/* var ch = "8888";
-		
-		$.ajax({
-			
-			type:"GET",
-			url:"getStepData",
-			data:{"ch": ch},
-			success:function(args){
-				
-				$("#test").html(args);
-				
-			},
-			error:function(e){
-				alert(e.responseText);
-			}
-		
-		}); */ 
 	});
 
 	</script>
