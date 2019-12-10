@@ -51,6 +51,7 @@ public class SeatController {
 	@RequestMapping(value = "/get/seatData", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView setTicket(@RequestParam String seatRow, @RequestParam String seatNum, HttpServletRequest request) {
+		System.out.println(seatRow+"¼® "+seatNum+"¿­");
 		ModelAndView m = new ModelAndView();
 		SelectedTicket ticket = new SelectedTicket();
 		ticket.setSeatRow(seatRow);

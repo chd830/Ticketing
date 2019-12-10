@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Built-By: stu
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Build-Jdk: 1.8.0_191
 =======
 Build-Jdk: 1.8.0_211
@@ -9,5 +10,8 @@ Build-Jdk: 1.8.0_211
 =======
 Build-Jdk: 1.8.0_191
 >>>>>>> 1fe1ad75343877ddae9e6e613eff77985b5cc1ea
+=======
+Build-Jdk: 1.8.0_221
+>>>>>>> chong
 Created-By: Maven Integration for Eclipse
 
