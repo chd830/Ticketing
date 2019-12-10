@@ -1,4 +1,8 @@
+<%@page import="com.ticket.dto.SeatingDTO"%>
+<%@page import="com.ticket.dto.PerformInfoDTO"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -11,7 +15,21 @@
 	String selectedMonth = (String)request.getAttribute("selectedMonth");
 	String selectedDay = (String)request.getAttribute("selectedDay");
 	String time = (String)request.getAttribute("time");
-
+	
+	String step = request.getParameter("step");
+	
+	int performGenreCode = (Integer)request.getAttribute("performGenreCode");
+	int year1 = (Integer)request.getAttribute("year1");
+	int mon1 = (Integer)request.getAttribute("mon1");
+	int day1 = (Integer)request.getAttribute("day1");
+	
+	int duringDate = (Integer)request.getAttribute("duringDate");
+	
+	List<PerformInfoDTO> timeList = (List)request.getAttribute("timeList");
+	List<SeatingDTO> seatPriceList = (List)request.getAttribute("seatPriceList");
+	
+	System.out.println(timeList + "*****************");
+	System.out.println(seatPriceList + "*****************");
 	
 %>
 
@@ -55,8 +73,7 @@
 </style>
 </head>
 <body>
-
-	<div class="post" style="vertical-align: top; float: left;">
+ 	<div class="post" style="vertical-align: top; float: left;">
 		<div>
 			<table width="800" bgcolor="#363636">
 				<tr>
@@ -82,7 +99,7 @@
 			</table>
 		</div>
 
-		<div>
+		<div id = "test">
 			<table border="1" bordercolor="#BEBEBE" bgcolor="#ffffff"
 				style="margin-left: 15px; margin-top: 10px;" width="770"
 				cellpadding="0" cellspacing="0">
@@ -106,7 +123,6 @@
 							</div>
 							
 							<div id="cal_tab" class="cal" style="margin-left: 30px;"></div>
-
 						</div>
 						<div style="margin-left: 28px; margin-bottom: 30px;">
 							<img src="/ticketing/resources/images/color.PNG">
@@ -146,17 +162,13 @@
 												<td width="150">
 													<div>
 														<table border="1" cellpadding="0" cellspacing="0" bordercolor="#DCDCDC" style="border-spacing: 5px;">
-															<tr>
-																<td class="check" <%if (time.equals("16:00")) {%> id="bgcolor1"
-																	<%} else {%> id="bgcolor2" <%}%>>&nbsp;<font
-																	size="2px">&nbsp;&nbsp;[1회]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16:00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
-															</tr>
-															<tr>
-																<td class="check" <%if (time.equals("18:00")) {%> id="bgcolor1"
-																	<%} else {%> id="bgcolor2" <%}%>>&nbsp;<font
-																	size="2px">&nbsp;&nbsp;[2회]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18:00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
-															</tr>
-
+															<%for(int i = 0;i<timeList.size();i++){ %>
+																<tr>
+																	<td class="check" <%if (time.equals(timeList.get(i).getPerformTime())) {%> id="bgcolor1"
+																		<%} else {%> id="bgcolor2" <%}%>>&nbsp;<font
+																		size="2px">&nbsp;[<%=i+1 %>회]&nbsp;&nbsp;<%=timeList.get(i).getPerformTime() %>&nbsp;&nbsp;&nbsp;</font></td>
+																</tr>
+															<%} %>
 														</table>
 													</div>
 												</td>
@@ -169,7 +181,7 @@
 											<tr>
 												<td width="200">
 												<!-- 공연 -->
-												<% if(performCode == "1111"){ %>
+												<c:if test="${performGenreCode == 3 or performGenreCode == 5 or performGenreCode == 6 }">
 													 <div>
 														 <table cellpadding="0" cellspacing="0" style="margin-left: 5px;">
 															<tr height="50">
@@ -196,63 +208,33 @@
 															</tr>
 														</table> 
 													</div>
-												<%}else{ %>	
+													</c:if>
+													<c:if test="${performGenreCode == 2 or performGenreCode == 1 or performGenreCode == 4}">
 													<!-- 콘서트 좌석 등급 및 잔여석 표시 -->
 													<div style="width: 240px; height: 130px; overflow: auto; margin-left: 10px; border-color: #ffffff" >
-													    <table width="220px" border="0" style="border-color: #FFFFFF; border-collapse: collapse;" cellpadding="0" cellspacing="0">
-													        <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 VIP석 187,000원</font> </td>
-													            <td width="200" ><font size="2px;">(잔여 : 0석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 S석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여 :1석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 R석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:0석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 A석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:7석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 B석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:0석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 C석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:10석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 D석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:0석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													         <tr style="background-color: #F3F3F3;">
-													            <td width="200" ><font size="2px;"> 지정석 E석 187,000원</font></td>
-													            <td width="200" ><font size="2px;">(잔여:12석)</font></td>
-													        </tr>
-													        <tr height="5" style="background-color: #ffffff"></tr>
-													        
+													   <table width="220px" border="0" style="border-color: #FFFFFF; border-collapse: collapse;" cellpadding="0" cellspacing="0">
+													    	<%for(int i = 0;i<seatPriceList.size();i++){ %>
+														        <tr style="background-color: #F3F3F3;">
+														            <td width="200" ><font size="2px;"> 지정석 <font color="#ED292F">R</font>석 &nbsp;&nbsp;<%=seatPriceList.get(i).getRclass() %>원</font> </td>
+														        </tr>
+														        <tr height="5" style="background-color: #ffffff"></tr>
+														         <tr style="background-color: #F3F3F3;">
+														            <td width="200" ><font size="2px;"> 지정석 <font color="#ED292F">S</font>석 &nbsp;&nbsp;<%=seatPriceList.get(i).getSclass() %>원</font> </td>
+														        </tr>
+														        <tr height="5" style="background-color: #ffffff"></tr>
+														         <tr style="background-color: #F3F3F3;">
+														            <td width="200" ><font size="2px;"> 지정석 <font color="#ED292F">V</font>석 &nbsp;&nbsp;<%=seatPriceList.get(i).getVclass() %>원</font> </td>
+														        </tr>
+														        <tr height="5" style="background-color: #ffffff"></tr>
+															<%} %>
 													    </table>
 													</div>
-													<%} %>
+													</c:if>
 												</td>
 											</tr>
 										</table>
 									</div>
 								</div>
-							</div>
-							<div style="margin-top: 15px; margin-left: 310px; margin-bottom: 30px;">
-								<input type="button" value="좌석다시선택"
-									style="color: #ffffff; background-color: #4E91CC; border-radius: 5px;">
 							</div>
 						</div>
 					</td>
@@ -270,9 +252,9 @@
 
 	<div class="post" id="detailDIV" style="vertical-align: top;">
 		<jsp:include page="detail.jsp">
-			<jsp:param value="1" name="step" />
+			<jsp:param value="${performGenreCode }" name="performGenreCode" />
 		</jsp:include>
-	</div>
+	</div> 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript">
@@ -283,10 +265,10 @@
 			var lastDay = null;
 			var $tdDay = null;
 			var $tdSche = null;
-			var startYear = 2019;
-			var startMonth = 12;
-			var startDay = 2;
-			var duringDate = 10;
+			var startYear = <%=year1%>;
+			var startMonth = <%=mon1%>;
+			var startDay = <%=day1%>;
+			var duringDate =<%=duringDate%>;
 			var t = 0;
 			var flag = false;
 			var cnt = 0;
@@ -339,7 +321,9 @@
 				        	var day = $(this).text();
 				        	console.log(day);
 				        	
-							var params = year + "." + month + "." + day;
+							var selectedDate = year + "." + month + "." + day;
+							
+							
 				        	
 				        	// 홈에서 불러온 값을 바탕으로 배경색 설정한 부분 제어하는 부분
 				        	if(cnt >= 1) {
@@ -360,7 +344,7 @@
 				        		
 				        	}
 				        	
-				        	console.log(count + " :::2121212");
+				        	
 							// 배경색 제어 부분 ( home에서 불러온 값 제외하고 제어하는 부분 )
 						    if(count==1){
 						        		
@@ -372,7 +356,7 @@
 												
 												type:"GET",
 												url:"changeDate",
-												data:{"params": params},
+												data:{"selectedDate": selectedDate},
 												success:function(args){
 													console.log("args: "+args);
 													$("#resultDIV").html(args);
@@ -460,7 +444,7 @@
 				           
 				           if(flag) {
 					           	$tdDay.eq(i).css("background-color","#7C8C94");
-					           	$tdDay.eq(i).css("color","white");
+					           	$tdDay.eq(i).css("color","black");
 					           	$tdDay.eq(i).text(dayCount++);
 					           	t++; // 회색배경으로 표시되어야하는 기간 count 세는 변수
 				           }else{
@@ -675,14 +659,13 @@
 			url:"detailDate",
 			data:{"check": check},
 			success:function(args){
-				$('#detailDIV').html(args);
+				
 			},
 			error:function(e){
 				alert(e.responseText);
 			}
 		
 		});
-		
 		
 	});
 
