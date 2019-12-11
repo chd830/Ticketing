@@ -76,10 +76,10 @@ height: 100%;
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav nav ml-auto">
-				<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+				<li class="nav-item"><a href="<%=cp%>/main.action" class="nav-link"><span>Home</span></a></li>
 
 				<c:choose>
-					<c:when test="${empty success}">
+					<c:when test="${empty sessionScope.userID}">
 						<li class="nav-item"><a href="<%=cp%>/userLogin.action"
 							class="nav-link"><span>Login</span></a></li>
 						<li class="nav-item"><a href="<%=cp%>/userSignUp.action"

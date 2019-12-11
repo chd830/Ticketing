@@ -24,8 +24,8 @@
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ff10a18701cb9609d0d4b309c8b6c530&libraries=services"></script>
     <script>
     
-    	alert ("${p_dto.placeAddr}");
-    	
+    /* 	alert ("${p_dto.placeAddr}");
+    	 */
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
             center : new daum.maps.LatLng("${MapX}", "${MapY}"), // 지도의 중심좌표

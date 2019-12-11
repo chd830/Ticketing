@@ -1,3 +1,13 @@
+<%-- <div>
+	<jsp:include page="mainHeader.jsp" flush="false"/>
+	<%@ page contentType="text/html; charset=UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+	%>
+</div> --%>
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -5,44 +15,8 @@
 	String cp = request.getContextPath();
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<head>
-<title>Ecoland - Free Bootstrap 4 Template by Colorlib</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i"
-	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="/ticketing/resources/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="/ticketing/resources/css/animate.css">
-
-<link rel="stylesheet"
-	href="/ticketing/resources/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/ticketing/resources/css/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/ticketing/resources/css/magnific-popup.css">
-
-<link rel="stylesheet" href="/ticketing/resources/css/aos.css">
-
-<link rel="stylesheet" href="/ticketing/resources/css/ionicons.min.css">
-
-<link rel="stylesheet" href="/ticketing/resources/css/flaticon.css">
-<link rel="stylesheet" href="/ticketing/resources/css/icomoon.css">
-<link rel="stylesheet" href="/ticketing/resources/css/style.css">
-
-</head>
-
-<body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="300">
-	<nav
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<!-- 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
 		id="ftco-navbar">
 	<div class="container">
@@ -75,21 +49,22 @@
 			</ul>
 		</div>
 	</div>
-	</nav>
+	</nav> -->
 
-	<section class="ftco-section">
+	<section class="ftco-section" style="padding: 0px">
 	<div class="container">
 		<div class="row">
 
 			<div class="col-md-12 tour-wrap" align="center">
-				<div class="pt-5">
-					<div class="comment-form-wrap pt-5" style="width: 800px">
+				<!-- <div class="pt-5" style="padding-top: 0px"> -->
+					<!-- <div class="comment-form-wrap pt-5" style="width: 900px"> -->
+					<div style="width: 900px">
 						<h3 class="mb-5" style="font-style: blod; font-size: 40px"></h3>
 						<form action="" class="p-5 bg-light" name="myForm" method="post"
 							enctype="multipart/form-data" autocomplete="off">
 							<div class="form-group" align="left">
-								<label for="name">이름 *</label> <input type="text"
-									class="form-control" name="performName">
+								<label for="name">이름 *</label> 
+								<input type="text" class="form-control" name="performName" value="">
 							</div>
 							<div class="form-group" align="left">
 								<label for="name">장르 *</label>
@@ -170,10 +145,6 @@
 								<div id="addedInputDiv">
 									<input type="file" class="form-control" name="performDetailImage">
 								</div>
-								<!-- <br/>
-								<label for="website">상세 내용</label>
-								<textarea name="performDetailContent" cols="30" rows="10"
-									class="form-control"></textarea> -->
 							</div>
 							<div class="form-group" align="left">
 								<!-- <input type="submit" value=" 등록 "	class="btn py-3 px-4 btn-primary" 
@@ -185,7 +156,7 @@
 
 						</form>
 					</div>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>
@@ -193,12 +164,12 @@
 	<!-- .section -->
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
+	<%-- <div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px"> <circle
 			class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
 			stroke="#eeeeee" /> <circle class="path" cx="24" cy="24" r="22"
 			fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
+	</div>--%>
 
 
 	<script src="/ticketing/resources/js/jquery.min.js"></script>
@@ -213,11 +184,11 @@
 	<script src="/ticketing/resources/js/aos.js"></script>
 	<script src="/ticketing/resources/js/jquery.animateNumber.min.js"></script>
 	<script src="/ticketing/resources/js/scrollax.min.js"></script>
-	<script
+<!-- 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="/ticketing/resources/js/google-map.js"></script>
+	<script src="/ticketing/resources/js/google-map.js"></script> -->
 
-	<script src="/ticketing/resources/js/main.js"></script>
+	<script src="/ticketing/resources/js/main.js"></script> 
 
 	<!-- 달력 -->
 	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -227,9 +198,6 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
-		/* $('#date1').click(function() {
-			datepicker();
-		}); */
 		$(function() {
 		    $("#date1").datepicker({
 		    		dateFormat: "yy-mm-dd"
@@ -405,5 +373,10 @@
 		}
 		
 	</script>
+	<%-- 
+	<div>
+		<jsp:include page="mainFooter.jsp" flush="false"/>
+	</div> --%>
+	
 </body>
 </html>

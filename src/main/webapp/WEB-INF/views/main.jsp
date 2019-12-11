@@ -34,6 +34,21 @@
 <link rel="stylesheet" href="/ticketing/resources/css/icomoon.css">
 <link rel="stylesheet" href="/ticketing/resources/css/style.css">
 
+<script type="text/javascript">
+
+	function search() {
+		
+		alert("여기안타냐???");
+		
+		var f = document.searchForm;
+		
+		f.action = "<%=cp%>/mainList.action";
+		f.submit();
+		
+	}
+
+</script>
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -42,7 +57,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
 		id="ftco-navbar">
 	<div class="container">
-		<a class="navbar-brand" href="<%=cp%>/main.action">Partycket</a>
+		<a class="navbar-brand" href="<%=cp%>/main.action"><font color="white">Partycket</font></a>
 		<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle"
 			type="button" data-toggle="collapse" data-target="#ftco-nav"
 			aria-controls="ftco-nav" aria-expanded="false"
@@ -52,68 +67,233 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav nav ml-auto">
-				<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+				<li class="nav-item"><a href="#home-section" class="nav-link"><span><font color="white">Home</font></span></a></li>
 
 				<c:choose>
 					<c:when test="${empty success}">
 						<li class="nav-item"><a href="<%=cp%>/userLogin.action"
-							class="nav-link"><span>Login</span></a></li>
+							class="nav-link"><span><font color="white">Login</font></span></a></li>
 						<li class="nav-item"><a href="<%=cp%>/userSignUp.action"
-							class="nav-link"><span>Sign Up</span></a></li>
+							class="nav-link"><span><font color="white">Sign Up</font></span></a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a href="<%=cp%>/logout.action"
-							class="nav-link"><span>Logout</span></a></li>
+							class="nav-link"><span><font color="white">Logout</font></span></a></li>
 						<li class="nav-item"><a href="<%=cp%>/myPage.action"
-							class="nav-link"><span>My Page</span></a></li>
+							class="nav-link"><span><font color="white">My Page</font></span></a></li>
 					</c:otherwise>
 				</c:choose>
 				
-				<%-- <c:if test="${!empty c_success}">
-						<li class="nav-item"><a href="<%=cp%>/userLogin.action"
-							class="nav-link"><span>Login</span></a></li>
-						<li class="nav-item"><a href="<%=cp%>/userSignUp.action"
-							class="nav-link"><span>Sign Up</span></a></li>
-						<li class="nav-item"><a href="<%=cp%>/performInsert.action"
-							class="nav-link"><span>Sign Up</span></a></li>
-					</c:if> --%>
-				
-
-				<li class="nav-item"><a href="#about-section" class="nav-link"><span>Musical</span></a></li>
+				<li class="nav-item"><a href="#about-section" class="nav-link"><span><font color="white">Musical</font></span></a></li>
 				<li class="nav-item"><a href="#destination-section"
-					class="nav-link"><span>Concert</span></a></li>
+					class="nav-link"><span><font color="white">Concert</font></span></a></li>
 				<li class="nav-item"><a href="#restaurant-section"
-					class="nav-link"><span>Classic</span></a></li>
-				<li class="nav-item"><a href="#blog-section" class="nav-link"><span>Exhibition</span></a></li>
+					class="nav-link"><span><font color="white">Classic</font></span></a></li>
+				<li class="nav-item"><a href="#blog-section" class="nav-link"><span><font color="white">Exhibition</font></span></a></li>
 				<li class="nav-item"><a href="#contact-section"
-					class="nav-link"><span>Theater</span></a></li>
+					class="nav-link"><span><font color="white">Theater</font></span></a></li>
 				<c:if test="${!empty c_success}">
-				<li class="nav-item"><a href="<%=cp%>/performInsert.action" class="nav-link"><span>Insert</span></a></li>
+				<li class="nav-item"><a href="<%=cp%>/calendarView.action" class="nav-link"><span><font color="white">일정</font></span></a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 	<div>
 	</nav>
-	<br/><br/><br/><br/>
+	<div class="home-slider owl-carousel" style="height: 670px;">
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 첫번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+		
+		<div class="slider-item">
+			<div class="overlay"></div>
+			
+			<div class="container-fluid p-0">
+				<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" 
+				data-scrollax-parent="true" style="height: 700px; background-image: url(/ticketing/resources/images/cap2.jpg);">
+					<div class="one-third order-md-last" style="height: 700px;">
+						<div class="img"
+							style="width: 600px; height: 550px;">
+							<div class="overlay"></div>
+						</div>
+						<!-- <div class="bg-primary">
+						</div> -->
+					</div>
+					<div class="one-forth d-flex align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;
+						">
+						<div class="text">
+							<span class="subheading pl-5"><font color="white">Participate Loro</font></span>
+							<h1 class="mb-4 mt-3"><font color="white">Explore Your Travel Destinations like
+								never before</font></h1>
+							<p><font color="white">A small river named Duden flows by their place and
+								supplies it with the necessary regelialia. It is a paradisematic
+								country.</font></p>
+
+							<p>
+								<a href="#" class="btn btn-secondary px-5 py-3 mt-3">Participate
+									<span class="ion-ios-arrow-forward"></span>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--  --><!--  --><!--  --><!--  --><!-- 첫번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+
+		<!--  --><!--  --><!--  --><!--  --><!-- 두번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+
+		<div class="slider-item">
+			<div class="overlay"></div>
+			
+			<div class="container-fluid p-0">
+				<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" 
+				data-scrollax-parent="true" style="height: 700px; background-image: url(/ticketing/resources/images/cap5.jpg);">
+					<div class="one-third order-md-last" style="height: 700px;">
+						<div class="img"
+							style="width: 600px; height: 550px;">
+							<div class="overlay"></div>
+						</div>
+						<!-- <div class="bg-primary">
+						</div> -->
+					</div>
+					<div class="one-forth d-flex align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;
+						">
+						<div class="text">
+							<span class="subheading pl-5"><font color="white">Participate Loro</font></span>
+							<h1 class="mb-4 mt-3"><font color="white">Explore Your Travel Destinations like
+								never before</font></h1>
+							<p><font color="white">A small river named Duden flows by their place and
+								supplies it with the necessary regelialia. It is a paradisematic
+								country.</font></p>
+
+							<p>
+								<a href="#" class="btn btn-secondary px-5 py-3 mt-3">Participate
+									<span class="ion-ios-arrow-forward"></span>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 두번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 세번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+
+		<div class="slider-item">
+			<div class="overlay"></div>
+			
+			<div class="container-fluid p-0">
+				<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" 
+				data-scrollax-parent="true" style="height: 700px; background-image: url(/ticketing/resources/images/cap4.jpg);">
+					<div class="one-third order-md-last" style="height: 700px;">
+						<div class="img"
+							style="width: 600px; height: 550px;">
+							<div class="overlay"></div>
+						</div>
+						<!-- <div class="bg-primary">
+						</div> -->
+					</div>
+					<div class="one-forth d-flex align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;
+						">
+						<div class="text">
+							<span class="subheading pl-5"><font color="white">Participate Loro</font></span>
+							<h1 class="mb-4 mt-3"><font color="white">Explore Your Travel Destinations like
+								never before</font></h1>
+							<p><font color="white">A small river named Duden flows by their place and
+								supplies it with the necessary regelialia. It is a paradisematic
+								country.</font></p>
+
+							<p>
+								<a href="#" class="btn btn-secondary px-5 py-3 mt-3">Participate
+									<span class="ion-ios-arrow-forward"></span>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 세번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 네번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+
+		<div class="slider-item">
+			<div class="overlay"></div>
+			
+			<div class="container-fluid p-0">
+				<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" 
+				data-scrollax-parent="true" style="height: 700px; background-image: url(/ticketing/resources/images/cap.jpg);">
+					<div class="one-third order-md-last" style="height: 700px;">
+						<div class="img"
+							style="width: 600px; height: 550px;">
+							<div class="overlay"></div>
+						</div>
+						<!-- <div class="bg-primary">
+						</div> -->
+					</div>
+					<div class="one-forth d-flex align-items-center ftco-animate"
+						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;
+						">
+						<div class="text">
+							<span class="subheading pl-5"><font color="white">Participate Loro</font></span>
+							<h1 class="mb-4 mt-3"><font color="white">Explore Your Travel Destinations like
+								never before</font></h1>
+							<p><font color="white">A small river named Duden flows by their place and
+								supplies it with the necessary regelialia. It is a paradisematic
+								country.</font></p>
+
+							<p>
+								<a href="#" class="btn btn-secondary px-5 py-3 mt-3">Participate
+									<span class="ion-ios-arrow-forward"></span>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--  --><!--  --><!--  --><!--  --><!-- 네번째 슬라이더 --><!--  --><!--  --><!--  --><!--  -->
+		
+	</div>
+	
+	<br/><br/>
+	
 	<section class="ftco-section ftco-no-pb ftco-no-pt">
-	<div class="container" style="text-align: right;">
+	
+	<!-- </section> -->
+
+	<section id="home-section" class="hero"> 
+	<img src="/images/blob-shape-3.svg" class="svg-blob" alt="Colorlib Free Template">
+	
+	</div>
+	
+	<div class="container" style="text-align: right; width: 1150px;" >
 		<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
 			<div class="col-md-12 heading-section ftco-animate">
-				<span class="subheading" style="font-size: 22pt;">Party &amp; Ticket</span>
+				<span class="subheading" style="font-size: 22pt;"><font color="#6c757d">Party &amp; Ticket</font></span>
 				<!-- <h2 class="mb-4">Where do you participate in?</h2> -->
 				<div class="row" align="left">
-			<div class="col-md-12" align="right">
+			<div class="col-md-12" align="right" style="">
 				<!-- <div class="search-wrap-1 ftco-animate p-4"> -->
-					<form action="#" class="search-property-1">
-						<div class="row" style="width: 600px; height: 10px;" align="right">
-							<div class="form-group" align="right" style="width: 120px; text-align: center;">
+					<form action="" class="search-property-1" name="searchForm" method="post">
+						<div class="row" style="width: 1125px; height: 10px;" align="right">
+							<div class="form-group" align="left" style="width: 120px; text-align: center;">
 								<!-- <label for="name" style="font-weight: normal;">Category</label> -->
-								<select name="genreName" class="form-control">
-									<option value="musical" style="font-size: 12pt;">뮤지컬</option>
-									<option value="concert" style="font-size: 12pt;">콘서트</option>
+								<select class="form-control" name="genreCode">
+									<option value="">장 르</option>
+									<c:forEach var="result" items="${genreList}">
+										<option value="${result.genreCode}">${result.genreName}</option>
+									</c:forEach>
 								</select>
-							</div>
+							</div>	
 							<div class="col-lg align-items-end" style="height: 30px;">
 								<div class="form-group">
 									<!-- <label for="#">Participate</label> -->
@@ -121,16 +301,16 @@
 										<div class="icon">
 											<span class="ion-ios-search"></span>
 										</div>
-										<b><input type="text" class="form-control"
-											placeholder="검색어를 입력해주세요" style="width: 300px;"></b>
+										<b><input type="text" class="form-control" name="searchValue"
+											placeholder="검색어를 입력해주세요" style="width: 810px;"></b>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg align-self-end" style="width: 150px;">
+							<div class="col-lg align-self-end">
 								<div class="form-group">
-									<div class="form-field">
-										<b><input type="submit" value="검색하기"
-											class="form-control btn btn-primary"></b>
+									<div class="form-field" > 
+										<b><input style="height: 51px;" type="submit" value="     검색하기     "  
+											class="btn btn-secondary" onclick="search()"></b>
 									</div>
 								</div>
 							</div>
@@ -143,145 +323,16 @@
 		</div>
 		
 	</div>
-	<!-- </section> -->
-
-	<br/><br/>
-
-	<section id="home-section" class="hero"> <img
-		src="/images/blob-shape-3.svg" class="svg-blob"
-		alt="Colorlib Free Template">
-	<div class="home-slider owl-carousel" style="height: 670px;">
-		<div class="slider-item">
-			<div class="overlay"></div>
-			<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
-			<div class="container-fluid p-0">
-				<div
-					class="row d-md-flex no-gutters slider-text align-items-center justify-content-end"
-					data-scrollax-parent="true" style="height: 700px;">
-					<div class="one-third order-md-last" style="height: 700px;">
-						<div class="img"
-							style="background-image: url(/ticketing/resources/images/레미제라블.jpeg); width: 600px; height: 550px;">
-							<div class="overlay"></div>
-						</div>
-						<!-- <div class="bg-primary">
-						</div> -->
-					</div>
-					<div class="one-forth d-flex align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }" style="height: 700px;">
-						<div class="text">
-							<span class="subheading pl-5">Participate Loro</span>
-							<h1 class="mb-4 mt-3">Explore Your Travel Destinations like
-								never before</h1>
-							<p>A small river named Duden flows by their place and
-								supplies it with the necessary regelialia. It is a paradisematic
-								country.</p>
-
-							<p>
-								<a href="#" class="btn btn-primary px-5 py-3 mt-3">Participate
-									<span class="ion-ios-arrow-forward"></span>
-								</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="slider-item">
-			<div class="overlay"></div>
-			<div class="container-fluid p-0">
-				<div
-					class="row d-flex no-gutters slider-text align-items-center justify-content-end"
-					data-scrollax-parent="true" style="height: 700px;">
-					<div class="one-third order-md-last" style="height: 700px;">
-						<div class="img"
-							style="background-image: url(/ticketing/resources/images/jpark.jpg); width: 600px; height: 550px;">
-							<div class="overlay"></div>
-						</div>
-						<!-- <div class="vr"><span class="pl-3 py-4" style="background-image: url(images/jpark.jpg);">J-Park</span></div> -->
-					</div>
-					<div class="one-forth d-flex align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '100%' }" style="height: 700px;">
-						<div class="text">
-							<span class="subheading pl-5">Participate J'park</span>
-							<h1 class="mb-4 mt-3">
-								Never Stop Exploring</span>
-							</h1>
-							<p>A small river named Duden flows by their place and
-								supplies it with the necessary regelialia. It is a paradisematic
-								country.</p>
-
-							<p>
-								<a href="#" class="btn btn-primary px-5 py-3 mt-3">Participate
-									<span class="ion-ios-arrow-forward"></span>
-								</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
 	
+	<br/><br/><br/><br/>
 	
-
-	<br/><br/>
-	<!-- <section class="ftco-section ftco-no-pb ftco-no-pt">
-	<div class="container" style="text-align: center;">
-		<div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
-			<div class="col-md-12 heading-section ftco-animate">
-				<span class="subheading" style="font-size: 16pt;">Party &amp; Ticket</span>
-				<h2 class="mb-4">Where do you participate in?</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="search-wrap-1 ftco-animate p-4">
-					<form action="#" class="search-property-1">
-						<div class="row">
-							<div class="form-group" align="center" style="width: 120px; text-align: left;">
-								<label for="name" style="font-weight: normal;">Category</label>
-								<select name="genreName" class="form-control">
-									<option value="musical" style="font-size: 12pt;">뮤지컬</option>
-									<option value="concert" style="font-size: 12pt;">콘서트</option>
-								</select>
-							</div>
-							<div class="col-lg align-items-end">
-								<div class="form-group">
-									<label for="#">Participate</label>
-									<div class="form-field">
-										<div class="icon">
-											<span class="ion-ios-search"></span>
-										</div>
-										<b><input type="text" class="form-control"
-											placeholder="검색어를 입력해주세요" style="width: 800px;"></b>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg align-self-end">
-								<div class="form-group">
-									<div class="form-field">
-										<b><input type="submit" value="검색하기"
-											class="form-control btn btn-primary" style="width: 160px;"></b>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	</section> -->
-
 	<section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb"
 		id="about-section">
 	<div class="container">
 		<div class="row no-gutters d-flex">
 			<div class="col-md-6 col-lg-5 d-flex">
-				<div class="img d-flex align-self-stretch align-items-center"
-					style="background-image: url(/ticketing/resources/images/jpark.jpg);">
+				<div class="img d-flex align-self-stretch align-items-center" 
+					style="background-image: url(/ticketing/resources/images/데이비드.jpg);">
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-7 px-lg-5 py-md-5 bg-darken">
@@ -303,7 +354,7 @@
 								country, in which roasted parts of sentences fly into your
 								mouth.</p>
 							<p>
-								<a href="#" class="btn btn-primary py-3 px-4">예약하기</a> 
+								<a href="#" class="btn btn-secondary py-3 px-4">예약하기</a> 
 								<a href="#" class="btn btn-white py-3 px-4">Reservation</a>
 							</p>
 						</div>
@@ -321,14 +372,6 @@
 	<!-- 첫번째 리스트 부분 -->
 	<section class="ftco-section">
 	<div class="container">
-		<!-- <div class="row justify-content-center pb-5">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<span class="subheading">Partycket Performance</span>
-				<h2 class="mb-4">Musical & Theater</h2>
-				<p>Far far away, behind the word mountains, far from the
-					countries Vokalia and Consonantia</p>
-			</div>
-		</div> -->
 		
 		<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!-- musical and theater --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
 		
@@ -345,7 +388,7 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-				<c:forEach var="dto" items="${mtlists }" begin="0" end="5">
+				<c:forEach var="dto" items="${mtlists }" begin="0" end="8">
 					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
 					
 						<div class="col-md-6 col-lg-4 ftco-animate"
@@ -362,11 +405,11 @@
 							</div>
 							<div class="text">
 
-								<h4 class="price">● ${dto.placeName }</h4>
+								<h4 class="price" style="background-color: #6c757d;">● ${dto.placeName }</h4>
 								<span><b>${dto.performStartDate } ~
 										${dto.performEndDate }<b /></span>
 								<h3>
-									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
+									<font size="3pt;"><a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a></font>
 								</h3>
 								<div class="star d-flex clearfix">
 									<div class="mr-auto float-left">
@@ -418,7 +461,7 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-				<c:forEach var="dto" items="${cclists }" begin="0" end="5">
+				<c:forEach var="dto" items="${cclists }" begin="0" end="8">
 					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
 					
 						<div class="col-md-6 col-lg-4 ftco-animate"
@@ -435,11 +478,11 @@
 							</div>
 							<div class="text">
 
-								<h4 class="price">● ${dto.placeName }</h4>
+								<h4 class="price" style="background-color: #6c757d;">● ${dto.placeName }</h4>
 								<span><b>${dto.performStartDate } ~
 										${dto.performEndDate }<b /></span>
 								<h3>
-									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
+									<font size="3pt;"><a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a></font>
 								</h3>
 								<div class="star d-flex clearfix">
 									<div class="mr-auto float-left">
@@ -491,9 +534,7 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-				<c:forEach var="dto" items="${eclists }" begin="0" end="5">
-					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
-					
+				<c:forEach var="dto" items="${eclists }" begin="0" end="8">
 						<div class="col-md-6 col-lg-4 ftco-animate"
 						style="display: inline-block;">
 						<div class="project">
@@ -508,11 +549,11 @@
 							</div>
 							<div class="text">
 
-								<h4 class="price">● ${dto.placeName }</h4>
+								<h4 class="price" style="background-color: #6c757d;">● ${dto.placeName }</h4>
 								<span><b>${dto.performStartDate } ~
 										${dto.performEndDate }<b /></span>
 								<h3>
-									<a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a>
+									<font size="3pt;"><a href="/ticketing/poster.action?performCode=${dto.performCode}">${dto.performName }</a></font>
 								</h3>
 								<div class="star d-flex clearfix">
 									<div class="mr-auto float-left">
@@ -552,113 +593,8 @@
 	
 	<!-- </section> -->
 	<!-- 첫번째 리스트 부분 끝 -->
-	<section class="ftco-section">
+	<!-- <section class="ftco-section"> -->
 	<div class="container">
-		<!-- <div class="row justify-content-center pb-5">
-			<div class="col-md-12 heading-section text-center ftco-animate">
-				<span class="subheading" style="font-weight: normal;">Suggested Hotel</span>
-				<h2 class="mb-4">Find Nearest Hotel</h2>
-				<p>Far far away, behind the word mountains, far from the
-					countries Vokalia and Consonantia</p>
-			</div>
-		</div> -->
-	<!-- 	<div class="row">
-			<div class="col-md-6 col-lg-4 ftco-animate">
-				<div class="project">
-					<div class="img">
-						<div class="vr">
-							<span>Sale</span>
-						</div>
-						<a href="hotel.html"><img
-							src="/ticketing/resources/images/hotel-1.jpg" class="img-fluid"
-							alt="Colorlib Template"></a>
-					</div>
-					<div class="text">
-						<h4 class="price">
-							<span class="old-price mr-2">$500</span>$400
-						</h4>
-						<span>3 nights</span>
-						<h3>
-							<a href="hotel.html">Luxury Hotel in Greece</a>
-						</h3>
-						<div class="star d-flex clearfix">
-							<div class="mr-auto float-left">
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span>
-							</div>
-							<div class="float-right">
-								<span class="rate"><a href="#">(120)</a></span>
-							</div>
-						</div>
-					</div>
-					<a href="images/hotel-1.jpg"
-						class="icon image-popup d-flex justify-content-center align-items-center">
-						<span class="icon-expand"></span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-4 ftco-animate">
-				<div class="project">
-					<div class="img">
-						<a href="hotel.html"><img
-							src="/ticketing/resources/images/hotel-2.jpg" class="img-fluid"
-							alt="Colorlib Template"></a>
-					</div>
-					<div class="text">
-						<h4 class="price">$400</h4>
-						<span>3 nights</span>
-						<h3>
-							<a href="hotel.html">Luxury Hotel in Greece</a>
-						</h3>
-						<div class="star d-flex clearfix">
-							<div class="mr-auto float-left">
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span>
-							</div>
-							<div class="float-right">
-								<span class="rate"><a href="#">(120)</a></span>
-							</div>
-						</div>
-					</div>
-					<a href="images/hotel-2.jpg"
-						class="icon image-popup d-flex justify-content-center align-items-center">
-						<span class="icon-expand"></span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-4 ftco-animate">
-				<div class="project">
-					<div class="img">
-						<a href="hotel.html"><img
-							src="/ticketing/resources/images/hotel-3.jpg" class="img-fluid"
-							alt="Colorlib Template"></a>
-					</div>
-					<div class="text">
-						<h4 class="price">$400</h4>
-						<span>3 nights</span>
-						<h3>
-							<a href="hotel.html">Luxury Hotel in Greece</a>
-						</h3>
-						<div class="star d-flex clearfix">
-							<div class="mr-auto float-left">
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span> <span class="ion-ios-star"></span>
-								<span class="ion-ios-star"></span>
-							</div>
-							<div class="float-right">
-								<span class="rate"><a href="#">(120)</a></span>
-							</div>
-						</div>
-					</div>
-					<a href="images/hotel-3.jpg"
-						class="icon image-popup d-flex justify-content-center align-items-center">
-						<span class="icon-expand"></span>
-					</a>
-				</div>
-			</div>
-		</div> -->
 		<div class="row justify-content-center pb-5 pt-5">
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<span class="subheading" style="font-weight: normal; font-size: 15pt;">전문가 칼럼</span>
@@ -1319,8 +1255,6 @@
 		</div>
 	</div>
 	</footer>
-
-
 
 	<!-- loader -->
 	<%-- <div id="ftco-loader" class="show fullscreen">

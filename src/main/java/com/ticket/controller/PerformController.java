@@ -56,7 +56,7 @@ public class PerformController {
 	FileManager fileManager;
 
 	@RequestMapping(value = "/performInsert.action", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String performInsert(Locale locale, Model model) {
 
 		List<GenreDTO> genreList = dao.selectGenreData();
 		List<PlaceDTO> placeList = dao.selectPlaceData();
@@ -70,7 +70,7 @@ public class PerformController {
 	}
 
 	@RequestMapping(value = "/insert.action", method = RequestMethod.POST)
-	public String performInsert(Locale locale, Model model, PerformDTO performDTO, SeatingDTO seatingDTO,
+	public String performInsert_ok(Locale locale, Model model, PerformDTO performDTO, SeatingDTO seatingDTO,
 			HttpServletRequest req) throws Exception {
 
 		StringBuffer temp = new StringBuffer();
@@ -168,7 +168,7 @@ public class PerformController {
 		dao.insertPerformData(performDTO);
 		dao.insertSeatingData(seatingDTO);
 
-		return "redirect:/performInsert.action";
+		return "redirect:/myPage.action";
 	}
 
 	@RequestMapping(value = "/calendarView.action", method = RequestMethod.GET)

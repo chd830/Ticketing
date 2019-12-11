@@ -70,60 +70,46 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 					
 					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 공통공통 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
 					
-	<!-- 전체데이터 -->
-	<select id="getLists" resultType="com.ticket.dto.MainListDTO">
-		
-		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
-		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
-		and a.performPlaceCode = b.placeCode
-		 
-	</select>
-	
 	<!-- 뮤지컬 & 연극 -->
 	<select id="mtgetLists" resultType="com.ticket.dto.MainListDTO">
-		
 		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
 		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
 		and a.performPlaceCode = b.placeCode and (c.genreCode = 2 or c.genreCode = 3)
-		 
 	</select>
 	
 	<!-- 콘서트 & 클래식 -->
 	<select id="ccgetLists" resultType="com.ticket.dto.MainListDTO">
-		
 		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
 		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
 		and a.performPlaceCode = b.placeCode and (c.genreCode = 1 or c.genreCode = 4)
-		 
 	</select>
 	
 	<!-- 전시 & 아동 -->
 	<select id="ecgetLists" resultType="com.ticket.dto.MainListDTO">
-		
 		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
 		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
 		and a.performPlaceCode = b.placeCode and (c.genreCode = 5 or c.genreCode = 6)
-		 
 	</select>
-					
+				
+	<!-- 데이터 갯수 -->	
 	<select id="getDataCount" parameterType="map" resultType="int">
 		select nvl(count(*),0) from (select distinct a.performCode,a.performName, a.performStartDate, 
 		a.performEndDate, a.performGenreCode,a.performMainImage, b.placeName,c.genreName 
-		from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode and a.performPlaceCode = b.placeCode)
-		where ${searchKey} like '%' || #{searchValue} || '%'
+		from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode and a.performPlaceCode = b.placeCode
+		and c.genreCode like '%' || #{searchValue} || '%' and a.performName like '%' || #{searchValue} || '%')
 	</select>
 	
-	<!-- <select id="getAllLists" resultType="com.ticket.mainDTO.MainListDTO" parameterType="map">
-		select * from (
-		select rownum rnum,data.* from (
-		select num,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created
-		from board
-		where ${searchKey} like '%' || #{searchValue} || '%'
-		order by num desc) data)
-	<![CDATA[
-		where rnum>=#{start} and rnum<=#{end}
-	]]>
-	</select> -->
+	<!-- 전체데이터 -->
+	<select id="getMainLists" resultType="com.ticket.dto.MainListDTO" parameterType="map">
+		select distinct a.performCode,a.performName, a.performStartDate, a.performEndDate,
+		a.performGenreCode,a.performMainImage, b.placeName,c.genreName from performData a, placeData b,genreData c where c.genreCode = a.performGenreCode
+		and a.performPlaceCode = b.placeCode
+		and c.genreCode like '%' || #{genreCode} || '%' and a.performName like '%' || #{searchValue} || '%'
+	</select>
+	
+	<select id="selectGenreData" resultType="com.ticket.dto.GenreDTO">
+	 select * from genreData
+	</select>
 	
 					<!-- ♥ --><!-- ♥ --><!-- ♥ --><!-- 공통공통 --><!-- ♥ --><!-- ♥ --><!-- ♥ -->
 	

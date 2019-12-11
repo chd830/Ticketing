@@ -18,7 +18,8 @@ public class UserMainDTO {
 	private int userPoint;
 	private int userCoupon;
 	private int userDisCount;
-	private boolean useCookie;
+	private String userIPAddr;
+	
 	public int getNum() {
 		return num;
 	}
@@ -115,12 +116,12 @@ public class UserMainDTO {
 	public void setUserDisCount(int userDisCount) {
 		this.userDisCount = userDisCount;
 	}
-	public boolean isUseCookie() {
-		return useCookie;
+	public String getUserIPAddr() {
+		return userIPAddr;
 	}
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
+	public void setUserIPAddr(String userIPAddr) {
+		this.userIPAddr = userIPAddr;
 	}
-	
+
 	
 }
