@@ -12,10 +12,13 @@
 <<<<<<< HEAD
 	<div>
 	<div style="border-bottom: 1px solid black; width: 950px; margin-left: 480px;">
+<<<<<<< HEAD
 =======
  	<div>
 	<div style="border-bottom: 1px solid black; width: 400px; margin-left: 500px;">
 >>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 		<h3>
 			<span id="spanPerfName">${p_dto.performName}</span>      
 		</h3>
@@ -96,10 +99,13 @@
 <<<<<<< HEAD
 	<br/><br/><br/>
 	<div id="tabs" style="width: 950px; margin: auto;">
+<<<<<<< HEAD
 =======
  	<br/><br/><br/>
 	<div id="tabs">
 >>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 		<ul style="text-align: center;">
 			<li><a href="#tabs-1" style="text-align: center;">상세정보</a></li>
 			<li><a href="#tabs-2">관람후기</a></li>
@@ -120,6 +126,7 @@
 		</div>
 	</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		<div class="post">
 			
@@ -132,6 +139,8 @@
 		</div>  --%>
 	<!-- footer 종료  -->
 >>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -152,6 +161,9 @@
 </script>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 <br/><br/><br/><br/><br/>
 	<!-- 하단 TAB BAR 종료  -->
 
@@ -161,8 +173,11 @@
 	</div>
 <!-- footer 종료  --> 
 	
+<<<<<<< HEAD
 =======
 >>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 </body>
 </html>
 

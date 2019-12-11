@@ -23,9 +23,12 @@
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ff10a18701cb9609d0d4b309c8b6c530&libraries=services"></script>
     <script>
+    
+    /* 	alert ("${p_dto.placeAddr}");
+    	 */
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
-            center : new daum.maps.LatLng(37.479010, 127.011643), // 지도의 중심좌표
+            center : new daum.maps.LatLng("${MapX}", "${MapY}"), // 지도의 중심좌표
             //center : new daum.maps.LatLng("${mapx}", 127.011643), // 지도의 중심좌표
             level : 4
         // 지도의 확대 레벨
@@ -38,7 +41,7 @@
         var geocoder = new daum.maps.services.Geocoder();
  
         var myAddress = [
-                "서울특별시 서초구 서초동 남부순환로 2406" ];
+                "${p_dto.placeAddr}" ];
  
         function myMarker(number, address) {
             // 주소로 좌표를 검색합니다

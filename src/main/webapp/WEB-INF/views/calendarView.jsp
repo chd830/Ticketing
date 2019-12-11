@@ -20,7 +20,7 @@
 	int month = cal.get(Calendar.MONTH);
 
 	int date = cal.get(Calendar.DATE);
-
+	
 	if (strYear != null)
 	{
 		year = Integer.parseInt(strYear);
@@ -303,7 +303,7 @@ A:hover {
 							<c:forEach var="map" items="${startList }">
 								<c:if test="${map['PERFORMSTARTDATE'] eq index}">
 									<img src="<c:url value='/resources/image/start.png'/>" style="width: 13px; height: 13px">
-									<a href="">${map['PERFORMNAME'] }</a><br/>
+									<a href="/ticketing/poster.action?performCode=${map['PERFORMCODE']}">${map['PERFORMNAME'] }</a><br/>
 								</c:if>
 								
 							</c:forEach>
@@ -311,7 +311,7 @@ A:hover {
 							<c:forEach var="map" items="${endList }">
 								<c:if test="${map['PERFORMENDDATE'] eq index}">
 									<img src="<c:url value='/resources/image/end.png'/>" style="width: 13px; height: 13px">
-									<a href="">${map['PERFORMNAME'] }</a><br/>
+									<a href="/ticketing/poster.action?performCode=${map['PERFORMCODE']}">${map['PERFORMNAME'] }</a><br/>
 								</c:if>
 							</c:forEach>
 						

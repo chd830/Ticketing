@@ -13,7 +13,7 @@ public class CompanyMainDTO {
 	private String companyUpdateDate;
 	private String companyEmail;
 	private String companyPhoneNum;
-	
+	private String companyIPAddr;
 	
 	public int getNum() {
 		return num;
@@ -80,6 +80,12 @@ public class CompanyMainDTO {
 	}
 	public void setCompanyPhoneNum(String companyPhoneNum) {
 		this.companyPhoneNum = companyPhoneNum;
+	}
+	public String getCompanyIPAddr() {
+		return companyIPAddr;
+	}
+	public void setCompanyIPAddr(String companyIPAddr) {
+		this.companyIPAddr = companyIPAddr;
 	}
 	
 	
