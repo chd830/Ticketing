@@ -313,6 +313,9 @@ function sendIt(){
 				<font size="2px;"><b>예매 가능 좌석 </b></font><br/>
 			</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 			<div class="home" style="margin-top: 3px;">
 			<!-- 	<table border="1">
 					<tr>
@@ -330,6 +333,7 @@ function sendIt(){
 				</table>
 				
 				<!-- <textarea rows="5" cols="25">본 공연은 잔여좌석 서비스를 제공하지 않습니다.</textarea> -->
+<<<<<<< HEAD
 =======
 			<div style="margin-top: 3px;">
 				<table border="">
@@ -368,6 +372,8 @@ function sendIt(){
 					</tr>
 				</table>
 >>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
+=======
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 			</div>
 		</div>
 		<div style="margin-left: 135px;">

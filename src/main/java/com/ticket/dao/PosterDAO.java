@@ -1,6 +1,8 @@
 package com.ticket.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -54,7 +56,17 @@ public class PosterDAO {
 
 	}
 	
+<<<<<<< HEAD
 
 
 	
 }
+=======
+	
+	  public List<Map<String,Object>> infoMap (String performCode) {
+	  List<Map<String,Object>> lists =  sessionTemplate.selectList("ticketMapper.infoMap",performCode); 
+	  return lists; 
+	  }
+	 
+	}
+>>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
