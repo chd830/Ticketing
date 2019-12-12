@@ -1,24 +1,5 @@
 Manifest-Version: 1.0
 Built-By: stu
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-Build-Jdk: 1.8.0_191
-=======
-Build-Jdk: 1.8.0_211
->>>>>>> a3500a0894544a2b6eea7e3e3fb50c6cecdafc7a
-=======
-Build-Jdk: 1.8.0_191
-<<<<<<< HEAD
->>>>>>> 1fe1ad75343877ddae9e6e613eff77985b5cc1ea
-=======
 Build-Jdk: 1.8.0_221
->>>>>>> chong
-=======
->>>>>>> b10b7f4208eca4d9c7a31781f3a0845a5628c561
-=======
-Build-Jdk: 1.8.0_191
->>>>>>> 282c64277993ad2bf6faddf806d255d14eba316a
->>>>>>> hwan
 Created-By: Maven Integration for Eclipse
 

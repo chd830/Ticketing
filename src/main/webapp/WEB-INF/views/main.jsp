@@ -388,19 +388,10 @@
 			<c:set var="j" value="3" />
 			<table align="center" border="0" width="500" cellpadding="3"
 				cellspacing="3">
-<<<<<<< HEAD
-				<c:forEach var="mainListDTO" items="${lists }" begin="0" end="5">
-					<c:if test="${i%j==0 and mainListDTO.performGenreCode==1 }">
-						<tr align="center">
-					</c:if>
-					<!-- <td> -->
-					<div class="col-md-6 col-lg-4 ftco-animate"
-=======
 				<c:forEach var="dto" items="${mtlists }" begin="0" end="8">
 					<%-- <c:if test="${dto.performGenreCode==2 or dto.performGenreCode==3}"> --%>
 					
 						<div class="col-md-6 col-lg-4 ftco-animate"
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 						style="display: inline-block;">
 						<div class="project">
 

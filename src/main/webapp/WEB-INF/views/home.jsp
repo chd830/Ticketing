@@ -69,16 +69,6 @@ table.calendar td {
 
 <script type="text/javascript">
 
-function sendIt(){
-	
-	var f = document.myForm;
-	
-	var time = f.time.value;
-	
-	f.action = "<%=cp%>/step1.action?time=" + time;
-	f.submit();
-	
-}
 
 </script>
 </head>
@@ -211,6 +201,21 @@ function sendIt(){
 			        	
 			        });
 			    }
+
+			    function sendIt(){
+			    	var f = document.myForm;
+			    	var time = f.time.value;
+			    	if(count == 0) {
+			    		alert("날짜를 선택하세요.");
+			    		return;
+			    	}
+			    	if(time == 0) {
+			    		alert("시간을 선택하세요.");
+			    		return;
+			    	}
+			    	f.action = "<%=cp%>/step1.action?time=" + time;
+			    	f.submit();
+			    }
 			    
 			    function initDate(){
 			        $tdDay = $("td div.cal-day")
@@ -312,10 +317,6 @@ function sendIt(){
 			<div>
 				<font size="2px;"><b>예매 가능 좌석 </b></font><br/>
 			</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 			<div class="home" style="margin-top: 3px;">
 			<!-- 	<table border="1">
 					<tr>
@@ -333,8 +334,6 @@ function sendIt(){
 				</table>
 				
 				<!-- <textarea rows="5" cols="25">본 공연은 잔여좌석 서비스를 제공하지 않습니다.</textarea> -->
-<<<<<<< HEAD
-=======
 			<div style="margin-top: 3px;">
 				<table border="">
 					<tr>
@@ -371,9 +370,6 @@ function sendIt(){
 						</td>
 					</tr>
 				</table>
->>>>>>> fdcaf7b32d52df90f0105efad85dae39978dae98
-=======
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 			</div>
 		</div>
 		<div style="margin-left: 135px;">

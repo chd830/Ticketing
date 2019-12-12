@@ -7,13 +7,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 진교 -->
 	<select id="posterReadData"
 		resultType="com.ticket.dto.PosterDTO">
-<<<<<<< HEAD
-		SELECT distinct a.performCode,a.performgenrecode, a.performName,a.performMainImage, a.performStartDate,
-		a.performEnddate, b.placeName,
-=======
 		SELECT distinct a.performCode, a.performName,a.performMainImage, a.performStartDate,
 		a.performEnddate, b.placeName,b.PLACEADDR,
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 		c.genreName, d.ratingname, a.performrunningTime
 		from performData a, placeData b, genreData c, ratingData d
 		where a.performPlaceCode = b.placeCode and a.performGenreCode = c.genreCode 
@@ -33,13 +28,9 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		from performdetail where performcode = #{performcode}
 	</select>
 	
-<<<<<<< HEAD
-=======
 	<select id="infoMap" parameterType="String" resultType="map">
 		SELECT distinct a.performCode, b.PLACEMAPX, b.PLACEMAPY,b.PLACEADDR
 		from performData a, placeData b
 		where a.performPlaceCode = b.placeCode and a.performCode = #{performcode}
-	
 	</select>
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 </mapper>

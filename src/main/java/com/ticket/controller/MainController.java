@@ -38,10 +38,6 @@ public class MainController {
 	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main(Locale locale, Model model) {
 		
-<<<<<<< HEAD
-=======
-		//return "mainFooter";
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 		return "redirect:/main.action";
 		
 	}

@@ -166,63 +166,6 @@
 					<h2 class="mb-4">My Page</h2>
 				</div>
 			</div>
-<<<<<<< HEAD
-		</div>
-		
-		<div class="row block-9">
-			<c:choose>
-				<c:when test="${!empty success }">
-					<div class="col-md-7 order-md-last d-flex">
-						<form action="" class="bg-light p-4 p-md-5 contact-form" method="post" name="myUpdateForm">
-							<div class="form-group">
-							<label style="font-weight: normal;">아이디 </label>
-								<input type="text" class="form-control"
-									value="${userMainDTO.getUserId()}" readonly/>
-							</div>
-							<div class="form-group">
-							<label style="font-weight: normal;">패스워드 </label>
-								<input type="password" class="form-control"
-									value="${userMainDTO.getUserPwd() }">
-							</div>
-							<div class="form-group">
-							<label style="font-weight: normal;">이름 </label>
-								<input type="text" class="form-control"
-									value="${userMainDTO.getUserName() }" readonly/>
-							</div>
-							<div class="form-group" align="left">
-								<label style="font-weight: normal;">주소 </label> <br /> <input
-									type="text" class="form-control" name="userAddr"
-									id="sample4_postcode" value="${userMainDTO.getUserAddr() }"
-									style="width: 73%; float: left" /> <input type="button"
-									class="btn btn-secondary" onclick="sample4_execDaumPostcode();"
-									style="float: right; height: 53px; vertical-align: center;"
-									value="우편번호 수정" /><span style="line-height: 100%"><br /></span>
-							</div>
-							<span style="line-height: 200%"><br /></span>
-							<div class="form-group">
-							<label style="font-weight: normal;">상세주소 </label>
-								<input type="text" class="form-control"
-									value="${userMainDTO.getUserFinalAddr() }" >
-							</div>
-							<div class="form-group">
-							<label style="font-weight: normal;">이메일 </label>
-								<input type="text" class="form-control"
-									value="${userMainDTO.getUserEmail() }" >
-							</div>
-							<div class="form-group">
-							<label style="font-weight: normal;">전화번호 </label>
-								<input type="text" class="form-control"
-									value="${userMainDTO.getUserPhoneNum() }" >
-							</div>
-							<br/>
-							<div class="form-group" align="center">
-								<input type="submit" value="정보 수정하기" 
-									class="btn btn-primary py-3 px-5" onclick="update();">
-							</div>
-						</form>
-					</div>
-=======
-			
 			<div class="row block-9">
 				<c:choose>
 					<c:when test="${!empty success }">
@@ -284,7 +227,6 @@
 								</div>
 							</form>
 						</div>
->>>>>>> gyo
 					</c:when>
 
 					<c:when test="${!empty c_success }">

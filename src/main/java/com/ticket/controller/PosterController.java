@@ -66,14 +66,10 @@ public class PosterController {
 		PosterDTO p_dto = PosterDAO.getReadData(performCode);
 		PayDTO pay_dto = PosterDAO.getPayData(performCode);
 		List<PerformDetailDTO> lists = PosterDAO.getDetailImageData(performCode);
-<<<<<<< HEAD
-				
-=======
 		List<Map<String,Object>> infoMap = PosterDAO.infoMap(performCode);	
 		
 		System.out.println("mapx : " + infoMap.get(0).get("PLACEMAPX"));
 		
->>>>>>> b4715e2c6bee6371c0d746af47787eb64439deb2
 		// performcode ÄíÅ° »ý¼º
 		Cookie p_performCode = new Cookie("performcode", performCode);
 		//p_performCode.setMaxAge(600*24*10);
