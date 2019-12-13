@@ -83,7 +83,7 @@
 					</tr>
 					<tr>
 						<td><font size="1px" color="#BFBFBF">티켓금액</font> </td>
-						<td><font size="1px" color="#ffffff">${stdto.ticketPrice*stdto.inwon }</font> </td>
+						<td><font size="1px" color="#ffffff">${stdto.ticketPrice}</font> </td>
 					</tr>
 					<tr>
 						<td><font size="1px" color="#BFBFBF">예매수수료</font> </td>
@@ -95,7 +95,7 @@
 					</tr>
 					<tr>
 						<td><font size="1px" color="#C3E3FA">총 금액(+)</font> </td>
-						<td><font size="1px" color="#ffffff">${stdto.ticketPrice*stdto.inwon+500*stdto.inwon }</font> </td>
+						<td><font size="1px" color="#ffffff">${stdto.ticketPrice }</font> </td>
 					</tr>
 			</table>	
 			</div>

@@ -11,26 +11,28 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	 values(#{userId}, #{performCode}, #{selectedDate},#{time},#{performGenreCode}) 
 	</insert>
 
-	<update id="date_updateData" parameterType="map">
+	<update id="date_updateData" parameterType="com.ticket.dto.SelectedTicketDTO">
 		update selectedTicket set selectedDate=#{selectedDate}
 		where userId=#{userId} and performCode=#{performCode}
 	</update>
 
-	<update id="time_updateData" parameterType="map">
+	<update id="time_updateData" parameterType="com.ticket.dto.SelectedTicketDTO">
 		update selectedTicket set time=#{rtime} 
 		where userId=#{userId} and performCode=#{performCode}
 	</update>
 
-	<update id="inwon_updateData" parameterType="map">
+	<update id="inwon_updateData" parameterType="com.ticket.dto.SelectedTicketDTO">
 		update selectedTicket set inwon=#{inwon} where
 		userId=#{userId} and
 		performCode=#{performCode}
 	</update>
 
-	<select id="detail_ReadData" parameterType="map" resultType="com.ticket.dto.SelectedTicketDTO">
+	<select id="detail_ReadData" parameterType="com.ticket.dto.SelectedTicketDTO" resultType="com.ticket.dto.SelectedTicketDTO">
 		select * from selectedTicket where userId=#{userId} and performCode=#{performCode}
 	</select>
-	
+	<select id="readData" parameterType="com.ticket.dto.SelectedTicketDTO" resultType="com.ticket.dto.SelectedTicketDTO">
+		select * from selectedTicket where userId=#{userId} and performCode=#{performCode} and finalpay=1
+	</select>
 	<select id="cal_select" parameterType="String" resultType="com.ticket.dto.PerformDTO">
 		select performStartDate, performEndDate from performData where performCode=#{performCode}
 	</select>
@@ -81,7 +83,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 연주 시작 -->
 
 	<select resultType="com.ticket.dto.SelectedTicketDTO"
-		parameterType="String" id="ticket"> select * from selectedTicket where
+		parameterType="String" id="ticket"> 
+		select * from selectedTicket where
 		userId=#{userId}
 	</select>
 
@@ -164,9 +167,9 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 은총이시작 -->
-	<insert parameterType="com.ticket.dto.SelectedTicket" id="insertSelectedTicket">
-		insert into selectedTicket(userid, performcode, selecteddate, time, inwon, ticketprice, discountprice, couponprice, pointprice, seatrow, seatnum, finalPay) 
-		values('test', 'test code', '2019-11-26', '16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum}, 0)
+	<insert parameterType="com.ticket.dto.SelectedTicketDTO" id="insertSelectedTicket">
+		insert into selectedTicket(userId, performCode, selecteddate, time, inwon, ticketprice, discountprice, couponprice, pointprice, seatrow, seatnum, performGenreCode, finalPay) 
+		values(#{userId}, #{performCode}, '2019-11-26', '16:00', 1, 60000, 0, 0, 0, #{seatRow}, #{seatNum}, #{performGenreCode}, 0)
 		<!-- insert into selctedTicket values(#{userId}, #{performCode}, #{selectedDate}, 
 			#{time}, #{inwon}, #{ticketPrice}, #{discountPrice}, #{couponPrice}, #{pointPrice}, 
 			#{seatRow}, #{seatNum}) -->
@@ -177,24 +180,24 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		where seatRow=#{seatRow} AND seatNum=#{seatNum} 
 	</update>
 	
-	<insert id="insertFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicket">
-		insert into selectedTicket(userId, performCode, selectedDate, time, inwon, ticketPrice, discountPrice, couponPrice, pointPrice, seatRow, seatNum, finalPay)
-		values('test', 'test code', '2019-12-10', '16:00', 1, #{ticketPrice}, 0, 0, 0, '','' , 1)
+	<insert id="insertFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicketDTO">
+		insert into selectedTicket(userId, performCode, selectedDate, time, inwon, ticketPrice, discountPrice, couponPrice, pointPrice, seatRow, seatNum, performGenreCode, finalPay)
+		values(#{userId}, #{performCode}, '2019-12-10', '16:00', 1, #{ticketPrice}, 0, 0, 0, '','', #{performGenreCode} , 1)
 	</insert>
 	
-	<update id="updateFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicket">
+	<update id="updateFinalSelectedTicket" parameterType="com.ticket.dto.SelectedTicketDTO">
 		update selectedTicket
-		set ticketPrice = #{ticketPrice}
-		where userId='test' and performCode='test code' and finalpay = 1
+		set ticketPrice = #{ticketPrice}, inwon = #{inwon}
+		where userId=#{userId} and performCode=#{performCode} and finalpay = 1
 	</update>
 
-	<delete parameterType="com.ticket.dto.SelectedTicket" id="deleteSelectedTicket"> delete selectedTicket where seatRow=#{seatRow} AND
+	<delete parameterType="com.ticket.dto.SelectedTicketDTO" id="deleteSelectedTicket"> delete selectedTicket where seatRow=#{seatRow} AND
 		seatNum=#{seatNum} 
 	</delete>
 
-	<select parameterType="String" id="selectSelectedTicket" resultType="com.ticket.dto.SelectedTicket"> 
+	<select parameterType="String" id="selectSelectedTicket" resultType="com.ticket.dto.SelectedTicketDTO"> 
 		select userId, ticketPrice, performCode, seatRow, seatNum, finalPay 
-		from selectedTicket where userId = #{userId} order by finalPay 
+		from selectedTicket where userId = #{userId} and performCode = #{performCode} order by finalPay 
 	</select>
 
 	<select id="selectCount" resultType="int"> select count(*) from

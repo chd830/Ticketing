@@ -1,10 +1,12 @@
 package com.ticket.dto;
 
 public class SelectedTicket {
+	
 	private String userId;
 	private String performCode;
-	private String selectedDAte;
+	private String selectedDate;
 	private String time;
+	private int performGenreCode;
 	private int inwon;
 	private int ticketPrice;
 	private int discountPrice;
@@ -14,6 +16,12 @@ public class SelectedTicket {
 	private int seatNum;
 	private int finalPay;
 	
+	public int getPerformGenreCode() {
+		return performGenreCode;
+	}
+	public void setPerformGenreCode(int performGenreCode) {
+		this.performGenreCode = performGenreCode;
+	}
 	public int getFinalPay() {
 		return finalPay;
 	}
@@ -32,11 +40,11 @@ public class SelectedTicket {
 	public void setPerformCode(String performCode) {
 		this.performCode = performCode;
 	}
-	public String getSelectedDAte() {
-		return selectedDAte;
+	public String getSelectedDate() {
+		return selectedDate;
 	}
-	public void setSelectedDAte(String selectedDAte) {
-		this.selectedDAte = selectedDAte;
+	public void setSelectedDate(String selectedDAte) {
+		this.selectedDate = selectedDAte;
 	}
 	public String getTime() {
 		return time;

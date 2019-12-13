@@ -8,7 +8,20 @@
 	String start = (String)request.getAttribute("start");
 	
 	String end = (String)request.getParameter("end");
-	
+	   // 쿠키값 가져오기
+    Cookie[] cookies = request.getCookies() ;
+    String userId = "";
+	String performCode = "";
+    if(cookies != null){
+    	for(Cookie cookie : cookies) {
+    		if(cookie.getName().equals("userId")) {
+    			userId = cookie.getValue();
+    		}
+    		if(cookie.getName().equals("performcode")) {
+    			performCode = cookie.getValue();
+    		}
+    	}
+    }
 	//List list = (List)request.getAttribute("timeList");
 	
 %>
@@ -213,8 +226,13 @@ table.calendar td {
 			    		alert("시간을 선택하세요.");
 			    		return;
 			    	}
-			    	f.action = "<%=cp%>/step1.action?time=" + time;
-			    	f.submit();
+			    	if("<%=userId%>" == ("")) {
+			    		alert("로그인하세요.")
+			    		location.href='<%=cp%>/';
+			    		return;
+			    	}
+ 			    	f.action = "<%=cp%>/step1.action?time=" + time;
+			    	f.submit();  
 			    }
 			    
 			    function initDate(){

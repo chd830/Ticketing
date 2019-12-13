@@ -37,51 +37,29 @@ public class SelectedTicketDAO {
 		
 	}
 	
-	public void date_updateData(String selectedDate,String userId, String performCode){
+	public void date_updateData(SelectedTicketDTO ticket){
 	
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("selectedDate", selectedDate);
-		map.put("userId", userId);
-		map.put("performCode", performCode);
-		
-		sessionTemplate.update("ticketMapper.date_updateData",map);
-	
+		sessionTemplate.update("ticketMapper.date_updateData", ticket);
 	}
 	
-	public void time_updateData(String performCode, String userId, String rtime){
+	public void time_updateData(SelectedTicketDTO ticket){
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("rtime", rtime);
-		map.put("userId", userId);
-		map.put("performCode", performCode);
-		
-		sessionTemplate.update("ticketMapper.time_updateData",map);
+		sessionTemplate.update("ticketMapper.time_updateData", ticket);
 		
 	}
 	
-	public void inwon_updateData(String performCode,String userId, String inwon){
+	public void inwon_updateData(SelectedTicketDTO ticket){
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("inwon", inwon);
-		map.put("userId", userId);
-		map.put("performCode", performCode);
-		
-		sessionTemplate.update("ticketMapper.inwon_updateData",map);
+		sessionTemplate.update("ticketMapper.inwon_updateData", ticket);
 	}
 	
-	public SelectedTicketDTO detail_readData(String performCode, String userId){
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("userId", userId);
-		map.put("performCode", performCode);
-		
-		SelectedTicketDTO stdto = sessionTemplate.selectOne("ticketMapper.detail_ReadData",map);
-		
+	public List<SelectedTicketDTO> detail_readData(SelectedTicketDTO ticket){
+		List<SelectedTicketDTO> stdto = sessionTemplate.selectList("ticketMapper.detail_ReadData",ticket);
 		return stdto;
+	}
+	
+	public SelectedTicketDTO readData(SelectedTicketDTO ticket) {
+		return sessionTemplate.selectOne("ticketMapper.readData", ticket);
 	}
 	
 	public PerformDTO cal_select(String performCode){
@@ -93,12 +71,7 @@ public class SelectedTicketDAO {
 		return pdto;
 	}
 	
-	public int get_performCode(String performCode){
-		
-		int performGenreCode = sessionTemplate.selectOne("ticketMapper.get_performCode",performCode);
-		
-		return performGenreCode;
-	}
+
 	
 	public List<PerformInfoDTO> timeList(String performCode){
 		
@@ -123,6 +96,14 @@ public class SelectedTicketDAO {
 		performReaddto = sessionTemplate.selectOne("ticketMapper.read_performData",performCode);
 		
 		return performReaddto;
+	}
+	
+	//장르코드를 가져오는 코드
+	public int get_performCode(String performCode){
+		
+		int performGenreCode = sessionTemplate.selectOne("ticketMapper.get_performCode",performCode);
+		
+		return performGenreCode;
 	}
 	
 	public PlaceDTO read_placeData(String placeCode){
@@ -227,9 +208,9 @@ public class SelectedTicketDAO {
 		
 	}
 	
-	public SelectedTicketDTO selectTicket(String userId) {
+	public List<SelectedTicketDTO> selectTicket(String userId) {
 		
-		SelectedTicketDTO dto = sessionTemplate.selectOne("ticketMapper.ticket",userId);
+		List<SelectedTicketDTO> dto = sessionTemplate.selectList("ticketMapper.ticket",userId);
 		return dto;
 	}
 	

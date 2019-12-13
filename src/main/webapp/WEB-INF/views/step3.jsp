@@ -98,7 +98,7 @@
 				<tr  height="30">
 					<td width="80"><font size="2pt"><b>등급선택</b></font></td>
 					<td style="background-color: #FDEEEA;" width="600"><font size="2pt" color="#888888">
-						<input type="radio" name="v" checked="checked">${stdto.seatClass }
+						<%-- <input type="radio" name="v" checked="checked">${stdto.seatClass } --%>
 						</font>
 					</td>
 				</tr>

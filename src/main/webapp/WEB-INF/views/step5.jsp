@@ -265,7 +265,7 @@ margin-left: 0px;
 		<div id="resultDiv" class="post" style="vertical-align: top; float: left; margin-left: 0px; position: relative;" align="right">
 			<jsp:include page="detail5.jsp" >
 				<jsp:param value="5" name="step"/>
-			</jsp:include>
+			</jsp:include> 
 		</div>
 		
 			<table width="200" bgcolor="#363636" class="post5" style="margin-top: 535px; margin-left: -200px;">
@@ -279,33 +279,6 @@ margin-left: 0px;
 			</table>
 	
 	</form>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		<!-- 현금영수증 발행 안내 창 START -->
 			<form action="" name="cashReceipt">
     			<div class="white_content" id="open">

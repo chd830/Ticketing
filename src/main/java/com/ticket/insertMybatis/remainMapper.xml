@@ -15,8 +15,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 <select id="getCount" resultType="int">
 	select count(*) from remainData where seatNum = 1
 </select>
-<update id="updateSeat">
-	update remainData r set r.isEmpty = 0 where EXISTS( select * from selectedTicket s where r.seatrow = s.seatrow AND r.seatNum = s.seatNum)
+<update id="updateSeat" parameterType="com.ticket.dto.SelectedTicketDTO">
+	update remainData r set r.isEmpty = 0 where EXISTS( select * from selectedTicket s where userId = #{userId} AND performCode = #{performCode} AND r.seatrow = s.seatrow AND r.seatNum = s.seatNum)
 </update>
 <select id="selectIsEmpty" resultType="int" parameterType="com.ticket.dto.Remain">
 	select isEmpty from remainData where seatRow = #{seatRow} AND seatNum = #{seatNum}

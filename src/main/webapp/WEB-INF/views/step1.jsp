@@ -535,8 +535,8 @@
 									url:"changeTime",
 									data:{"time": time},
 									success:function(args){
-										console.log("args: "+args);
-										//$("#resultDIV").html(args);
+										/* console.log("args: "+args); */
+										$("#resultDIV").html(args);
 									
 									},
 									error:function(e){
@@ -613,8 +613,8 @@
 				url:"changeInwon",
 				data:{"inwon": inwon},
 				success:function(args){
-					console.log("args: "+args);
-					//$("#resultDIV").html(args);
+					/* console.log("args: "+args); */
+					$("#resultDIV").html(args);
 				
 				},
 				error:function(e){

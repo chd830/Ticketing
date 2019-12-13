@@ -1,5 +1,10 @@
 ﻿package com.ticket.util;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
+import com.ticket.dto.SelectedTicketDTO;
+
 public class MyUtil {
 	
 	//전체 페이지수 구하기
@@ -82,5 +87,34 @@ public class MyUtil {
 		
 		return sb.toString();
 		
+	}
+	
+	//cookie를 가져와서 반환하는 코드
+	public static SelectedTicketDTO setSelectedTicket(HttpServletRequest request) {
+		Cookie[] cookie = request.getCookies();
+
+		String performCode = "";
+		String userId = "";
+
+		if (cookie != null) {
+			for (int i = 0; i < cookie.length; i++) {
+				if (cookie[i].getName().equals("performcode")) {
+					performCode = cookie[i].getValue();
+				}
+			}
+		}
+
+		if (cookie != null) {
+			for (int i = 0; i < cookie.length; i++) {
+				if (cookie[i].getName().equals("userId")) {
+					userId = cookie[i].getValue();
+				}
+			}
+		}
+		SelectedTicketDTO ticket = new SelectedTicketDTO();
+		ticket.setUserId(userId);
+		ticket.setPerformCode(performCode);
+		
+		return ticket;
 	}
 }

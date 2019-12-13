@@ -1,6 +1,5 @@
 package com.ticket.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.ticket.dto.PayDTO;
 import com.ticket.dto.PerformDetailDTO;
 import com.ticket.dto.PosterDTO;
-import com.ticket.dto.ReviewBoardDTO;
-import com.ticket.dto.SelectedTicketDTO;
 
 public class PosterDAO {
 
